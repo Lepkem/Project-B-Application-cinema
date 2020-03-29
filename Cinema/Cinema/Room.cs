@@ -15,7 +15,7 @@ namespace Cinema
         }
         public void deleteRoom(string room)
         {
-             File.Delete(room);
+            File.Delete(room);
         }
         public void Initialize(string l)
         {

@@ -1,24 +1,29 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using Newtonsoft.Json.Linq;
 using System;
-using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Cinema
 {
     class Program
     {
         static public List<Room> rooms = new List<Room>();
+        static public List<ScheduleElement> schedule = new List<ScheduleElement>();
         static void Main(string[] args)
         {
-            //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
-            rooms.Add(new Room(File.ReadAllText(@".\rooms\room1.json")));
-            rooms.Add(new Room(File.ReadAllText(@".\rooms\room2.json")));
-            rooms.Add(new Room(File.ReadAllText(@".\rooms\room3.json")));
-
+            readRooms();
             //Test update room
             //rooms[2].updateRoom(@".\rooms\room3.json");
             //Test create room
             //createRoom();
+        }
+
+        static void readRooms()
+        {
+            string[] files = Directory.GetFiles(@".\rooms", "*.json");
+            for (int i = 0; i < files.Length; i++)
+                //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
+                rooms.Add(new Room(File.ReadAllText(files[i])));
         }
 
         static void createRoom()
@@ -27,7 +32,7 @@ namespace Cinema
             Console.WriteLine("How many rows does this room have?");
             int rows = int.Parse(Console.ReadLine());
             string[] roomRows = new string[rows];
-            
+
             //Fill rows
             for (int i = 0; i < rows; i++)
             {
@@ -52,6 +57,15 @@ namespace Cinema
 
             //Reads new file and makes it a room object
             rooms.Add(new Room(File.ReadAllText(filePath)));
+        }
+
+        static void printSchedule()
+        {
+            foreach (ScheduleElement se in schedule)
+            {
+                se.printScheduleElement();
+            }
+            Console.WriteLine("\n");
         }
     }
 }

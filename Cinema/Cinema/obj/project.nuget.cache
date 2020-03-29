@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "iH6/bkcHU5MH/o8AXk/dz6r4Dz0G3zDFL+Lt0IKc1rzAcfMRQfuDd9IbWZZRnA0FiKe3Db7QonI2uFE9gc4t4g==",
+  "dgSpecHash": "AJ42emjNcKrTiXXWO8c3MdP+YQJ/iotEl0kMeORDvQWHW8kY4JilxjPGJ0SUoq6I/bBbqY0jLaDtcLQQMSektQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Age en Annelies\\Desktop\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+  "projectFilePath": "C:\\Users\\User\\3D Objects\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Age en Annelies\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\User\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }
