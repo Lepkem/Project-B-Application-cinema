@@ -25,7 +25,7 @@ namespace Cinema
                         break;
 
                     case 1:
-                        //Login
+                        //Login OR logout
                         if (!login){ login = Login(); }
                         else { Console.WriteLine("\n\n"); login = false; }
                         caseSwitch = 0;
@@ -112,19 +112,25 @@ namespace Cinema
         {
             while (true) 
             {
-                
                 Boolean login = false;
                 string username, password = string.Empty;
+
+                //asks user input username
                 Console.Write("Enter a username: (admin) ");
                 username = Console.ReadLine();
+
+                //Exit login screen
                 if (username == "b") 
                 {
                     Console.WriteLine("\n\n");
                     return false;
                 }
+
+                //ask user input password
                 Console.Write("Enter a password: (admin) ");
                 password = Console.ReadLine();
 
+                //checks if user input correct.
                 if (username == "admin" && password == "admin")
                 {
                     Console.WriteLine("\n \nWelcome admin");
@@ -138,20 +144,28 @@ namespace Cinema
         static int Menu(Boolean login) 
         {
             int parsable = 0;
+
+            //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
             if (!login) { Console.WriteLine("1:Login \n" + "2:read rooms \n" + "3:function 3 \n" + "4:function 4 \n"); }
+
+            //text being displayed in menu Admin version
             if (login) { Console.WriteLine("1:Logout \n" + "2:read rooms \n" + "3:function 3 \n" + "4:function 4 \n" + "10:function 1 admin \n" + "11:function 2 admin \n"); }
             while (true) 
             {
+
+                //gets user input converts it to numbers
                 string function = Console.ReadLine();
                 bool isParsable = Int32.TryParse(function, out parsable);
                 if (isParsable)
                 {
+                    //checks if number is the same as a user fucntion
                     if (!login) 
                     {
-                        if(0 < parsable && parsable < 4) { return parsable; } //number equal to possible functions +1
+                        if(0 < parsable && parsable < 5) { return parsable; } //number equal to possible functions +1
                         else { Console.WriteLine("please select only action given");}
                     }
+                    //checks if number is the same as a user OR admin fucntion
                     if (login)
                     {
                         if (0 < parsable && parsable < 12) { return parsable; } //number equal to possible functions +1
