@@ -16,7 +16,13 @@ namespace Cinema
             Boolean running = true;
             int caseSwitch = 0;
             Boolean login = false;
-            while(running){
+            readRooms();
+
+            schedule.Add(new ScheduleElement("12:00", "sonic 2 electric boogaloo", rooms[0], "20 april"));
+            schedule.Add(new ScheduleElement("15:30", "preys of bird", rooms[2], "9 may"));
+            schedule.Add(new ScheduleElement("18:00", "test film", rooms[1], "30 february"));
+
+            while (running){
                 switch (caseSwitch)
                 {   //functions
                     case 0:
@@ -32,27 +38,31 @@ namespace Cinema
                         break;
 
                     case 2:
-                        //read rooms
-                        readRooms();
-                        //Test update room
-                        //rooms[2].updateRoom(@".\rooms\room3.json");
-                        //Test create room
-                        //createRoom();
+                        printSchedule();
                         caseSwitch = 0;
                         break;
 
                     case 3:
-
+                        caseSwitch = 0;
                         break;
+
                     //Admin functions
                     case 10:
-                       
-
+                        //Test update room
+                        Console.WriteLine("Which room do you want to change?");
+                        rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
+                        //Test create room
+                        createRoom();
+                        caseSwitch = 0;
                         break;
 
                     case 11:
+                        caseSwitch = 0;
+                        break;
 
-
+                    default:
+                        Console.WriteLine("That's not an option you knucklehead");
+                        caseSwitch = 0;
                         break;
                 }
             }
@@ -147,10 +157,10 @@ namespace Cinema
 
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
-            if (!login) { Console.WriteLine("1:Login \n" + "2:read rooms \n" + "3:function 3 \n" + "4:function 4 \n"); }
+            if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n"); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine("1:Logout \n" + "2:read rooms \n" + "3:function 3 \n" + "4:function 4 \n" + "10:function 1 admin \n" + "11:function 2 admin \n"); }
+            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n" + "10:edit and create rooms \n" + "11:function 2 admin \n"); }
             while (true) 
             {
 

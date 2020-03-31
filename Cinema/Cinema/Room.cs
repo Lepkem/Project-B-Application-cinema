@@ -44,14 +44,27 @@ namespace Cinema
             //read the array in the object and store it
             JArray layoutArray = (JArray)fullObject["layout"];
             //go through each row in the layout
+            int defaultLength = layoutArray.First.ToString().Length;
             for (int i = 0; i < layoutArray.Count; i++)
             {
                 Console.WriteLine("Replace the " + (i + 1) + " line? If yes give new line.");
                 string newLine = Console.ReadLine();
-                if (newLine != "")
+                while (true)
                 {
-                    //TODO: does making changes to layoutarray change the array inside fullObject?
-                    layoutArray[i] = newLine;
+                    if (newLine != "")
+                    {
+                        if (newLine.Length == defaultLength)
+                        {
+                            layoutArray[i] = newLine;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine(string.Format("The length of each row must be exactly {0}. Try inputting a line of the proper length.", defaultLength));
+                            newLine = Console.ReadLine();
+                        }
+                    }
+                    else break;
                 }
             }
 
