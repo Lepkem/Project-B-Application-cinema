@@ -1,4 +1,14 @@
+# Ignore everything
+*
 
-Cinema/.vs/Cinema/DesignTimeBuild/.dtbcache.v2
-Cinema/Cinema/obj/Debug/netcoreapp3.1/Cinema.assets.cache
-Cinema/.vs/Cinema/v16/.suo
+# But not these files...
+!.gitignore
+!README.md
+
+# if the files to be tracked are in subdirectories
+!*/Cinema/Cinema.sln
+!*/Cinema/Cinema/Cinema.csproj
+!*/Cinema/Cinema/Program.cs
+!*/Cinema/Cinema/Room.cs
+!*/Cinema/Cinema/ScheduleElement.cs
+!*/Cinema/Cinema/bin/Debug/netcoreapp3.1/rooms/*
