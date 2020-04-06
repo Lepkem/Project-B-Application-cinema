@@ -8,7 +8,6 @@ namespace Cinema
 {
     class Program
     {
-        //public static Tuple<string, string, string> movies = new Tuple<string, string, string>("Sonic The Hedgehog", "Comedy", "12-02-2020");
         public static List<Films> myFilms = new List<Films>
             {
                 new Films{ Name = "Sonic", Genre = "Comedy", Runtime = "120 min", Synopsis = "Blue hedgehog collects rings.", ReleaseDate = "12-02-2020" },
