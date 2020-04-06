@@ -52,23 +52,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\jordanguerrero\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\3D Objects\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+      "projectUniqueName": "\\\\mac\\Home\\Documents\\GitHub\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
       "projectName": "Cinema",
-      "projectPath": "C:\\Users\\User\\3D Objects\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\3D Objects\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\obj\\",
+      "projectPath": "\\\\mac\\Home\\Documents\\GitHub\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+      "packagesPath": "C:\\Users\\jordanguerrero\\.nuget\\packages\\",
+      "outputPath": "\\\\mac\\Home\\Documents\\GitHub\\Project-B-Application-cinema\\Cinema\\Cinema\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jordanguerrero\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -112,7 +108,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
