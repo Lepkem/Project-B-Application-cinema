@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Cinema
 {
     class Program
     {
+<<<<<<< HEAD
         public static List<Films> myFilms = new List<Films>
             {
                 new Films{ Name = "Sonic", Genre = "Comedy", Runtime = "120 min", Synopsis = "Blue hedgehog collects rings.", ReleaseDate = "12-02-2020" },
@@ -29,69 +31,194 @@ namespace Cinema
             myFilms.Add(new Films { Name = "Invisible Man", Genre = "Horror", Runtime = "130 min", Synopsis = "Invisible Man stalks his ex.", ReleaseDate = "24-02-2020" });
 
             Search search = new Search();
-        }
-    }
+=======
+        static public List<Room> rooms = new List<Room>();
+        static public List<ScheduleElement> schedule = new List<ScheduleElement>();
+        
+        static void Main(string[] args)
+        {
+            //console program
+            Boolean running = true;
+            int caseSwitch = 0;
+            Boolean login = false;
+            readRooms();
 
-    class Room
-    {
-        char[,] layout;
-        int chairs;
-        public Room(string l)
-        {
-            //the actual initialization function is its own method so that it can be called manually
-            Initialize(l);
-        }
-        public void deleteRoom()
-        {
-            //TODO: D31373 the room
-        }
-        public void Initialize(string l)
-        {
-            //this line takes the string and turns it into a special object that contains the attributes of the JSON
-            JObject input = JObject.Parse(l);
-            //this line assigns the chairs value stored in the file in the object's chair variable 
-            chairs = (int)input["chairs"];
-            //there's also an array of strings in the file: this file takes it and turns it from a massive string to a special array
-            JArray inputJArray = JArray.Parse(input["layout"].ToString());
-            //create an empty 2D character array the same size as the string array
-            char[,] inputMatrix = new char[inputJArray.First.ToString().Length, inputJArray.Count];
-            // go through each position in the character array and fill it with the proper character
-            for (int i = 0; i < inputMatrix.GetLength(0); i++)
-                for (int j = 0; j < inputMatrix.GetLength(1); j++)
-                {
-                    inputMatrix[i, j] = inputJArray[j].ToString()[i];
-                }
-            //store the array in the object
-            layout = inputMatrix;
-        }
+            schedule.Add(new ScheduleElement("12:00", "sonic 2 electric boogaloo", rooms[0], "20 april"));
+            schedule.Add(new ScheduleElement("15:30", "preys of bird", rooms[2], "9 may"));
+            schedule.Add(new ScheduleElement("18:00", "test film", rooms[1], "30 february"));
 
-        public void updateCreateRoom(string room)
-        {
-            //read the file as one big string and turn it into a special object
-            JObject fullObject = JObject.Parse(File.ReadAllText(room));
-            //read the array in the object and store it
-            JArray layoutArray = (JArray)fullObject["layout"];
-            //go through each row in the layout
-            for (int i = 0; i < layoutArray.Count; i++)
-            {
-                Console.WriteLine("Replace the " + (i + 1) + " line? If yes give new line.");
-                string newLine = Console.ReadLine();
-                if (newLine != "")
-                {
-                    //TODO: does making changes to layoutarray change the array inside fullObject?
-                    layoutArray[i] = newLine;
+            while (running){
+                switch (caseSwitch)
+                {   //functions
+                    case 0:
+                        //menu
+                        caseSwitch = Menu(login);
+                        break;
+
+                    case 1:
+                        //Login OR logout
+                        if (!login){ login = Login(); }
+                        else { Console.WriteLine("\n\n"); login = false; }
+                        caseSwitch = 0;
+                        break;
+
+                    case 2:
+                        printSchedule();
+                        caseSwitch = 0;
+                        break;
+
+                    case 3:
+                        caseSwitch = 0;
+                        break;
+
+                    //Admin functions
+                    case 10:
+                        //Test update room
+                        Console.WriteLine("Which room do you want to change?");
+                        rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
+                       
+                        caseSwitch = 0;
+                        break;
+
+                    case 11:
+                        //Test create room
+                        createRoom();
+                        caseSwitch = 0;
+                        break;
+
+                    default:
+                        Console.WriteLine("That's not an option you knucklehead");
+                        caseSwitch = 0;
+                        break;
                 }
             }
-
-            Console.WriteLine("How many chairs should the room have?");
-            //alter the special object
-            fullObject["chairs"] = Int32.Parse(Console.ReadLine());
-            //turn the object into a string
-            string updatedString = fullObject.ToString();
-            //update the object
-            Initialize(updatedString);
-            //update the file
-            File.WriteAllText(room, updatedString);
+>>>>>>> Trevor
         }
+
+        static void readRooms()
+        {
+            string[] files = Directory.GetFiles(@".\rooms", "*.json");
+            for (int i = 0; i < files.Length; i++)
+                //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
+                rooms.Add(new Room(File.ReadAllText(files[i])));
+        }
+
+        static void createRoom()
+        {
+            //Set row amount
+            Console.WriteLine("How many rows does this room have?");
+            int rows = int.Parse(Console.ReadLine());
+            string[] roomRows = new string[rows];
+
+            //Fill rows
+            for (int i = 0; i < rows; i++)
+            {
+                Console.WriteLine("Set row " + (i + 1) + ".");
+                roomRows[i] = Console.ReadLine();
+            }
+
+            //Set chair amount
+            Console.WriteLine("Set chair amount.");
+            string chairAmount = Console.ReadLine();
+
+            //Set room type
+            Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
+            String roomType = Console.ReadLine();
+
+            //Convert roomRows and chairAmount
+            JObject output = new JObject();
+            output["layout"] = JArray.FromObject(roomRows);
+            output["chairs"] = chairAmount;
+            output["roomType"] = roomType;
+
+            //Set new file name in x location
+            string filePath = string.Format(@".\rooms\room{0}.json", rooms.Count + 1);
+
+            //Create the new file
+            File.WriteAllText(filePath, output.ToString());
+
+            //Reads new file and makes it a room object
+            rooms.Add(new Room(File.ReadAllText(filePath)));
+        }
+
+        static void printSchedule()
+        {
+            foreach (ScheduleElement se in schedule)
+            {
+                se.printScheduleElement();
+            }
+            Console.WriteLine("\n");
+        }
+
+        static Boolean Login()
+        {
+            while (true) 
+            {
+                Boolean login = false;
+                string username, password = string.Empty;
+
+                //asks user input username
+                Console.Write("Enter a username: (admin) ");
+                username = Console.ReadLine();
+
+                //Exit login screen
+                if (username == "b") 
+                {
+                    Console.WriteLine("\n\n");
+                    return false;
+                }
+
+                //ask user input password
+                Console.Write("Enter a password: (admin) ");
+                password = Console.ReadLine();
+
+                //checks if user input correct.
+                if (username == "admin" && password == "admin")
+                {
+                    Console.WriteLine("\n \nWelcome admin");
+                    return true;
+                }
+                else { Console.WriteLine("Wrong input, please try again \n" + "if you want to return to the menu write b as username");}
+
+            }
+        }
+
+        static int Menu(Boolean login) 
+        {
+            int parsable = 0;
+
+            //text being displayed in menu
+            Console.WriteLine("What action do you want to do?");
+            if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n"); }
+
+            //text being displayed in menu Admin version
+            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n" + "10:edit room \n" + "11:create room \n"); }
+            while (true) 
+            {
+
+                //gets user input converts it to numbers
+                string function = Console.ReadLine();
+                bool isParsable = Int32.TryParse(function, out parsable);
+                if (isParsable)
+                {
+                    //checks if number is the same as a user fucntion
+                    if (!login) 
+                    {
+                        if(0 < parsable && parsable < 5) { return parsable; } //number equal to possible functions +1
+                        else { Console.WriteLine("please select only action given");}
+                    }
+                    //checks if number is the same as a user OR admin fucntion
+                    if (login)
+                    {
+                        if (0 < parsable && parsable < 12) { return parsable; } //number equal to possible functions +1
+                        else { Console.WriteLine("please select only action given"); }
+                    }
+                    
+                }
+                else { Console.WriteLine("please select only action given"); }
+            }
+        }
+
+
     }
 }
