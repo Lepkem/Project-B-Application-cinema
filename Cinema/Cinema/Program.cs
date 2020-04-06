@@ -2,13 +2,21 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cinema
 {
     class Program
     {
-        public static Tuple<string, string, string> movies = new Tuple<string, string, string>("Sonic The Hedgehog", "Comedy", "12-02-2020");
-        new Tuple<string, string, string>("Birds of Prey", "Action, Comedy", "12-02-2020");
+        //public static Tuple<string, string, string> movies = new Tuple<string, string, string>("Sonic The Hedgehog", "Comedy", "12-02-2020");
+        public static List<Films> myFilms = new List<Films>
+            {
+                new Films{ Name = "Sonic", Genre = "Comedy", Runtime = "120 min", Synopsis = "Blue hedgehog collects rings.", ReleaseDate = "12-02-2020" },
+                new Films{ Name = "Birds", Genre = "Comedy", Runtime = "100 min", Synopsis = "Clown girl does funny stuff.", ReleaseDate = "18-02-2020" },
+                new Films{ Name = "Bloodshot", Genre = "Action", Runtime = "110 min", Synopsis = "Vin Diesel shoots enemies.", ReleaseDate = "21-02-2020" },
+            };
+
+        
 
         static void Main(string[] args)
         {
@@ -18,6 +26,8 @@ namespace Cinema
             //Room roomthree = new Room(File.ReadAllText(@"./rooms/room3.json"));
 
             //roomthree.updateCreateRoom(@"./rooms/room3.json")
+
+            myFilms.Add(new Films { Name = "Invisible Man", Genre = "Horror", Runtime = "130 min", Synopsis = "Invisible Man stalks his ex.", ReleaseDate = "24-02-2020" });
 
             Search search = new Search();
         }

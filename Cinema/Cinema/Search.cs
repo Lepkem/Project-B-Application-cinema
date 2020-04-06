@@ -13,66 +13,56 @@ namespace Cinema
             string filmSearch;
             bool userWrong = true;
 
-            Console.WriteLine("Waar zoek je naar?: \n [1]Film \n [2]Genre \n [3]Datum \n");
-            var val = Console.ReadLine();
-            filmChoice = Convert.ToInt32(val);
+            
 
             while (userWrong)
             {
+                Console.WriteLine("Waar zoek je naar?: \n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n");
+                var val = Console.ReadLine();
+                filmChoice = Convert.ToInt32(val);
+
                 if (filmChoice == 1)
                 {
                     Console.WriteLine("Welke film zoek je?: ");
                     filmSearch = Console.ReadLine();
 
-                    var match = Program.movies.FirstOrDefault(stringToCheck => stringToCheck.Contains(filmSearch));
 
-                    if (match != null)
-                    {
-                        Console.WriteLine(match);
-                    }
-                    else
-                    {
-                        Console.WriteLine(filmSearch + " does not exist.");
-                    }
+                    IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.Name == filmSearch);
 
-                    userWrong = false;
+                    foreach (Films films in query)
+                    {
+                        Console.WriteLine($"Movie: {films.Name}\n{films.Genre}\n{films.Runtime}\n{films.Synopsis}\n{films.ReleaseDate}\n");
+                    }
                 }
 
                 else if (filmChoice == 2)
                 {
-                    Console.WriteLine("Welke film zoek je?: ");
+                    Console.WriteLine("Welke genre zoek je?: ");
                     filmSearch = Console.ReadLine();
 
-                    var match = Program.movies.FirstOrDefault(stringToCheck => stringToCheck.Contains(filmSearch));
+                    IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.Genre == filmSearch);
 
-                    if (match != null)
+                    foreach (Films films in query)
                     {
-                        Console.WriteLine(match);
+                        Console.WriteLine($"Movie: {films.Name}\n{films.Genre}\n{films.Runtime}\n{films.Synopsis}\n{films.ReleaseDate}\n");
                     }
-                    else
-                    {
-                        Console.WriteLine(filmSearch + " does not exist.");
-                    }
-
-                    userWrong = false;
                 }
 
                 else if (filmChoice == 3)
                 {
-                    Console.WriteLine("Welke film zoek je?: ");
+                    Console.WriteLine("Welke release datum zoek je?: ");
                     filmSearch = Console.ReadLine();
 
-                    var match = Program.movies.FirstOrDefault(stringToCheck => stringToCheck.Contains(filmSearch));
+                    IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.ReleaseDate == filmSearch);
 
-                    if (match != null)
+                    foreach (Films films in query)
                     {
-                        Console.WriteLine(match);
+                        Console.WriteLine($"Movie: {films.Name}\n{films.Genre}\n{films.Runtime}\n{films.Synopsis}\n{films.ReleaseDate}\n");
                     }
-                    else
-                    {
-                        Console.WriteLine(filmSearch + " does not exist.");
-                    }
+                }
 
+                else if (filmChoice == 4)
+                {
                     userWrong = false;
                 }
 
