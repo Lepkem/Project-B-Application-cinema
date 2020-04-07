@@ -2,6 +2,10 @@
 using System;
 using System.IO;
 
+using System.Collections.Generic;
+using System.Globalization;
+
+
 namespace Cinema
 {
     class Program
@@ -9,11 +13,16 @@ namespace Cinema
         static void Main(string[] args)
         {
             //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
-            Room roomone = new Room(File.ReadAllText(@".\rooms\room1.json"));
-            Room roomtwo = new Room(File.ReadAllText(@".\rooms\room2.json"));
-            Room roomthree = new Room(File.ReadAllText(@".\rooms\room3.json"));
+            //Room roomone = new Room(File.ReadAllText(@".\rooms\room1.json"));
+            //Room roomtwo = new Room(File.ReadAllText(@".\rooms\room2.json"));
+            //Room roomthree = new Room(File.ReadAllText(@".\rooms\room3.json"));
             
-            roomthree.updateCreateRoom(@".\rooms\room3.json");
+            //roomthree.updateCreateRoom(@".\rooms\room3.json");
+
+            Movies movies = new Movies(@"./movies/movie.json");
+            //movieone.updateCreateMovie(@".\movies\movie.json");
+            movies.updateCreateMovie();
+
         }
     }
 
@@ -79,4 +88,161 @@ namespace Cinema
             File.WriteAllText(room, updatedString);
         }
     }
+    
+    //Add, edit and delete movies
+    class Movie
+    {
+        public string name;
+        public string genre;
+        public int runtime;
+        public string synopsis;
+        public DateTime releaseDate; 
+
+
+        public Movie(string name, string genre, int runtime, string synopsis, DateTime releaseDate) {
+            this.name = name;
+            this.genre = genre;
+            this.runtime = runtime;
+            this.synopsis = synopsis;
+            this.releaseDate = releaseDate;
+        }   
+
+        //constructor overloading: redefine a constructor in more than one form
+        public Movie(string name, string genre, int runtime, string synopsis, string releaseDate) {
+            this.name = name;
+            this.genre = genre;
+            this.runtime = runtime;
+            this.synopsis = synopsis;
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            this.releaseDate = DateTime.ParseExact(releaseDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+        }   
+    }
+
+    class Movies
+    {
+       List<Movie> movieList;
+    
+
+        string jsonFileLocation;
+
+
+
+    
+        public Movies(string jsonFileLocation)
+        {
+            //the actual initialization function is its own method so that it can be called manually
+            this.jsonFileLocation = jsonFileLocation;
+            initialize();
+        }
+        
+        
+        public void deleteMovie(Movie movie)
+        {
+            Console.WriteLine("Delete a movie\nEnter the title:");
+            string deleteTitle = Console.ReadLine();
+            this.createJson();
+        }
+
+        public void initialize() 
+        {
+            this.movieList = new List<Movie>();
+            JArray movieArray = JArray.Parse(File.ReadAllText(this.jsonFileLocation));
+            foreach (JObject obj in movieArray) {
+                this.movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (int)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"]));
+            }
+        }
+
+        public void updateCreateMovie()
+        {
+            Console.WriteLine("Enter the name of the movie: ");
+            string movieName = Console.ReadLine();
+            foreach (Movie movie in this.movieList) {
+                if (movie.name == movieName) {
+                    Console.WriteLine("Do you want to remove or edit the movie?");
+                    string addOrDelete = Console.ReadLine();
+                    if (addOrDelete == "edit") {
+                        this.updateMovie(movie);
+                        return;
+                    }
+                    if (addOrDelete == "remove") { 
+                        this.deleteMovie(movie);
+                        return;
+                    }
+                }
+                else {
+                    this.createMovie(movieName);
+                    return;
+                }
+            }
+        }   
+        private void updateMovie(Movie movie) {
+            Console.WriteLine("What do you want to edit?");
+            string update = Console.ReadLine();
+            switch (update)
+            {
+                case "genre":
+                    Console.WriteLine("genre:");
+                    movie.genre = Console.ReadLine();
+                    break;
+                case "synopsis":
+                    Console.WriteLine("synopsis:");
+                    movie.synopsis = Console.ReadLine();
+                    break;
+                case "name":
+                    Console.WriteLine("name:");
+                    movie.name = Console.ReadLine();
+                    break;
+                case "runtime":
+                    Console.WriteLine("runtime:");
+                    movie.runtime = int.Parse(Console.ReadLine());
+                    break;
+                case "releaseDate":
+                    Console.WriteLine("releaseDate:");
+                    CultureInfo provider = CultureInfo.InvariantCulture;
+                    movie.releaseDate = DateTime.ParseExact(Console.ReadLine(),"MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+            }
+            this.createJson();
+        }
+   
+        private void createMovie(string movieName) {
+            Console.WriteLine("Add a movie\nTitle:");
+            string addMovie = Console.ReadLine();
+            Console.WriteLine("Genre:");
+            string genre = Console.ReadLine();
+            Console.WriteLine("runtime:");
+            string runtime = Console.ReadLine();
+            Console.WriteLine("synopsis:");
+            string synopsis = Console.ReadLine();
+            Console.WriteLine("releaseDate:");
+            string releaseDate = Console.ReadLine();
+            
+            
+            this.movieList.Add(new Movie(movieName, genre, int.Parse(runtime), synopsis, releaseDate));
+            this.createJson();
+        }
+        private void createJson() {
+            string location = this.jsonFileLocation;
+            
+            //checking if file exists
+            if (File.Exists(location)) {
+                File.Delete(location);
+            }
+            JArray movieArray = new JArray();
+            foreach (Movie movie in this.movieList) {
+                movieArray.Add(new JObject(
+                    new JProperty("name", movie.name),
+                    new JProperty("genre", movie.genre),
+                    new JProperty("runtime", movie.runtime),
+                    new JProperty("synopsis", movie.synopsis),
+                    new JProperty("releaseDate", movie.releaseDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
+            }
+            File.WriteAllText(location, movieArray.ToString());
+        }
+
+    }
+
 }
