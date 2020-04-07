@@ -8,6 +8,7 @@ namespace Cinema
     {
         char[,] layout;
         int chairs;
+        int roomType;
         public Room(string l)
         {
             //the actual initialization function is its own method so that it can be called manually
@@ -23,6 +24,8 @@ namespace Cinema
             JObject input = JObject.Parse(l);
             //this line assigns the chairs value stored in the file in the object's chair variable 
             chairs = (int)input["chairs"];
+            //this line assigns the roomType value stored in the file in the object's roomType variable 
+            roomType = (int)input["roomType"];
             //there's also an array of strings in the file: this file takes it and turns it from a massive string to a special array
             JArray inputJArray = JArray.Parse(input["layout"].ToString());
             //create an empty 2D character array the same size as the string array
@@ -71,6 +74,9 @@ namespace Cinema
             Console.WriteLine("How many chairs should the room have?");
             //alter the special object
             fullObject["chairs"] = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
+            //alter the special object
+            fullObject["roomType"] = Int32.Parse(Console.ReadLine());
             //turn the object into a string
             string updatedString = fullObject.ToString();
             //update the object

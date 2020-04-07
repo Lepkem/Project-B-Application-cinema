@@ -51,12 +51,13 @@ namespace Cinema
                         //Test update room
                         Console.WriteLine("Which room do you want to change?");
                         rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
-                        //Test create room
-                        createRoom();
+                       
                         caseSwitch = 0;
                         break;
 
                     case 11:
+                        //Test create room
+                        createRoom();
                         caseSwitch = 0;
                         break;
 
@@ -94,10 +95,15 @@ namespace Cinema
             Console.WriteLine("Set chair amount.");
             string chairAmount = Console.ReadLine();
 
+            //Set room type
+            Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
+            String roomType = Console.ReadLine();
+
             //Convert roomRows and chairAmount
             JObject output = new JObject();
             output["layout"] = JArray.FromObject(roomRows);
             output["chairs"] = chairAmount;
+            output["roomType"] = roomType;
 
             //Set new file name in x location
             string filePath = string.Format(@".\rooms\room{0}.json", rooms.Count + 1);
@@ -160,7 +166,7 @@ namespace Cinema
             if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n"); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n" + "10:edit and create rooms \n" + "11:function 2 admin \n"); }
+            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n" + "10:edit room \n" + "11:create room \n"); }
             while (true) 
             {
 

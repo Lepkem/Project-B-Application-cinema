@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace Cinema
 {
@@ -8,6 +10,7 @@ namespace Cinema
         string movie;
         Room room;
         string date;
+        int roomType;
 
         public ScheduleElement(string t, string m, Room r, string d)
         {
