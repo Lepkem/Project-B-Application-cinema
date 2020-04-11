@@ -12,15 +12,8 @@ namespace Cinema
     {
         static void Main(string[] args)
         {
-            //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
-            //Room roomone = new Room(File.ReadAllText(@".\rooms\room1.json"));
-            //Room roomtwo = new Room(File.ReadAllText(@".\rooms\room2.json"));
-            //Room roomthree = new Room(File.ReadAllText(@".\rooms\room3.json"));
             
-            //roomthree.updateCreateRoom(@".\rooms\room3.json");
-
             Movies movies = new Movies(@"./movies/movie.json");
-            //movieone.updateCreateMovie(@".\movies\movie.json");
             movies.updateCreateMovie();
 
         }
@@ -140,7 +133,23 @@ namespace Cinema
         {
             Console.WriteLine("Delete a movie\nEnter the title:");
             string deleteTitle = Console.ReadLine();
-            this.createJson();
+            bool check = false;
+            for (int i = 0; i < movieList.Count-1; i++) {
+                if (movieList[i].name == deleteTitle) {
+                    movieList.RemoveAt(i);
+                    check = true;
+                    break;
+                }
+            }
+            if (!check) {
+                Console.WriteLine("That movie does not exist.");
+            }
+            
+            JArray delete = new JArray();
+            foreach (Movie m in movieList) {
+                delete.Add(JObject.FromObject(m));
+            }
+            File.WriteAllText(@"./movies/movie.json", delete.ToString());
         }
 
         public void initialize() 
@@ -181,23 +190,23 @@ namespace Cinema
             switch (update)
             {
                 case "genre":
-                    Console.WriteLine("genre:");
+                    Console.WriteLine("new genre:");
                     movie.genre = Console.ReadLine();
                     break;
                 case "synopsis":
-                    Console.WriteLine("synopsis:");
+                    Console.WriteLine("new synopsis:");
                     movie.synopsis = Console.ReadLine();
                     break;
                 case "name":
-                    Console.WriteLine("name:");
+                    Console.WriteLine("new name:");
                     movie.name = Console.ReadLine();
                     break;
                 case "runtime":
-                    Console.WriteLine("runtime:");
+                    Console.WriteLine("new runtime:");
                     movie.runtime = int.Parse(Console.ReadLine());
                     break;
                 case "releaseDate":
-                    Console.WriteLine("releaseDate:");
+                    Console.WriteLine("new releaseDate:");
                     CultureInfo provider = CultureInfo.InvariantCulture;
                     movie.releaseDate = DateTime.ParseExact(Console.ReadLine(),"MM/dd/yyyy", CultureInfo.InvariantCulture);
                     break;

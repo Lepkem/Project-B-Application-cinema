@@ -1,16 +1,16 @@
 [
   {
-    "name": "sonic",
-    "genre": "family",
-    "runtime": 120,
-    "synopsis": "something",
-    "releaseDate": "08/20/2020"
-  },
-  {
     "name": "Star Wars",
     "genre": "Sci-fi",
     "runtime": 120,
     "synopsis": "idk",
-    "releaseDate": "04/15/2020"
+    "releaseDate": "2020-04-15T00:00:00"
+  },
+  {
+    "name": "avengers",
+    "genre": "adventure",
+    "runtime": 120,
+    "synopsis": "something",
+    "releaseDate": "2020-08-13T00:00:00"
   }
 ]
