@@ -140,6 +140,14 @@ namespace Cinema
             Console.WriteLine("\n");
         }
 
+        static void printFAQ()
+        {
+            string FileContentString = "";
+            FileContentString = System.IO.File.ReadAllText("faq.txt");
+            Console.WriteLine(FileContentString);
+            Console.WriteLine("\n");
+        }
+
         static Boolean Login()
         {
             while (true) 
