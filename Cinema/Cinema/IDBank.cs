@@ -16,7 +16,9 @@ namespace Cinema
     }
     class IDBank: IIDBank
     {
-        public void generateUniqueNumber()
+        private  string selectedOrder { get; set; } //why is this private in the UML?
+                                                    //and why is this the type in the UML: [int, ScheduleElement, string]?
+    public void generateUniqueNumber()
         {
             Guid uniqueNumber = new Guid();
         }
