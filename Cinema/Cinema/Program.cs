@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Cinema
 {
@@ -9,6 +10,12 @@ namespace Cinema
     {
         static public List<Room> rooms = new List<Room>();
         static public List<ScheduleElement> schedule = new List<ScheduleElement>();
+        public static List<Films> myFilms = new List<Films>
+            {
+                new Films{ Name = "Sonic", Genre = "Comedy", Runtime = "120 min", Synopsis = "Blue hedgehog collects rings.", ReleaseDate = "12-02-2020" },
+                new Films{ Name = "Birds", Genre = "Comedy", Runtime = "100 min", Synopsis = "Clown girl does funny stuff.", ReleaseDate = "18-02-2020" },
+                new Films{ Name = "Bloodshot", Genre = "Action", Runtime = "110 min", Synopsis = "Vin Diesel shoots enemies.", ReleaseDate = "21-02-2020" },
+            };
         
         static void Main(string[] args)
         {
@@ -38,11 +45,14 @@ namespace Cinema
                         break;
 
                     case 2:
+                        //Print a Shedule
                         printSchedule();
                         caseSwitch = 0;
                         break;
 
                     case 3:
+                        //Search
+                        Search search = new Search();
                         caseSwitch = 0;
                         break;
 
@@ -61,15 +71,21 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
+                    case 12:
+                        //Add movie
+                        myFilms.Add(new Films { Name = "Invisible Man", Genre = "Horror", Runtime = "130 min", Synopsis = "Invisible Man stalks his ex.", ReleaseDate = "24-02-2020" });
+                        caseSwitch = 0;
+                        break;
+
                     default:
                         Console.WriteLine("That's not an option you knucklehead");
                         caseSwitch = 0;
                         break;
                 }
             }
-        }
+    }
 
-        static void readRooms()
+    static void readRooms()
         {
             string[] files = Directory.GetFiles(@".\rooms", "*.json");
             for (int i = 0; i < files.Length; i++)
@@ -124,6 +140,14 @@ namespace Cinema
             Console.WriteLine("\n");
         }
 
+        static void printFAQ()
+        {
+            string FileContentString = "";
+            FileContentString = System.IO.File.ReadAllText("faq.txt");
+            Console.WriteLine(FileContentString);
+            Console.WriteLine("\n");
+        }
+
         static Boolean Login()
         {
             while (true) 
@@ -163,10 +187,10 @@ namespace Cinema
 
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
-            if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n"); }
+            if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:Search  \n" + "4:function 4 \n"); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:function 3 \n" + "4:function 4 \n" + "10:edit room \n" + "11:create room \n"); }
+            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:Search \n" + "4:function 4 \n" + "10:edit room \n" + "11:create room \n" + "12:create movie"); }
             while (true) 
             {
 
@@ -184,7 +208,7 @@ namespace Cinema
                     //checks if number is the same as a user OR admin fucntion
                     if (login)
                     {
-                        if (0 < parsable && parsable < 12) { return parsable; } //number equal to possible functions +1
+                        if (0 < parsable && parsable < 13) { return parsable; } //number equal to possible functions +1
                         else { Console.WriteLine("please select only action given"); }
                     }
                     
