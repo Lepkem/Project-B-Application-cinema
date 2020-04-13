@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ef1BJm2Z7IvceFR9tz/u3z12XTbtXU1vIPPAX0yxpUhP1p97A2VAsdUQmPZHYALTIXBytx2y4Z4oVu/y7JpqaA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Gerben\\Desktop\\School\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gerben\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

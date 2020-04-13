@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Cinema
 {
@@ -16,7 +15,7 @@ namespace Cinema
                 new Films{ Name = "Birds", Genre = "Comedy", Runtime = "100 min", Synopsis = "Clown girl does funny stuff.", ReleaseDate = "18-02-2020" },
                 new Films{ Name = "Bloodshot", Genre = "Action", Runtime = "110 min", Synopsis = "Vin Diesel shoots enemies.", ReleaseDate = "21-02-2020" },
             };
-        
+
         static void Main(string[] args)
         {
             //console program
@@ -29,7 +28,8 @@ namespace Cinema
             schedule.Add(new ScheduleElement("15:30", "preys of bird", rooms[2], "9 may"));
             schedule.Add(new ScheduleElement("18:00", "test film", rooms[1], "30 february"));
 
-            while (running){
+            while (running)
+            {
                 switch (caseSwitch)
                 {   //functions
                     case 0:
@@ -38,30 +38,42 @@ namespace Cinema
                         break;
 
                     case 1:
+                        Console.Clear();
                         //Login OR logout
-                        if (!login){ login = Login(); }
+                        if (!login) { login = Login(); }
                         else { Console.WriteLine("\n\n"); login = false; }
                         caseSwitch = 0;
                         break;
 
                     case 2:
+                        Console.Clear();
                         //Print a Shedule
                         printSchedule();
                         caseSwitch = 0;
                         break;
 
                     case 3:
+                        Console.Clear();
                         //Search
                         Search search = new Search();
                         caseSwitch = 0;
                         break;
-
+                    case 8:
+                        //FAQ
+                        faq();
+                        caseSwitch = 0;
+                        break;
+                    case 9:
+                        //Contact
+                        contact();
+                        caseSwitch = 0;
+                        break;
                     //Admin functions
                     case 10:
                         //Test update room
                         Console.WriteLine("Which room do you want to change?");
                         rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
-                       
+
                         caseSwitch = 0;
                         break;
 
@@ -83,9 +95,9 @@ namespace Cinema
                         break;
                 }
             }
-    }
+        }
 
-    static void readRooms()
+        static void readRooms()
         {
             string[] files = Directory.GetFiles(@".\rooms", "*.json");
             for (int i = 0; i < files.Length; i++)
@@ -140,17 +152,17 @@ namespace Cinema
             Console.WriteLine("\n");
         }
 
-        static void printFAQ()
-        {
-            string FileContentString = "";
-            FileContentString = System.IO.File.ReadAllText("faq.txt");
-            Console.WriteLine(FileContentString);
-            Console.WriteLine("\n");
-        }
+        //static void printFAQ()
+        //{
+        //    string FileContentString = "";
+        //   FileContentString = System.IO.File.ReadAllText("faq.txt");
+        //    Console.WriteLine(FileContentString);
+        //    Console.WriteLine("\n");
+        //}
 
         static Boolean Login()
         {
-            while (true) 
+            while (true)
             {
                 Boolean login = false;
                 string username, password = string.Empty;
@@ -160,7 +172,7 @@ namespace Cinema
                 username = Console.ReadLine();
 
                 //Exit login screen
-                if (username == "b") 
+                if (username == "b")
                 {
                     Console.WriteLine("\n\n");
                     return false;
@@ -176,22 +188,22 @@ namespace Cinema
                     Console.WriteLine("\n \nWelcome admin");
                     return true;
                 }
-                else { Console.WriteLine("Wrong input, please try again \n" + "if you want to return to the menu write b as username");}
+                else { Console.WriteLine("Wrong input, please try again \n" + "if you want to return to the menu write b as username"); }
 
             }
         }
 
-        static int Menu(Boolean login) 
+        static int Menu(Boolean login)
         {
             int parsable = 0;
 
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
-            if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:Search  \n" + "4:function 4 \n"); }
+            if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:Search  \n" + "4:function 4 \n" + "8:FAQ\n" + "9:Contact"); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:Search \n" + "4:function 4 \n" + "10:edit room \n" + "11:create room \n" + "12:create movie"); }
-            while (true) 
+            if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:Search \n" + "4:function 4 \n" + "8:FAQ\n" + "9:Contact\n" + "10:edit room \n" + "11:create room \n" + "12:create movie"); }
+            while (true)
             {
 
                 //gets user input converts it to numbers
@@ -200,10 +212,10 @@ namespace Cinema
                 if (isParsable)
                 {
                     //checks if number is the same as a user fucntion
-                    if (!login) 
+                    if (!login)
                     {
-                        if(0 < parsable && parsable < 5) { return parsable; } //number equal to possible functions +1
-                        else { Console.WriteLine("please select only action given");}
+                        if (0 < parsable && parsable < 10) { return parsable; } //number equal to possible functions +1
+                        else { Console.WriteLine("please select only action given"); }
                     }
                     //checks if number is the same as a user OR admin fucntion
                     if (login)
@@ -211,12 +223,113 @@ namespace Cinema
                         if (0 < parsable && parsable < 13) { return parsable; } //number equal to possible functions +1
                         else { Console.WriteLine("please select only action given"); }
                     }
-                    
+
                 }
                 else { Console.WriteLine("please select only action given"); }
             }
         }
 
+        static void faq()
+        {
+            //Set variables
+            bool looping = true;
 
+            //While loop
+            Console.Clear();
+            while (looping)
+            {
+                int question = 0;
+                Console.WriteLine("\n1: Is de bioscoop geschikt voor invalide mensen? \n2: Heeft de bioscoop zoete popcorn\n3: Wat zijn de openingstijden van de bioscoop\n4: Quit");
+
+                //Ask for case input and quit when input is invalid
+                try { question = int.Parse(Console.ReadLine()); } catch { }
+                Console.WriteLine();
+                Console.Clear();
+
+                //Switch case
+                switch (question)
+                {
+                    case 1:
+                        Console.WriteLine("De bioscoop is zeker geschikt voor invalide mensen!\n" +
+                            "Er is beschikking tot een lift voor de 2de verdieping en alle\n" +
+                            "gangpaden zijn breed genoeg voor rolstoelen.\n");
+                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                    case 2:
+                        Console.WriteLine("De bioscoop heeft 3 soorten popcorn.\n" +
+                            "Zowel zoet, zout als karamel.\n");
+                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                    case 3:
+                        Console.WriteLine("Wegens het corona virus zijn wij momenteel gesloten!\n" +
+                            "wel hebben wij een thuisbioscoop klaarstaan! zie hiervoor de website\n");
+                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Going back"); looping = false; break;
+                    default:
+                        Console.WriteLine("Enter an existing value"); break;
+                }
+
+            }
+
+        }
+
+        static void contact()
+        {
+            //Set variables
+            bool looping = true; int question = 0;
+
+            //While looping is true
+            Console.Clear();
+            while (looping)
+            {
+                //Intro text
+                Console.WriteLine("Welkom bij de Deltascope contactpagina!\n" +
+                    "Deltascope is gevestigd in een modern gebouw, gelegen aan de jachthaven in het centrum van Rotterdam.\n" +
+                    "Vanuit een gastvrije insteek biedt het burgers, bedrijfsleven en verenigingen een accommodatie voor vele uiteenlopende activiteiten.\n" +
+                    "Van feesten en vergaderen tot dansen, sporten en musiceren.\n" +
+                    "\n" +
+                    "If you would like to contact us you can do so by choosing between the next options!");
+
+                //Show menu
+                Console.WriteLine("\n1: Phone number\n2: E-mail\n3: Location\n4: Quit");
+
+                //Ask for case input and quit when input is invalid
+                try { question = int.Parse(Console.ReadLine()); } catch { }
+                Console.WriteLine();
+                Console.Clear();
+
+                //Switch case
+                switch (question)
+                {
+                    case 1:
+                        Console.WriteLine("Welcome to our phone number dialog. Call our phone number and follow the menu as told!\n" +
+                            "Mobile number: 06-12345678\n" +
+                            "Cinema number: 010-234567\n" +
+                            "\n" +
+                            "If you would like to ask questions about partnership etc. call our buisiness number" +
+                            "Buisiness number: 010-123456");
+
+                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                    case 2:
+                        Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mails depending on your question\n" +
+                            "E-mail: deltascope@gmail.com" +
+                            "Buisiness E-mail: b.deltascope@gmail.com");
+                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                    case 3:
+                        Console.WriteLine("If you would like to visit our headquartes you can by making an apointment and coming to the following adress\n" +
+                            "Street adress: Monopolystraat 124\n" +
+                            "Postal code: 2777 ID\n" +
+                            "City: Rotterdam\n" +
+                            "Country: Netherlands\n" +
+                            "Province: Zuid-Holland\n");
+                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Going back"); looping = false; break;
+                    default:
+                        Console.WriteLine("Enter an existing value"); break;
+                }
+            }
+        }
     }
 }

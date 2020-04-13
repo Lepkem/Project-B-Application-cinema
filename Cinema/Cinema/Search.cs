@@ -23,8 +23,10 @@ namespace Cinema
 
                 if (filmChoice == 1)
                 {
+                    Console.Clear();
                     Console.WriteLine("Welke film zoek je?: ");
                     filmSearch = Console.ReadLine();
+                    Console.Clear();
 
 
                     IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.Name == filmSearch);
@@ -37,8 +39,10 @@ namespace Cinema
 
                 else if (filmChoice == 2)
                 {
+                    Console.Clear();
                     Console.WriteLine("Welke genre zoek je?: ");
                     filmSearch = Console.ReadLine();
+                    Console.Clear();
 
                     IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.Genre == filmSearch);
 
@@ -50,8 +54,10 @@ namespace Cinema
 
                 else if (filmChoice == 3)
                 {
+                    Console.Clear();
                     Console.WriteLine("Welke release datum zoek je?: ");
                     filmSearch = Console.ReadLine();
+                    Console.Clear();
 
                     IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.ReleaseDate == filmSearch);
 
@@ -64,6 +70,7 @@ namespace Cinema
                 else if (filmChoice == 4)
                 {
                     userWrong = false;
+                    Console.Clear();
                 }
 
                 else
