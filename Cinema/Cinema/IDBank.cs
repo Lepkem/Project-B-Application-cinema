@@ -3,7 +3,6 @@
 namespace Cinema
 {
     interface IIDBank
-<<<<<<< HEAD
         {
             void generateUniqueNumber();
             void storeOrder();
@@ -11,8 +10,7 @@ namespace Cinema
             void editOrder();
             void deleteOrder();
         }
-    class IDBank: IIDBank
-=======
+    /*class IDBank: IIDBank
     {
         void generateUniqueNumber();
         void storeOrder();
@@ -20,8 +18,8 @@ namespace Cinema
         void editOrder();
         void deleteOrder();
     }
-    class IDBank : IIDBank
->>>>>>> Mattias
+    */
+    class IIIDBank : IIDBank
     {
         private string selectedOrder { get; set; } //why is this private in the UML?
                                                    //and why is this the type in the UML: [int, ScheduleElement, string]?
