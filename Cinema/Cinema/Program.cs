@@ -58,6 +58,7 @@ namespace Cinema
                         Search search = new Search();
                         caseSwitch = 0;
                         break;
+<<<<<<< HEAD
                     case 8:
                         //FAQ
                         faq();
@@ -68,6 +69,16 @@ namespace Cinema
                         contact();
                         caseSwitch = 0;
                         break;
+=======
+
+                    case 4:
+                        //print a room
+                        rooms[1].printRoom(true);
+                        rooms[1].printRoom(false);
+                        caseSwitch = 0;
+                        break;
+
+>>>>>>> Mattias
                     //Admin functions
                     case 10:
                         //Test update room
@@ -196,14 +207,22 @@ namespace Cinema
         static int Menu(Boolean login)
         {
             int parsable = 0;
-
+            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 2 \n";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
+<<<<<<< HEAD
             if (!login) { Console.WriteLine("1:Login \n" + "2:print schedule\n" + "3:Search  \n" + "4:function 4 \n" + "8:FAQ\n" + "9:Contact"); }
 
             //text being displayed in menu Admin version
             if (login) { Console.WriteLine("1:Logout \n" + "2:print schedule\n" + "3:Search \n" + "4:function 4 \n" + "8:FAQ\n" + "9:Contact\n" + "10:edit room \n" + "11:create room \n" + "12:create movie"); }
             while (true)
+=======
+            if (!login) { Console.WriteLine(menu); }
+
+            //text being displayed in menu Admin version
+            if (login) { Console.WriteLine(menu + "10:edit room \n11:create room \n12:create movie"); }
+            while (true) 
+>>>>>>> Mattias
             {
 
                 //gets user input converts it to numbers

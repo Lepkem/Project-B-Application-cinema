@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Cinema;
 
 namespace Cinema
 {
     interface IIDBank
+<<<<<<< HEAD
         {
             void generateUniqueNumber();
             void storeOrder();
@@ -14,10 +12,20 @@ namespace Cinema
             void deleteOrder();
         }
     class IDBank: IIDBank
+=======
     {
-        private  string selectedOrder { get; set; } //why is this private in the UML?
-                                                    //and why is this the type in the UML: [int, ScheduleElement, string]?
-    public void generateUniqueNumber()
+        void generateUniqueNumber();
+        void storeOrder();
+        void searchOrder();
+        void editOrder();
+        void deleteOrder();
+    }
+    class IDBank : IIDBank
+>>>>>>> Mattias
+    {
+        private string selectedOrder { get; set; } //why is this private in the UML?
+                                                   //and why is this the type in the UML: [int, ScheduleElement, string]?
+        public void generateUniqueNumber()
         {
             Guid uniqueNumber = new Guid();
         }
