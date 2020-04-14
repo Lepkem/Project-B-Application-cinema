@@ -13,7 +13,6 @@ namespace Cinema
             void editOrder();
             void deleteOrder();
         }
-    }
     class IDBank: IIDBank
     {
         private  string selectedOrder { get; set; } //why is this private in the UML?
