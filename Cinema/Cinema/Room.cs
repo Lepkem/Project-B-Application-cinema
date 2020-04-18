@@ -29,20 +29,20 @@ namespace Cinema
             //there's also an array of strings in the file: this file takes it and turns it from a massive string to a special array
             JArray inputJArray = JArray.Parse(input["layout"].ToString());
             //create an empty 2D character array the same size as the string array
-            Seat[,] inputMatrix = new Seat[inputJArray.First.ToString().Length, inputJArray.Count];
+            Seat[,] inputMatrix = new Seat[inputJArray.Count, inputJArray.First.ToString().Length];
             //this array goes over which seat is already taken
             JArray vacancyJArray = JArray.Parse(input["vacancy"].ToString());
             // go through each position in the character array and fill it with the proper seat object
-            for (int rows = 0; rows < inputMatrix.GetLength(1); rows++)
+            for (int rows = 0; rows < inputMatrix.GetLength(0); rows++)
             {
                 string inputLine = inputJArray[rows].ToString();
                 string vacancyLine = vacancyJArray[rows].ToString();
-                for (int columns = 0; columns < inputMatrix.GetLength(0); columns++)
+                for (int columns = 0; columns < inputMatrix.GetLength(1); columns++)
                 {
                     if (inputLine[columns] == '0')
-                        inputMatrix[columns, rows] = new Seat(true, 0.0f);
+                        inputMatrix[rows, columns] = new Seat(true, 0.0f);
                     else
-                        inputMatrix[columns, rows] = new Seat(Convert.ToBoolean((int)vacancyLine[columns]), (float)Char.GetNumericValue(inputLine[columns]));
+                        inputMatrix[rows, columns] = new Seat(Convert.ToBoolean((int)vacancyLine[columns]), (float)Char.GetNumericValue(inputLine[columns]));
                 }
             }
             //store the array in the object
@@ -99,7 +99,7 @@ namespace Cinema
             for (int x = 0; x < layout.GetLength(0); x++)
             {
                 string printString = "";
-                for (int y = 0; y < layout.GetLength(0); y++)
+                for (int y = 0; y < layout.GetLength(1); y++)
                 {
                     if (vacancy)
                     {

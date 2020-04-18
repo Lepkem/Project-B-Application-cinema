@@ -24,9 +24,9 @@ namespace Cinema
             Boolean login = false;
             readRooms();
 
-            schedule.Add(new ScheduleElement("12:00", "sonic 2 electric boogaloo", rooms[0], "20 april"));
-            schedule.Add(new ScheduleElement("15:30", "preys of bird", rooms[2], "9 may"));
-            schedule.Add(new ScheduleElement("18:00", "test film", rooms[1], "30 february"));
+            schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
+            schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
+            schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
 
             while (running)
             {
@@ -62,8 +62,8 @@ namespace Cinema
 
                     case 4:
                         //print a room
-                        rooms[1].printRoom(true);
-                        rooms[1].printRoom(false);
+                        rooms[0].printRoom(true);
+                        rooms[0].printRoom(false);
                         caseSwitch = 0;
                         break;
 
