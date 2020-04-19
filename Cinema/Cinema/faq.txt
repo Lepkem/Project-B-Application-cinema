@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+﻿ewfiugfuiwheiufwhueifewiuf
+=======
+﻿test
+>>>>>>> Mattias

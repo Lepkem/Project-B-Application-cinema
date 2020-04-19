@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "\\\\Mac\\Home\\Documents\\GitHub\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj": {}
   },
   "projects": {
@@ -15,6 +16,22 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jordanguerrero\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+    "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+        "projectName": "Cinema",
+        "projectPath": "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+        "packagesPath": "C:\\Users\\PC_Trevor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\PC_Trevor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 5eb3f159d1088bccf1f12400019c2eea98f96f47
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
