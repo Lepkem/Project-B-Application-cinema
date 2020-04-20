@@ -28,12 +28,11 @@ namespace Cinema
                     filmSearch = Console.ReadLine();
                     Console.Clear();
 
+                    IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.Name == filmSearch);
 
-                    IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.Name == filmSearch);
-
-                    foreach (Films films in query)
+                    foreach (ScheduleElement schedule in query)
                     {
-                        Console.WriteLine($"Movie: {films.Name}\n{films.Genre}\n{films.Runtime}\n{films.Synopsis}\n{films.ReleaseDate}\n");
+                        schedule.printScheduleElement();
                     }
                 }
 
@@ -44,11 +43,11 @@ namespace Cinema
                     filmSearch = Console.ReadLine();
                     Console.Clear();
 
-                    IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.Genre == filmSearch);
+                    IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.Genre == filmSearch);
 
-                    foreach (Films films in query)
+                    foreach (ScheduleElement schedule in query)
                     {
-                        Console.WriteLine($"Movie: {films.Name}\n{films.Genre}\n{films.Runtime}\n{films.Synopsis}\n{films.ReleaseDate}\n");
+                        schedule.printScheduleElement();
                     }
                 }
 
@@ -59,11 +58,11 @@ namespace Cinema
                     filmSearch = Console.ReadLine();
                     Console.Clear();
 
-                    IEnumerable<Films> query = Program.myFilms.Where(myFilms => myFilms.ReleaseDate == filmSearch);
+                    IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.ReleaseDate == filmSearch);
 
-                    foreach (Films films in query)
+                    foreach (ScheduleElement schedule in query)
                     {
-                        Console.WriteLine($"Movie: {films.Name}\n{films.Genre}\n{films.Runtime}\n{films.Synopsis}\n{films.ReleaseDate}\n");
+                        schedule.printScheduleElement();
                     }
                 }
 

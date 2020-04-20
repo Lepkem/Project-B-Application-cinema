@@ -1,11 +1,11 @@
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.exe
+C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\movies\movie.json
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.deps.json
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.runtimeconfig.json
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.runtimeconfig.dev.json
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.dll
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.pdb
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.csprojAssemblyReference.cache
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.csproj.CoreCompileInputs.cache
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.AssemblyInfoInputs.cache
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.AssemblyInfo.cs
@@ -13,22 +13,4 @@ C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\o
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.dll
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.pdb
 C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.genruntimeconfig.cache
-<<<<<<< HEAD
-C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\movies\movie.json
-=======
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.exe
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.deps.json
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.runtimeconfig.json
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.runtimeconfig.dev.json
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.dll
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Cinema.pdb
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.csprojAssemblyReference.cache
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.csproj.CoreCompileInputs.cache
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.AssemblyInfoInputs.cache
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.AssemblyInfo.cs
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.csproj.CopyComplete
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.dll
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.pdb
-C:\Users\User\3D Objects\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.genruntimeconfig.cache
->>>>>>> Mattias
+C:\Users\PC_Trevor\Documents\Github\Project-B-Application-cinema\Cinema\Cinema\obj\Debug\netcoreapp3.1\Cinema.csprojAssemblyReference.cache

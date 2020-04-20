@@ -9,6 +9,7 @@ namespace Cinema
         Seat[,] layout;
         int chairs;
         int roomType;
+        string type;
         public Room(string l)
         {
             //the actual initialization function is its own method so that it can be called manually
@@ -112,6 +113,15 @@ namespace Cinema
                 Console.WriteLine(printString);
             }
             Console.WriteLine("\n");
+        }
+
+        public string printInfo() 
+        {
+            
+            if (roomType == 1){ type = "normal";}
+            if (roomType == 2) { type = "3D"; }
+            if (roomType == 3) { type = "IMAX"; }
+            return string.Format("Type: {0} Chairs: {1} ", type, chairs);
         }
     }
 }

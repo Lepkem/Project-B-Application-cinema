@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Cinema
 {
@@ -10,6 +11,7 @@ namespace Cinema
         static public List<Room> rooms = new List<Room>();
         static public List<ScheduleElement> schedule = new List<ScheduleElement>();
         public static List<Films> myFilms = new List<Films>
+
             {
                 new Films{ Name = "Sonic", Genre = "Comedy", Runtime = "120 min", Synopsis = "Blue hedgehog collects rings.", ReleaseDate = "12-02-2020" },
                 new Films{ Name = "Birds", Genre = "Comedy", Runtime = "100 min", Synopsis = "Clown girl does funny stuff.", ReleaseDate = "18-02-2020" },
@@ -27,6 +29,7 @@ namespace Cinema
             schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
             schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
             schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
+            schedule.Add(new ScheduleElement("23:55", myFilms[0], rooms[2], "5 mei"));
 
             while (running)
             {
@@ -69,13 +72,18 @@ namespace Cinema
 
                     case 5:
                         Console.Clear();
-                        Console.WriteLine("Enter case 4");
-                        IDBank bank = new IDBank();
-                        bank.generateUniqueNumber();
+                        orderMenu();
 
+                        
+                        //IDBank orders = new IDBank(@"./orders/orders.json");
+
+
+
+                        /*
                         IDBank bank2 = new IDBank();
                         bank2.generateUniqueNumber();
-                        Console.WriteLine("Exit case 4");
+                        
+                        */
                         caseSwitch = 0;
                         break;
 
@@ -114,9 +122,15 @@ namespace Cinema
                     case 13:
                         //Add movie Jitske
                         Movies movies = new Movies(@"./movies/movie.json");
-                        movies.updateCreateMovie(); 
+                        movies.updateCreateMovie();
                         caseSwitch = 0;
                         break;
+                    case 14:
+                        //Add a scheduleElement
+                        createShedule();
+                        caseSwitch = 0;
+                        break;
+
 
                     default:
                         Console.WriteLine("That's not an option you knucklehead");
@@ -193,7 +207,7 @@ namespace Cinema
         {
             while (true)
             {
-                
+
                 string username, password = string.Empty;
 
                 //asks user input username
@@ -225,15 +239,15 @@ namespace Cinema
         static int Menu(Boolean login)
         {
             int parsable = 0;
-            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 1 \n";
+            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 1 \n5:Order Ticket";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 
             if (!login) { Console.WriteLine(menu); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine(menu + "10:edit room \n11:create room \n12:create movie\n13: create movie Jitske"); }
-            while (true) 
+            if (login) { Console.WriteLine(menu + "10:edit room \n11:create room \n12:create movie\n13: create movie Jitske\n14: add to schedule"); }
+            while (true)
             {
 
                 //gets user input converts it to numbers
@@ -250,7 +264,7 @@ namespace Cinema
                     //checks if number is the same as a user OR admin fucntion
                     if (login)
                     {
-                        if (0 < parsable && parsable < 14) { return parsable; } //number equal to possible functions +1
+                        if (0 < parsable && parsable < 151) { return parsable; } //number equal to possible functions +1
                         else { Console.WriteLine("please select only action given"); }
                     }
 
@@ -360,6 +374,98 @@ namespace Cinema
                         Console.WriteLine("Enter an existing value"); break;
                 }
             }
+        }
+
+        static void orderMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Which movie do you want to watch? enter number\n\n");
+
+            int i = 0;
+            foreach (Films f in myFilms)
+            {
+                string x = f.printFilms();
+                Console.WriteLine(i + " " + x + "\n");
+                i++;
+            }
+            int inputFilm = int.Parse(Console.ReadLine());
+            searchMovie(inputFilm);
+            
+
+
+
+        }
+
+        static void createShedule()
+        {
+            Console.Clear();
+            //print current shedule
+            Console.WriteLine("Current Shedule: ");
+            printSchedule();
+
+            //input time
+            Console.WriteLine("What time wil the movie start");
+            string time = (Console.ReadLine());
+            Console.Clear();
+
+            //input movie
+            Console.WriteLine("Time: " + time);
+            Console.WriteLine("\n\nWhat movie do you want to add? select a number\n");
+            int i = 0;
+            foreach (Films f in myFilms)
+            {
+               string x = f.printFilms();
+                Console.WriteLine(i + " " + x +"\n");
+                i++;
+            }
+            int inputFilm = int.Parse(Console.ReadLine());
+            Console.Clear();
+
+            //input room
+            Console.WriteLine("Time: " + time +"\nMovie: " + myFilms[inputFilm].Name);
+            Console.WriteLine("\n\nWhat room do you want assign? select a number\n");
+            int j = 0;
+            foreach (Room r in rooms)
+            {
+                string y = r.printInfo();
+                Console.WriteLine(j + " " + y +"\n");
+                j++;
+            }
+            int inputRoom = int.Parse(Console.ReadLine());
+            Console.Clear();
+
+            //input date
+            Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
+            Console.WriteLine("\n\nWhat date do you want assign? Example: 1 maart");
+            string inputDate = Console.ReadLine();
+
+
+            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate)); 
+        }
+
+        static void searchMovie(int input)
+        {
+            Console.Clear();
+            Console.WriteLine("Choose your preference: select number \n\n");
+            IEnumerable<ScheduleElement> query = schedule.Where(schedule => schedule.movie == myFilms[input]);
+            int i = 0;
+            foreach (ScheduleElement schedule in query)
+            {
+                Console.WriteLine(i);
+                schedule.printScheduleElement();
+                i++;
+            }
+       
+            int x = int.Parse(Console.ReadLine());
+            
+            //Tot hier ben ik gekomen atm, Deze X geeft de welk film er gekken wordt. Nu moet van die film de zaal->stoelen aangepast worden.
+        }
+
+
+
+        public List<ScheduleElement> schedules
+        {
+            get { return schedule; }
         }
     }
 }
