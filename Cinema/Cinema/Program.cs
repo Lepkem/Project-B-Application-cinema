@@ -24,9 +24,9 @@ namespace Cinema
             Boolean login = false;
             readRooms();
 
-            schedule.Add(new ScheduleElement("12:00", "sonic 2 electric boogaloo", rooms[0], "20 april"));
-            schedule.Add(new ScheduleElement("15:30", "preys of bird", rooms[2], "9 may"));
-            schedule.Add(new ScheduleElement("18:00", "test film", rooms[1], "30 february"));
+            schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
+            schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
+            schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
 
             while (running)
             {
@@ -62,18 +62,18 @@ namespace Cinema
 
                     case 4:
                         //print a room
-                        rooms[1].printRoom(true);
-                        rooms[1].printRoom(false);
+                        rooms[0].printRoom(true);
+                        rooms[0].printRoom(false);
                         caseSwitch = 0;
                         break;
 
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Enter case 4");
-                        IIIDBank bank = new IIIDBank();
+                        IDBank bank = new IDBank();
                         bank.generateUniqueNumber();
 
-                        IIIDBank bank2 = new IIIDBank();
+                        IDBank bank2 = new IDBank();
                         bank2.generateUniqueNumber();
                         Console.WriteLine("Exit case 4");
                         caseSwitch = 0;
@@ -193,7 +193,7 @@ namespace Cinema
         {
             while (true)
             {
-                Boolean login = false;
+                
                 string username, password = string.Empty;
 
                 //asks user input username
@@ -225,7 +225,7 @@ namespace Cinema
         static int Menu(Boolean login)
         {
             int parsable = 0;
-            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 2 \n";
+            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 1 \n";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 
