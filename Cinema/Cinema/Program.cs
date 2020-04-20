@@ -206,7 +206,7 @@ namespace Cinema
         static int Menu(Boolean login)
         {
             int parsable = 0;
-            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 2 \n";
+            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 1 \n";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 

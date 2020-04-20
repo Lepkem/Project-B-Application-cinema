@@ -40,9 +40,9 @@ namespace Cinema
                 for (int columns = 0; columns < inputMatrix.GetLength(1); columns++)
                 {
                     if (inputLine[columns] == '0')
-                        inputMatrix[rows, columns] = new Seat(true, 0.0f);
+                        inputMatrix[rows, columns] = new Seat(false, 0.0f);
                     else
-                        inputMatrix[rows, columns] = new Seat(Convert.ToBoolean((int)vacancyLine[columns]), (float)Char.GetNumericValue(inputLine[columns]));
+                        inputMatrix[rows, columns] = new Seat(!Convert.ToBoolean(Char.GetNumericValue(vacancyLine[columns])), (float)Char.GetNumericValue(inputLine[columns]));
                 }
             }
             //store the array in the object
@@ -111,6 +111,7 @@ namespace Cinema
                 }
                 Console.WriteLine(printString);
             }
+            Console.WriteLine("\n");
         }
     }
 }
