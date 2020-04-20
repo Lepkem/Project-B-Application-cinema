@@ -67,6 +67,18 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("Enter case 4");
+                        IIIDBank bank = new IIIDBank();
+                        bank.generateUniqueNumber();
+
+                        IIIDBank bank2 = new IIIDBank();
+                        bank2.generateUniqueNumber();
+                        Console.WriteLine("Exit case 4");
+                        caseSwitch = 0;
+                        break;
+
                     case 8:
                         //FAQ
                         faq();
@@ -96,6 +108,13 @@ namespace Cinema
                     case 12:
                         //Add movie
                         myFilms.Add(new Films { Name = "Invisible Man", Genre = "Horror", Runtime = "130 min", Synopsis = "Invisible Man stalks his ex.", ReleaseDate = "24-02-2020" });
+                        caseSwitch = 0;
+                        break;
+
+                    case 13:
+                        //Add movie Jitske
+                        Movies movies = new Movies(@"./movies/movie.json");
+                        movies.updateCreateMovie(); 
                         caseSwitch = 0;
                         break;
 
@@ -213,7 +232,7 @@ namespace Cinema
             if (!login) { Console.WriteLine(menu); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine(menu + "10:edit room \n11:create room \n12:create movie"); }
+            if (login) { Console.WriteLine(menu + "10:edit room \n11:create room \n12:create movie\n13: create movie Jitske"); }
             while (true) 
             {
 
@@ -231,7 +250,7 @@ namespace Cinema
                     //checks if number is the same as a user OR admin fucntion
                     if (login)
                     {
-                        if (0 < parsable && parsable < 13) { return parsable; } //number equal to possible functions +1
+                        if (0 < parsable && parsable < 14) { return parsable; } //number equal to possible functions +1
                         else { Console.WriteLine("please select only action given"); }
                     }
 
