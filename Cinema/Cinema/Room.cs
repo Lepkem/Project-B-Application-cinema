@@ -6,9 +6,10 @@ namespace Cinema
 {
     class Room
     {
-        Seat[,] layout;
+        public Seat[,] layout;
         int chairs;
         int roomType;
+        string type;
         public Room(string l)
         {
             //the actual initialization function is its own method so that it can be called manually
@@ -29,20 +30,20 @@ namespace Cinema
             //there's also an array of strings in the file: this file takes it and turns it from a massive string to a special array
             JArray inputJArray = JArray.Parse(input["layout"].ToString());
             //create an empty 2D character array the same size as the string array
-            Seat[,] inputMatrix = new Seat[inputJArray.First.ToString().Length, inputJArray.Count];
+            Seat[,] inputMatrix = new Seat[inputJArray.Count, inputJArray.First.ToString().Length];
             //this array goes over which seat is already taken
             JArray vacancyJArray = JArray.Parse(input["vacancy"].ToString());
             // go through each position in the character array and fill it with the proper seat object
-            for (int rows = 0; rows < inputMatrix.GetLength(1); rows++)
+            for (int rows = 0; rows < inputMatrix.GetLength(0); rows++)
             {
                 string inputLine = inputJArray[rows].ToString();
                 string vacancyLine = vacancyJArray[rows].ToString();
-                for (int columns = 0; columns < inputMatrix.GetLength(0); columns++)
+                for (int columns = 0; columns < inputMatrix.GetLength(1); columns++)
                 {
                     if (inputLine[columns] == '0')
-                        inputMatrix[columns, rows] = new Seat(true, 0.0f);
+                        inputMatrix[rows, columns] = new Seat(false, 0.0f);
                     else
-                        inputMatrix[columns, rows] = new Seat(Convert.ToBoolean((int)vacancyLine[columns]), (float)Char.GetNumericValue(inputLine[columns]));
+                        inputMatrix[rows, columns] = new Seat(!Convert.ToBoolean(Char.GetNumericValue(vacancyLine[columns])), (float)Char.GetNumericValue(inputLine[columns]));
                 }
             }
             //store the array in the object
@@ -99,7 +100,7 @@ namespace Cinema
             for (int x = 0; x < layout.GetLength(0); x++)
             {
                 string printString = "";
-                for (int y = 0; y < layout.GetLength(0); y++)
+                for (int y = 0; y < layout.GetLength(1); y++)
                 {
                     if (vacancy)
                     {
@@ -111,6 +112,72 @@ namespace Cinema
                 }
                 Console.WriteLine(printString);
             }
+            Console.WriteLine("\n");
+        }
+
+        public void updateVacancy(int cord_x,int cord_y,string room)
+        {
+            JObject fullObject = JObject.Parse(File.ReadAllText(room));
+            JArray layoutArray = (JArray)fullObject["layout"];
+            int defaultLength = layoutArray.First.ToString().Length;
+            string newLine = "";
+            for (int i = 0; i < layoutArray.Count; i++)
+            {
+                for (int j = 0; j < layoutArray.Count; j++)
+                {
+                    if (i == cord_y)
+                    {
+                        if (j == cord_x)
+                        {
+                            newLine = newLine + "x";
+                        }
+                    }
+                    else { newLine = newLine + "-"; }
+
+                    if (newLine.Length == defaultLength)
+                    {
+                        layoutArray[i] = newLine;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(string.Format("The length of each row must be exactly {0}. Try inputting a line of the proper length.", defaultLength));
+                            
+                    }
+                    
+                }
+
+            }
+
+        }
+                /*bool vacancy = true;
+                for (int x = 0; x < layout.GetLength(0); x++)
+                {
+                    string printString = "";
+                    for (int y = 0; y < layout.GetLength(1); y++)
+                    {
+                        if (vacancy)
+                        {
+                            if (layout[x, y].vacant)
+                                printString += "_";
+                            else printString += "X";
+                            if(layout[x, y] == layout[cord_x, cord_y]) { printString += "X"; }
+                        }
+                        else printString += layout[x, y].priceMod;
+                    }
+                    Console.WriteLine(printString);
+                }
+                Console.WriteLine("\n");
+            }
+            */
+
+        public string printInfo() 
+        {
+            
+            if (roomType == 1){ type = "normal";}
+            if (roomType == 2) { type = "3D"; }
+            if (roomType == 3) { type = "IMAX"; }
+            return string.Format("Type: {0} Chairs: {1} ", type, chairs);
         }
     }
 }

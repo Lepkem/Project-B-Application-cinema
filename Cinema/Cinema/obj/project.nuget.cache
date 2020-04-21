@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4sV0e+pg2qyi2F8cgDYh1tu6aMO2B2csaFFGrR018YyOD2rBuo9eVSolaMMy46zLW5pm7fddCmPhrpo4zbMWLg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PC_Trevor\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

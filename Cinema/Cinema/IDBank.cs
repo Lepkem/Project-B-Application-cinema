@@ -1,51 +1,85 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Cinema
 {
-    interface IIDBank
+
+    class Order
+    {
+        public int number;
+        public ScheduleElement scheduleElement;
+        public Seat seat;
+
+
+        public Order(int number,ScheduleElement scheduleElement, Seat seat)
         {
-            void generateUniqueNumber();
-            void storeOrder();
-            void searchOrder();
-            void editOrder();
-            void deleteOrder();
+            this.number = number;
+            this.scheduleElement = scheduleElement;
+            this.seat = seat;
+
+            Tuple<int, ScheduleElement, Seat> selectedOrder = new Tuple<int, ScheduleElement, Seat>(number,scheduleElement,seat);
+
         }
-    /*class IDBank: IIDBank
-    {
-        void generateUniqueNumber();
-        void storeOrder();
-        void searchOrder();
-        void editOrder();
-        void deleteOrder();
+
+
     }
-    */
-    class IIIDBank : IIDBank
+   
+
+    class IDBank
     {
-        private string selectedOrder { get; set; } //why is this private in the UML?
-                                                   //and why is this the type in the UML: [int, ScheduleElement, string]?
+        List<IDBank> orderList;
+        private string jsonFileLocation;
+
+        
+
+        public IDBank(string jsonFileLocation)
+        {
+            //the actual initialization function is its own method so that it can be called manually
+            this.jsonFileLocation = jsonFileLocation;
+            initialize();
+        }
+
         public void generateUniqueNumber()
         {
-            Guid uniqueNumber = new Guid();
+            Guid uniqueNumber = Guid.NewGuid();
+            Console.WriteLine(uniqueNumber);
         }
 
         public void storeOrder()
         {
-            throw new NotImplementedException();
+
+            
         }
 
         public void searchOrder()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void editOrder()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void deleteOrder()
         {
-            throw new NotImplementedException();
+            
+        }
+
+
+        public void initialize()
+        {
+            List<ScheduleElement> schedule = new List<ScheduleElement>();
+            schedule = Program.schedule;
+            this.orderList = new List<IDBank>();
+            JArray orderArray = JArray.Parse(File.ReadAllText(this.jsonFileLocation));
+            foreach (JObject obj in orderArray)
+            {
+            //    this.orderList.Add(new order((int)obj["orderNumber"], (string)obj["ScheduleElement"], (string)obj["seat"]));
+            }
         }
     }
 }
