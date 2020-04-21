@@ -388,29 +388,40 @@ namespace Cinema
         static void orderMenu()
         {
             Console.Clear();
-            Console.WriteLine("Which movie do you want to watch? enter number\n\n");
-            Console.WriteLine($"Choose a number between 0 and {(myFilms.Count)-1}"); //als we de opties laten beginnen vanaf 1 moet dit ff veranderd worden
-            int i = 0;
-            foreach (Films f in myFilms)
+            bool quit = false;
+            int inputFilm = 0;
+            while (quit == false)
             {
-                string x = f.printFilms();
-                Console.WriteLine(i + " " + x + "\n");
-                
-                i++;
-            }
+                Console.WriteLine("Which movie do you want to watch? enter number\n\n");
 
-            try
-            {
-                int inputFilm = int.Parse(Console.ReadLine());
-                searchMovie(inputFilm);
+                int i = 0;
+                foreach (Films f in myFilms)
+                {
+                    string x = f.printFilms();
+                    Console.WriteLine(i + " " + x + "\n");
+                    i++;
+                }
+
+                try
+                {
+                    inputFilm = int.Parse(Console.ReadLine());
+                    if (inputFilm > i - 1)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please fill in existing integers only!");
+                    }
+                    else
+                    {
+                        quit = true;
+                    }
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please fill in an integer only!\n\n");
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Console.ReadLine();
-                throw;
-            }
-            
+            searchMovie(inputFilm);
         }
 
         static void createShedule()
@@ -463,20 +474,41 @@ namespace Cinema
         static void searchMovie(int input)
         {
             Console.Clear();
+            bool quit = false;
+            int x = 0;
             List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
-            Console.WriteLine("Choose your preference: select number \n\n");
-            IEnumerable<ScheduleElement> query = schedule.Where(schedule => schedule.movie == myFilms[input]);
-            int i = 0;
-            foreach (ScheduleElement schedule in query)
+            while (quit == false)
             {
-                possibleMovies.Add(schedule);
-                Console.WriteLine(i);
-                schedule.printScheduleElement();
-                i++;
+                Console.WriteLine("Choose your preference: select number \n\n");
+                IEnumerable<ScheduleElement> query = schedule.Where(schedule => schedule.movie == myFilms[input]);
+                int i = 0;
+                foreach (ScheduleElement schedule in query)
+                {
+                    possibleMovies.Add(schedule);
+                    Console.WriteLine(i);
+                    schedule.printScheduleElement();
+                    i++;
+                }
+                try
+                {
+                    x = int.Parse(Console.ReadLine());
+                    if (x > i - 1)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please fill in existing integers only!");
+                    }
+                    else
+                    {
+                        quit = true;
+                    }
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please fill in an integer only!\n\n");
+                }
             }
-            int x = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("How many tickets do you want? Enter number");
+            Console.WriteLine("How many tickets do you want? enter number");
             int seats = int.Parse(Console.ReadLine());
 
 
