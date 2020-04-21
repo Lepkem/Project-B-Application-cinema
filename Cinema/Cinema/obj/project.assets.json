@@ -52,19 +52,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC_Trevor\\.nuget\\packages\\": {}
+    "C:\\Users\\Age en Annelies\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+      "projectUniqueName": "C:\\Users\\Age en Annelies\\Desktop\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
       "projectName": "Cinema",
-      "projectPath": "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
-      "packagesPath": "C:\\Users\\PC_Trevor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC_Trevor\\Documents\\Github\\Project-B-Application-cinema\\Cinema\\Cinema\\obj\\",
+      "projectPath": "C:\\Users\\Age en Annelies\\Desktop\\Project-B-Application-cinema\\Cinema\\Cinema\\Cinema.csproj",
+      "packagesPath": "C:\\Users\\Age en Annelies\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Age en Annelies\\Desktop\\Project-B-Application-cinema\\Cinema\\Cinema\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\PC_Trevor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Age en Annelies\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

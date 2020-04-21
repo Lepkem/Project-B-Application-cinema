@@ -74,7 +74,7 @@ namespace Cinema
                         Console.Clear();
                         orderMenu();
 
-                        
+
                         //IDBank orders = new IDBank(@"./orders/orders.json");
 
 
@@ -379,16 +379,39 @@ namespace Cinema
         static void orderMenu()
         {
             Console.Clear();
-            Console.WriteLine("Which movie do you want to watch? enter number\n\n");
-
-            int i = 0;
-            foreach (Films f in myFilms)
+            bool quit = false;
+            int inputFilm = 0;
+            while (quit == false)
             {
-                string x = f.printFilms();
-                Console.WriteLine(i + " " + x + "\n");
-                i++;
+                Console.WriteLine("Which movie do you want to watch? enter number\n\n");
+
+                int i = 0;
+                foreach (Films f in myFilms)
+                {
+                    string x = f.printFilms();
+                    Console.WriteLine(i + " " + x + "\n");
+                    i++;
+                }
+
+                try
+                {
+                    inputFilm = int.Parse(Console.ReadLine());
+                    if (inputFilm > i-1)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please fill in existing integers only!");
+                    }
+                    else
+                    {
+                        quit = true;
+                    }
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please fill in an integer only!\n\n");
+                }
             }
-            int inputFilm = int.Parse(Console.ReadLine());
             searchMovie(inputFilm);
         }
 
@@ -410,21 +433,21 @@ namespace Cinema
             int i = 0;
             foreach (Films f in myFilms)
             {
-               string x = f.printFilms();
-                Console.WriteLine(i + " " + x +"\n");
+                string x = f.printFilms();
+                Console.WriteLine(i + " " + x + "\n");
                 i++;
             }
             int inputFilm = int.Parse(Console.ReadLine());
             Console.Clear();
 
             //input room
-            Console.WriteLine("Time: " + time +"\nMovie: " + myFilms[inputFilm].Name);
+            Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name);
             Console.WriteLine("\n\nWhat room do you want assign? select a number\n");
             int j = 0;
             foreach (Room r in rooms)
             {
                 string y = r.printInfo();
-                Console.WriteLine(j + " " + y +"\n");
+                Console.WriteLine(j + " " + y + "\n");
                 j++;
             }
             int inputRoom = int.Parse(Console.ReadLine());
@@ -436,25 +459,45 @@ namespace Cinema
             string inputDate = Console.ReadLine();
 
 
-            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate)); 
+            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate));
         }
 
         static void searchMovie(int input)
         {
             Console.Clear();
+            bool quit = false;
+            int x = 0;
             List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
-            Console.WriteLine("Choose your preference: select number \n\n");
-            IEnumerable<ScheduleElement> query = schedule.Where(schedule => schedule.movie == myFilms[input]);
-            int i = 0;
-            foreach (ScheduleElement schedule in query)
-            {
-                possibleMovies.Add(schedule);
-                Console.WriteLine(i);
-                schedule.printScheduleElement();
-                i++;
+            while (quit == false) { 
+                Console.WriteLine("Choose your preference: select number \n\n");
+                IEnumerable<ScheduleElement> query = schedule.Where(schedule => schedule.movie == myFilms[input]);
+                int i = 0;
+                foreach (ScheduleElement schedule in query)
+                {
+                    possibleMovies.Add(schedule);
+                    Console.WriteLine(i);
+                    schedule.printScheduleElement();
+                    i++;
+                }
+                try
+                {
+                    x = int.Parse(Console.ReadLine());
+                    if (x > i - 1)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please fill in existing integers only!");
+                    }
+                    else
+                    {
+                        quit = true;
+                    }
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please fill in an integer only!\n\n");
+                }
             }
-            int x = int.Parse(Console.ReadLine());
-
             Console.WriteLine("How many tickets do you want? enter number");
             int seats = int.Parse(Console.ReadLine());
 
@@ -478,19 +521,19 @@ namespace Cinema
                     Console.WriteLine("select the Y coordinate: ");
                     cord_y = int.Parse(Console.ReadLine());
 
-                    if(possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
+                    if (possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
                     {
                         Console.WriteLine("Your in the if");
                         //possibleMovies[x].room.layout[cord_x, cord_y].vacant. == "1";
-                        possibleMovies[x].room.updateVacancy(cord_x, cord_y,file);
+                        possibleMovies[x].room.updateVacancy(cord_x, cord_y, file);
                         seatLoop = false;
                     }
                     else { Console.WriteLine("Seats are already taken."); }
-                    
+
                 }
 
             }
-    
+
         }
 
 
