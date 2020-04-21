@@ -120,22 +120,35 @@ namespace Cinema
             JObject fullObject = JObject.Parse(File.ReadAllText(room));
             JArray layoutArray = (JArray)fullObject["layout"];
             int defaultLength = layoutArray.First.ToString().Length;
-            string newLine;
+            string newLine = "";
             for (int i = 0; i < layoutArray.Count; i++)
             {
-                if (i == cord_y)
+                for (int j = 0; j < layoutArray.Count; j++)
                 {
-                    for (int j = 0; j < layoutArray.Count; j++)
+                    if (i == cord_y)
                     {
                         if (j == cord_x)
                         {
-                            newLine = newLine + "X";
+                            newLine = newLine + "x";
                         }
-                        else { newLine = newLine + "-";}
                     }
+                    else { newLine = newLine + "-"; }
+
+                    if (newLine.Length == defaultLength)
+                    {
+                        layoutArray[i] = newLine;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(string.Format("The length of each row must be exactly {0}. Try inputting a line of the proper length.", defaultLength));
+                            
+                    }
+                    
                 }
 
             }
+
         }
                 /*bool vacancy = true;
                 for (int x = 0; x < layout.GetLength(0); x++)

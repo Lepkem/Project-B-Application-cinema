@@ -462,8 +462,9 @@ namespace Cinema
             int cord_x = 0;
             int cord_y = 0;
             bool seatLoop = true;
+            string file = string.Format(@".\rooms\room{0}.json", (x + 1));
 
-            for(int s = seats; s >= 1; seats--)
+            for (int s = seats; s >= 1; seats--)
             {
                 seatLoop = true;
                 while (seatLoop)
@@ -481,7 +482,7 @@ namespace Cinema
                     {
                         Console.WriteLine("Your in the if");
                         //possibleMovies[x].room.layout[cord_x, cord_y].vacant. == "1";
-                        possibleMovies[x].room.updateVacancy(cord_x, cord_y);
+                        possibleMovies[x].room.updateVacancy(cord_x, cord_y,file);
                         seatLoop = false;
                     }
                     
