@@ -389,13 +389,7 @@ namespace Cinema
                 i++;
             }
             int inputFilm = int.Parse(Console.ReadLine());
-            
-
             searchMovie(inputFilm);
-            
-
-
-
         }
 
         static void createShedule()
@@ -483,8 +477,14 @@ namespace Cinema
                     Console.WriteLine("select the Y coordinate: ");
                     cord_y = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine(possibleMovies[x].room.layout[cord_x, cord_y].vacant);
-                    //if (possibleMovies[x].room.layout[cord_x, cord_y].vacant  '_');
+                    if(possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
+                    {
+                        Console.WriteLine("Your in the if");
+                        //possibleMovies[x].room.layout[cord_x, cord_y].vacant. == "1";
+                        possibleMovies[x].room.updateVacancy(cord_x, cord_y);
+                        seatLoop = false;
+                    }
+                    
                 }
 
             }

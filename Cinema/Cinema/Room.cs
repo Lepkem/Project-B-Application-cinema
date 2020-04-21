@@ -115,6 +115,49 @@ namespace Cinema
             Console.WriteLine("\n");
         }
 
+        public void updateVacancy(int cord_x,int cord_y,string room)
+        {
+            JObject fullObject = JObject.Parse(File.ReadAllText(room));
+            JArray layoutArray = (JArray)fullObject["layout"];
+            int defaultLength = layoutArray.First.ToString().Length;
+            string newLine;
+            for (int i = 0; i < layoutArray.Count; i++)
+            {
+                if (i == cord_y)
+                {
+                    for (int j = 0; j < layoutArray.Count; j++)
+                    {
+                        if (j == cord_x)
+                        {
+                            newLine = newLine + "X";
+                        }
+                        else { newLine = newLine + "-";}
+                    }
+                }
+
+            }
+        }
+                /*bool vacancy = true;
+                for (int x = 0; x < layout.GetLength(0); x++)
+                {
+                    string printString = "";
+                    for (int y = 0; y < layout.GetLength(1); y++)
+                    {
+                        if (vacancy)
+                        {
+                            if (layout[x, y].vacant)
+                                printString += "_";
+                            else printString += "X";
+                            if(layout[x, y] == layout[cord_x, cord_y]) { printString += "X"; }
+                        }
+                        else printString += layout[x, y].priceMod;
+                    }
+                    Console.WriteLine(printString);
+                }
+                Console.WriteLine("\n");
+            }
+            */
+
         public string printInfo() 
         {
             
