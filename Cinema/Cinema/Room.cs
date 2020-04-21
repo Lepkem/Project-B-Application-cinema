@@ -6,7 +6,7 @@ namespace Cinema
 {
     class Room
     {
-        Seat[,] layout;
+        public Seat[,] layout;
         int chairs;
         int roomType;
         string type;

@@ -389,6 +389,8 @@ namespace Cinema
                 i++;
             }
             int inputFilm = int.Parse(Console.ReadLine());
+            
+
             searchMovie(inputFilm);
             
 
@@ -446,21 +448,48 @@ namespace Cinema
         static void searchMovie(int input)
         {
             Console.Clear();
+            List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
             Console.WriteLine("Choose your preference: select number \n\n");
             IEnumerable<ScheduleElement> query = schedule.Where(schedule => schedule.movie == myFilms[input]);
             int i = 0;
             foreach (ScheduleElement schedule in query)
             {
+                possibleMovies.Add(schedule);
                 Console.WriteLine(i);
                 schedule.printScheduleElement();
                 i++;
             }
-       
             int x = int.Parse(Console.ReadLine());
-            
-            //Tot hier ben ik gekomen atm, Deze X geeft de welk film er gekken wordt. Nu moet van die film de zaal->stoelen aangepast worden.
-        }
 
+            Console.WriteLine("How many tickets do you want? enter number");
+            int seats = int.Parse(Console.ReadLine());
+
+
+            int cord_x = 0;
+            int cord_y = 0;
+            bool seatLoop = true;
+
+            for(int s = seats; s >= 1; seats--)
+            {
+                seatLoop = true;
+                while (seatLoop)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please pick a seat. You can select " + s + " more seats\n the upper left corner is 0,0");
+                    possibleMovies[x].room.printRoom(true);
+
+                    Console.WriteLine("select the X coordinate: ");
+                    cord_x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("select the Y coordinate: ");
+                    cord_y = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine(possibleMovies[x].room.layout[cord_x, cord_y].vacant);
+                    //if (possibleMovies[x].room.layout[cord_x, cord_y].vacant  '_');
+                }
+
+            }
+    
+        }
 
 
         public List<ScheduleElement> schedules
