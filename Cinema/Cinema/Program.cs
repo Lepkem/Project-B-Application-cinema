@@ -485,6 +485,7 @@ namespace Cinema
                         possibleMovies[x].room.updateVacancy(cord_x, cord_y,file);
                         seatLoop = false;
                     }
+                    else { Console.WriteLine("Seats are already taken."); }
                     
                 }
 

@@ -118,36 +118,44 @@ namespace Cinema
         public void updateVacancy(int cord_x,int cord_y,string room)
         {
             JObject fullObject = JObject.Parse(File.ReadAllText(room));
-            JArray layoutArray = (JArray)fullObject["layout"];
+            JArray layoutArray = (JArray)fullObject["vacancy"];
             int defaultLength = layoutArray.First.ToString().Length;
-            string newLine = "";
             for (int i = 0; i < layoutArray.Count; i++)
             {
+                string newLine = "";
                 for (int j = 0; j < layoutArray.Count; j++)
                 {
                     if (i == cord_y)
                     {
                         if (j == cord_x)
                         {
-                            newLine = newLine + "x";
+                            newLine = newLine + "1";
                         }
                     }
-                    else { newLine = newLine + "-"; }
+                    else 
+                    {
+                        Console.WriteLine(layoutArray[j][i]);
+                        if (layoutArray[j][i].HasValues)
+                        {
+                            newLine = newLine + "1";
+                        }
+                        else
+                        {
+                            newLine = newLine + "0";
+                        }
+                        
+                    }
 
                     if (newLine.Length == defaultLength)
                     {
                         layoutArray[i] = newLine;
                         break;
                     }
-                    else
-                    {
-                        Console.WriteLine(string.Format("The length of each row must be exactly {0}. Try inputting a line of the proper length.", defaultLength));
-                            
-                    }
-                    
                 }
-
             }
+            string updatedString = fullObject.ToString();
+            File.WriteAllText(room, updatedString);
+
 
         }
                 /*bool vacancy = true;
