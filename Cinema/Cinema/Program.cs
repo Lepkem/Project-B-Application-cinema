@@ -248,7 +248,7 @@ namespace Cinema
         static int Menu(Boolean login)
         {
             int parsable = 0;
-            string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Print Maasvlakte 1 \n5:Order Tickets";
+            string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Print Maasvlakte 1 \n5:Order Tickets \n8:FAQ \n5:Contact\n";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 
@@ -485,7 +485,7 @@ namespace Cinema
             bool seatLoop = true;
             string file = string.Format(@".\rooms\room{0}.json", (x + 1));
 
-            for (int s = seats; s >= 1; seats--)
+            for (int s = seats; s >= 1; s--)
             {
                 seatLoop = true;
                 while (seatLoop)
@@ -501,17 +501,14 @@ namespace Cinema
 
                     if(possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
                     {
-                        Console.WriteLine("Your in the if");
                         //possibleMovies[x].room.layout[cord_x, cord_y].vacant. == "1";
                         possibleMovies[x].room.updateVacancy(cord_x, cord_y,file);
+                        possibleMovies[x].room.Initialize(File.ReadAllText(file));
                         seatLoop = false;
                     }
-                    else { Console.WriteLine("Seats are already taken."); }
-                    
+                    else { Console.WriteLine("Seats are already taken.");}         
                 }
-
             }
-    
         }
 
 

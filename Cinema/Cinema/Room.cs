@@ -115,70 +115,24 @@ namespace Cinema
             Console.WriteLine("\n");
         }
 
-        public void updateVacancy(int cord_x,int cord_y,string room)
+        public void updateVacancy(int cord_x, int cord_y, string room)
         {
             JObject fullObject = JObject.Parse(File.ReadAllText(room));
-            JArray layoutArray = (JArray)fullObject["vacancy"];
-            int defaultLength = layoutArray.First.ToString().Length;
-            for (int i = 0; i < layoutArray.Count; i++)
-            {
-                string newLine = "";
-                for (int j = 0; j < layoutArray.Count; j++)
-                {
-                    if (i == cord_y)
-                    {
-                        if (j == cord_x)
-                        {
-                            newLine = newLine + "1";
-                        }
-                    }
-                    else 
-                    {
-                        Console.WriteLine(layoutArray[j][i]);
-                        if (layoutArray[j][i].HasValues)
-                        {
-                            newLine = newLine + "1";
-                        }
-                        else
-                        {
-                            newLine = newLine + "0";
-                        }
-                        
-                    }
+            JArray vacancyArray = (JArray)fullObject["vacancy"];
 
-                    if (newLine.Length == defaultLength)
-                    {
-                        layoutArray[i] = newLine;
-                        break;
-                    }
-                }
-            }
+            int defaultLength = vacancyArray.First.ToString().Length;
+
+
+            string temp = vacancyArray[cord_y - 1].ToString();
+            char[] temp2 = temp.ToCharArray();
+            temp2[cord_x - 1]='1';
+            temp = new string(temp2);
+
+            vacancyArray[cord_y] = temp;
+
             string updatedString = fullObject.ToString();
             File.WriteAllText(room, updatedString);
-
-
         }
-                /*bool vacancy = true;
-                for (int x = 0; x < layout.GetLength(0); x++)
-                {
-                    string printString = "";
-                    for (int y = 0; y < layout.GetLength(1); y++)
-                    {
-                        if (vacancy)
-                        {
-                            if (layout[x, y].vacant)
-                                printString += "_";
-                            else printString += "X";
-                            if(layout[x, y] == layout[cord_x, cord_y]) { printString += "X"; }
-                        }
-                        else printString += layout[x, y].priceMod;
-                    }
-                    Console.WriteLine(printString);
-                }
-                Console.WriteLine("\n");
-            }
-            */
-
         public string printInfo() 
         {
             
