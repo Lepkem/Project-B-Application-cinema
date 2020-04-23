@@ -248,7 +248,7 @@ namespace Cinema
         static int Menu(Boolean login)
         {
             int parsable = 0;
-            string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Print Maasvlakte 1 \n5:Order Tickets \n8:FAQ \n5:Contact\n";
+            string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Print Maasvlakte 1 \n5:Order Tickets \n8:FAQ \n9:Contact\n";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 
@@ -508,8 +508,24 @@ namespace Cinema
                     Console.WriteLine("Please fill in an integer only!\n\n");
                 }
             }
-            Console.WriteLine("How many tickets do you want? enter number");
-            int seats = int.Parse(Console.ReadLine());
+            quit = false;
+            int seats = 0;
+            Console.Clear();
+            while (quit == false)
+            {
+                try
+                {
+                    
+                    Console.WriteLine("How many tickets do you want? enter number");
+                    seats = int.Parse(Console.ReadLine());
+                    quit = true;
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Fill in integers only!");
+                }
+            }
 
 
             int cord_x = 0;
