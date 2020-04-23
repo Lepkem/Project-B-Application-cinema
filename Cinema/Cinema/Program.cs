@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +29,7 @@ namespace Cinema
             schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
             schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
             schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
-            schedule.Add(new ScheduleElement("23:55", myFilms[0], rooms[2], "5 mei"));
+            schedule.Add(new ScheduleElement("23:55", myFilms[0], rooms[2], "5 may"));
 
             while (running)
             {
@@ -82,7 +82,7 @@ namespace Cinema
                         /*
                         IDBank bank2 = new IDBank();
                         bank2.generateUniqueNumber();
-                        
+
                         */
                         caseSwitch = 0;
                         break;
@@ -142,10 +142,19 @@ namespace Cinema
 
         static void readRooms()
         {
-            string[] files = Directory.GetFiles(@".\rooms", "*.json");
-            for (int i = 0; i < files.Length; i++)
-                //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
-                rooms.Add(new Room(File.ReadAllText(files[i])));
+            try
+            {
+                string[] files = Directory.GetFiles(@".\rooms", "*.json");
+                for (int i = 0; i < files.Length; i++)
+                    //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
+                    rooms.Add(new Room(File.ReadAllText(files[i])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         static void createRoom()
@@ -239,14 +248,14 @@ namespace Cinema
         static int Menu(Boolean login)
         {
             int parsable = 0;
-            string menu = "1:Login \n2:print schedule\n3:Search  \n4:print Maasvlakte 1 \n5:Order Ticket";
+            string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Print Maasvlakte 1 \n5:Order Tickets \n8:FAQ \n5:Contact\n";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 
             if (!login) { Console.WriteLine(menu); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine(menu + "10:edit room \n11:create room \n12:create movie\n13: create movie Jitske\n14: add to schedule"); }
+            if (login) { Console.WriteLine(menu + "10:Edit room \n11:Create room \n12:Create movie\n13:Create movie Jitske\n14:Add to schedule"); }
             while (true)
             {
 
@@ -259,17 +268,17 @@ namespace Cinema
                     if (!login)
                     {
                         if (0 < parsable && parsable < 10) { return parsable; } //number equal to possible functions +1
-                        else { Console.WriteLine("please select only action given"); }
+                        else { Console.WriteLine("Please only select from the options given."); }
                     }
                     //checks if number is the same as a user OR admin fucntion
                     if (login)
                     {
                         if (0 < parsable && parsable < 151) { return parsable; } //number equal to possible functions +1
-                        else { Console.WriteLine("please select only action given"); }
+                        else { Console.WriteLine("Please only select from the options given."); }
                     }
 
                 }
-                else { Console.WriteLine("please select only action given"); }
+                else { Console.WriteLine("Please only select from the options given."); }
             }
         }
 
@@ -283,7 +292,7 @@ namespace Cinema
             while (looping)
             {
                 int question = 0;
-                Console.WriteLine("\n1: Is de bioscoop geschikt voor invalide mensen? \n2: Heeft de bioscoop zoete popcorn\n3: Wat zijn de openingstijden van de bioscoop\n4: Quit");
+                Console.WriteLine("\n1: Is de bioscoop geschikt voor mensen in een rolstoel? \n2: Heeft de bioscoop zoete popcorn?\n3: Wat zijn de openingstijden van de bioscoop?\n4: Quit");
 
                 //Ask for case input and quit when input is invalid
                 try { question = int.Parse(Console.ReadLine()); } catch { }
@@ -294,7 +303,7 @@ namespace Cinema
                 switch (question)
                 {
                     case 1:
-                        Console.WriteLine("De bioscoop is zeker geschikt voor invalide mensen!\n" +
+                        Console.WriteLine("De bioscoop is zeker geschikt voor mensen in een rolstoel.\n" +
                             "Er is beschikking tot een lift voor de 2de verdieping en alle\n" +
                             "gangpaden zijn breed genoeg voor rolstoelen.\n");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
@@ -332,7 +341,7 @@ namespace Cinema
                     "Vanuit een gastvrije insteek biedt het burgers, bedrijfsleven en verenigingen een accommodatie voor vele uiteenlopende activiteiten.\n" +
                     "Van feesten en vergaderen tot dansen, sporten en musiceren.\n" +
                     "\n" +
-                    "If you would like to contact us you can do so by choosing between the next options!");
+                    "If you would like to contact us, you can do so by making a choice");
 
                 //Show menu
                 Console.WriteLine("\n1: Phone number\n2: E-mail\n3: Location\n4: Quit");
@@ -350,18 +359,18 @@ namespace Cinema
                             "Mobile number: 06-12345678\n" +
                             "Cinema number: 010-234567\n" +
                             "\n" +
-                            "If you would like to ask questions about partnership etc. call our buisiness number" +
+                            "If you would like to ask questions about partnership etc. call our business number" +
                             "Buisiness number: 010-123456");
 
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 2:
                         Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mails depending on your question\n" +
                             "E-mail: deltascope@gmail.com" +
-                            "Buisiness E-mail: b.deltascope@gmail.com");
+                            "Business E-mail: b.deltascope@gmail.com");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 3:
-                        Console.WriteLine("If you would like to visit our headquartes you can by making an apointment and coming to the following adress\n" +
-                            "Street adress: Monopolystraat 124\n" +
+                        Console.WriteLine("If you would like to visit our headquarters you can by making an appointment and coming to the following adress\n" +
+                            "Street address: Monopolystraat 124\n" +
                             "Postal code: 2777 ID\n" +
                             "City: Rotterdam\n" +
                             "Country: Netherlands\n" +
@@ -396,7 +405,7 @@ namespace Cinema
                 try
                 {
                     inputFilm = int.Parse(Console.ReadLine());
-                    if (inputFilm > i-1)
+                    if (inputFilm > i - 1)
                     {
                         Console.Clear();
                         Console.WriteLine("Please fill in existing integers only!");
@@ -418,12 +427,12 @@ namespace Cinema
         static void createShedule()
         {
             Console.Clear();
-            //print current shedule
-            Console.WriteLine("Current Shedule: ");
+            //print current schedule
+            Console.WriteLine("Current Schedule: ");
             printSchedule();
 
             //input time
-            Console.WriteLine("What time wil the movie start");
+            Console.WriteLine("What time wil the movie start?");
             string time = (Console.ReadLine());
             Console.Clear();
 
@@ -441,8 +450,8 @@ namespace Cinema
             Console.Clear();
 
             //input room
-            Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name);
-            Console.WriteLine("\n\nWhat room do you want assign? select a number\n");
+            Console.WriteLine("Time: " + time +"\nMovie: " + myFilms[inputFilm].Name);
+            Console.WriteLine("\n\nWhat room do you want assign? Select a number\n");
             int j = 0;
             foreach (Room r in rooms)
             {
@@ -455,7 +464,7 @@ namespace Cinema
 
             //input date
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
-            Console.WriteLine("\n\nWhat date do you want assign? Example: 1 maart");
+            Console.WriteLine("\n\nWhat date do you want assign? Example: 1 march");
             string inputDate = Console.ReadLine();
 
 
@@ -468,7 +477,8 @@ namespace Cinema
             bool quit = false;
             int x = 0;
             List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
-            while (quit == false) { 
+            while (quit == false)
+            {
                 Console.WriteLine("Choose your preference: select number \n\n");
                 IEnumerable<ScheduleElement> query = schedule.Where(schedule => schedule.movie == myFilms[input]);
                 int i = 0;
@@ -507,7 +517,7 @@ namespace Cinema
             bool seatLoop = true;
             string file = string.Format(@".\rooms\room{0}.json", (x + 1));
 
-            for (int s = seats; s >= 1; seats--)
+            for (int s = seats; s >= 1; s--)
             {
                 seatLoop = true;
                 while (seatLoop)
@@ -523,17 +533,14 @@ namespace Cinema
 
                     if (possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
                     {
-                        Console.WriteLine("Your in the if");
                         //possibleMovies[x].room.layout[cord_x, cord_y].vacant. == "1";
-                        possibleMovies[x].room.updateVacancy(cord_x, cord_y, file);
+                        possibleMovies[x].room.updateVacancy(cord_x, cord_y,file);
+                        possibleMovies[x].room.Initialize(File.ReadAllText(file));
                         seatLoop = false;
                     }
-                    else { Console.WriteLine("Seats are already taken."); }
-
+                    else { Console.WriteLine("Seats are already taken.");}
                 }
-
             }
-
         }
 
 
