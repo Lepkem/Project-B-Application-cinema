@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -74,7 +74,7 @@ namespace Cinema
                         Console.Clear();
                         orderMenu();
 
-
+                        
                         //IDBank orders = new IDBank(@"./orders/orders.json");
 
 
@@ -82,7 +82,7 @@ namespace Cinema
                         /*
                         IDBank bank2 = new IDBank();
                         bank2.generateUniqueNumber();
-
+                        
                         */
                         caseSwitch = 0;
                         break;
@@ -154,7 +154,7 @@ namespace Cinema
                 Console.WriteLine(e);
                 throw;
             }
-
+            
         }
 
         static void createRoom()
@@ -170,7 +170,7 @@ namespace Cinema
                 Console.WriteLine("Set row " + (i + 1) + ".");
                 roomRows[i] = Console.ReadLine();
             }
-
+            
             //Set chair amount
             Console.WriteLine("Set chair amount.");
             string chairAmount = Console.ReadLine();
@@ -442,8 +442,8 @@ namespace Cinema
             int i = 0;
             foreach (Films f in myFilms)
             {
-                string x = f.printFilms();
-                Console.WriteLine(i + " " + x + "\n");
+               string x = f.printFilms();
+                Console.WriteLine(i + " " + x +"\n");
                 i++;
             }
             int inputFilm = int.Parse(Console.ReadLine());
@@ -456,7 +456,7 @@ namespace Cinema
             foreach (Room r in rooms)
             {
                 string y = r.printInfo();
-                Console.WriteLine(j + " " + y + "\n");
+                Console.WriteLine(j + " " + y +"\n");
                 j++;
             }
             int inputRoom = int.Parse(Console.ReadLine());
@@ -468,7 +468,7 @@ namespace Cinema
             string inputDate = Console.ReadLine();
 
 
-            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate));
+            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate)); 
         }
 
         static void searchMovie(int input)
@@ -531,14 +531,14 @@ namespace Cinema
                     Console.WriteLine("select the Y coordinate: ");
                     cord_y = int.Parse(Console.ReadLine());
 
-                    if (possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
+                    if(possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
                     {
                         //possibleMovies[x].room.layout[cord_x, cord_y].vacant. == "1";
                         possibleMovies[x].room.updateVacancy(cord_x, cord_y,file);
                         possibleMovies[x].room.Initialize(File.ReadAllText(file));
                         seatLoop = false;
                     }
-                    else { Console.WriteLine("Seats are already taken.");}
+                    else { Console.WriteLine("Seats are already taken.");}         
                 }
             }
         }
