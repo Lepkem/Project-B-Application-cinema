@@ -1,0 +1,22 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!README.md
+
+# if the files to be tracked are in subdirectories
+!*/Cinema/Cinema.sln
+!*/Cinema/Cinema/Cinema.csproj
+!*/Cinema/Cinema/Program.cs
+!*/Cinema/Cinema/Room.cs
+!*/Cinema/Cinema/ScheduleElement.cs
+!*/Cinema/Cinema/ComingSoon.cs
+!*/Cinema/Cinema/Films.cs
+!*/Cinema/Cinema/IDBank.cs
+!*/Cinema/Cinema/Movies.cs
+!*/Cinema/Cinema/Search.cs
+!*/Cinema/Cinema/Seat.cs
+!*/Cinema/Cinema/movies/*
+!*/Cinema/Cinema/bin/Debug/netcoreapp3.1/rooms/*
+!*/Cinema/Cinema/bin/Debug/netcoreapp3.1/movies/*
