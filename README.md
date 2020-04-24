@@ -1,6 +1,12 @@
 # Project-B-Application-cinema
 This university project was written and developed, by a group of six developers, a PO and a tutor.
 
+*Cloning line 11
+*Pulling and pushing development line 19
+*Updating your own branch line 26
+*Master branch line 33
+*Checkout to your own branch line 35
+
 
 Cloning
 To clone this project on your computer follow the following steps
@@ -25,3 +31,8 @@ Before you update and push your own branch, make sure you have finished the foll
 - Push your own branch
 
 Before you update the master branch, the development branch must have been tested completely and it must be working completely!
+
+Checkout to your own branch
+- Open git bash in your git project folder
+- type "git fetch"
+- type "git checkout {your branch name(without curly quotes)}
