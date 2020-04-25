@@ -101,7 +101,16 @@ namespace Cinema
                     case 10:
                         //Test update room
                         Console.WriteLine("Which room do you want to change?");
-                        rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
+                        int roomNumber = 0;
+                        try
+                        {
+                            roomNumber = Convert.ToInt32(Console.ReadLine());
+                        }
+                        catch
+                        {
+                            Console.WriteLine($"Please enter a number only.");
+                        }
+                        rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", roomNumber));
 
                         caseSwitch = 0;
                         break;
@@ -156,32 +165,68 @@ namespace Cinema
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         static void createRoom()
         {
             //Set row amount
             Console.WriteLine("How many rows does this room have?");
-            int rows = int.Parse(Console.ReadLine());
+            int rows = 0;
+
+            try
+            {
+                rows = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                //display error to user 
+            }
             string[] roomRows = new string[rows];
 
             //Fill rows
             for (int i = 0; i < rows; i++)
             {
                 Console.WriteLine("Set row " + (i + 1) + ".");
-                roomRows[i] = Console.ReadLine();
+                roomRows[i] = "";
+                try
+                {
+                    roomRows[i] = Console.ReadLine();
+                }
+                catch
+                {
+                    Console.WriteLine($"Please input only a single number for the row");
+                }
             }
             
             //Set chair amount
             Console.WriteLine("Set chair amount.");
-            string chairAmount = Console.ReadLine();
+            int chairAmount = 0;                    
+            try
+            {
+                chairAmount = Convert.ToInt32((Console.ReadLine()));
+            }
+            catch
+            {
+                Console.WriteLine($"Please only enter a number.");
+            }
 
             //Set room type
             Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
-            String roomType = Console.ReadLine();
+            string roomType = "";
+            try
+            {
+                roomType = Console.ReadLine();
+            }
+            catch
+            {
+                Console.WriteLine($"Only choose between the given options please.");
+            }
 
             //Convert roomRows and chairAmount
             JObject output = new JObject();
             output["layout"] = JArray.FromObject(roomRows);
-            output["chairs"] = chairAmount;
+            output["chairs"] = chairAmount.ToString();
             output["roomType"] = roomType;
 
             //Set new file name in x location
@@ -193,7 +238,9 @@ namespace Cinema
             //Reads new file and makes it a room object
             rooms.Add(new Room(File.ReadAllText(filePath)));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         static void printSchedule()
         {
             foreach (ScheduleElement se in schedule)
@@ -211,16 +258,28 @@ namespace Cinema
         //    Console.WriteLine("\n");
         //}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         static Boolean Login()
         {
             while (true)
             {
 
-                string username, password = string.Empty;
+                string username = string.Empty;
+                string password = string.Empty;
 
                 //asks user input username
-                Console.Write("Enter a username: (admin) ");
-                username = Console.ReadLine();
+                Console.Write("Hello Admin. \nPlease enter your username:");
+                try
+                {
+                    username = Console.ReadLine();
+                }
+                catch
+                {
+                    Console.WriteLine($"Something went wrong. Next time enter your username.");
+                }
 
                 //Exit login screen
                 if (username == "b")
@@ -230,8 +289,15 @@ namespace Cinema
                 }
 
                 //ask user input password
-                Console.Write("Enter a password: (admin) ");
-                password = Console.ReadLine();
+                Console.Write("Hello Admin. \nPlease enter your password:");
+                try
+                {
+                    password = Console.ReadLine();
+                }
+                catch
+                {
+                    Console.WriteLine($"Something went wrong. Next time enter your password");
+                }
 
                 //checks if user input correct.
                 if (username == "admin" && password == "admin")
@@ -244,6 +310,11 @@ namespace Cinema
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         static int Menu(Boolean login)
         {
             int parsable = 0;
@@ -259,7 +330,15 @@ namespace Cinema
             {
 
                 //gets user input converts it to numbers
-                string function = Console.ReadLine();
+                string function = "";
+                try
+                {
+                    function = Console.ReadLine();
+                }
+                catch
+                {
+                    Console.WriteLine($"Please enter a number");
+                }
                 bool isParsable = Int32.TryParse(function, out parsable);
                 if (isParsable)
                 {
@@ -294,7 +373,14 @@ namespace Cinema
                 Console.WriteLine("\n1: Is de bioscoop geschikt voor mensen in een rolstoel? \n2: Heeft de bioscoop zoete popcorn?\n3: Wat zijn de openingstijden van de bioscoop?\n4: Quit");
 
                 //Ask for case input and quit when input is invalid
-                try { question = int.Parse(Console.ReadLine()); } catch { }
+                try
+                {
+                    question = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine($"Enter a question.");
+                }
                 Console.WriteLine();
                 Console.Clear();
 
@@ -346,7 +432,14 @@ namespace Cinema
                 Console.WriteLine("\n1: Phone number\n2: E-mail\n3: Location\n4: Quit");
 
                 //Ask for case input and quit when input is invalid
-                try { question = int.Parse(Console.ReadLine()); } catch { }
+                try
+                {
+                    question = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine($"Please enter a number only");
+                }
                 Console.WriteLine();
                 Console.Clear();
 
@@ -431,8 +524,16 @@ namespace Cinema
             printSchedule();
 
             //input time
-            Console.WriteLine("What time wil the movie start?");
-            string time = (Console.ReadLine());
+            Console.WriteLine($"What time wil the movie start?\nFormat: dd-mm-yyyy" );
+            string time = "";
+            try
+            {
+                time = (Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine($"Please enter a date according to the format only");
+            }
             Console.Clear();
 
             //input movie
@@ -445,7 +546,16 @@ namespace Cinema
                 Console.WriteLine(i + " " + x +"\n");
                 i++;
             }
-            int inputFilm = int.Parse(Console.ReadLine());
+
+            int inputFilm = 0;
+            try
+            {
+                inputFilm = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine($"Please enter a number only");
+            }
             Console.Clear();
 
             //input room
@@ -458,13 +568,23 @@ namespace Cinema
                 Console.WriteLine(j + " " + y +"\n");
                 j++;
             }
-            int inputRoom = int.Parse(Console.ReadLine());
+
+            int inputRoom = 0;
+            try{ inputRoom = int.Parse(Console.ReadLine());} catch { }
             Console.Clear();
 
             //input date
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
             Console.WriteLine("\n\nWhat date do you want assign? Example: 1 march");
-            string inputDate = Console.ReadLine();
+            string inputDate = "";
+            try
+            {
+                inputDate = Console.ReadLine();
+            }
+            catch
+            {
+                Console.WriteLine($"Please enter a date");
+            }
 
 
             schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate)); 
@@ -541,10 +661,27 @@ namespace Cinema
                     Console.WriteLine("Please pick a seat. You can select " + s + " more seats\n the upper left corner is 0,0");
                     possibleMovies[x].room.printRoom(true);
 
-                    Console.WriteLine("select the X coordinate: ");
-                    cord_x = int.Parse(Console.ReadLine());
-                    Console.WriteLine("select the Y coordinate: ");
-                    cord_y = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Please select a single number for the X coordinate: ");
+                    cord_x = 0;
+                    try
+                    {
+                        x = int.Parse(Console.ReadLine());
+                    }
+                    catch
+                    {
+                        Console.WriteLine($"Please enter a single number for the X coordinate only");
+                        Console.WriteLine($"");
+                    }
+                    Console.WriteLine("Please select a single number for the Y coordinate: ");
+                    cord_y = 0;
+                    try
+                    {
+                        cord_y = int.Parse(Console.ReadLine());
+                    }
+                    catch
+                    {
+                        Console.WriteLine($"Please enter a single number for the Y coordinate only");
+                    }
 
                     if(possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
                     {
