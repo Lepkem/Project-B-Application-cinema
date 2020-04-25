@@ -20,7 +20,6 @@ namespace Cinema
 
         static void Main(string[] args)
         {
-            //console program
             Boolean running = true;
             int caseSwitch = 0;
             Boolean login = false;
