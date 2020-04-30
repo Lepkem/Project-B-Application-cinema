@@ -19,6 +19,8 @@ namespace Cinema
         {
             File.Delete(room);
         }
+
+        
         public void Initialize(string l)
         {
             //this line takes the string and turns it into a special object that contains the attributes of the JSON
@@ -48,7 +50,9 @@ namespace Cinema
             }
             //store the array in the object
             layout = inputMatrix;
+            
         }
+        
 
         public void updateRoom(string room)
         {
