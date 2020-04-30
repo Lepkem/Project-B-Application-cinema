@@ -18,6 +18,7 @@
 !*/Cinema/Cinema/Search.cs
 !*/Cinema/Cinema/Seat.cs
 !*/Cinema/Cinema/Menu.cs
+!*/Cinema/Cinema/Order.cs
 !*/Cinema/Cinema/movies/*
 !*/Cinema/Cinema/bin/Debug/netcoreapp3.1/rooms/*
 !*/Cinema/Cinema/bin/Debug/netcoreapp3.1/movies/*
