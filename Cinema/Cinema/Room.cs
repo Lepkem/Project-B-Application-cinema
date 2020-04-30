@@ -19,9 +19,11 @@ namespace Cinema
         {
             File.Delete(room);
         }
+
+        
         public void Initialize(string l)
         {
-            //this line takes the string and turns it into a special object that contains the attributes of the JSON
+            /*//this line takes the string and turns it into a special object that contains the attributes of the JSON
             JObject input = JObject.Parse(l);
             //this line assigns the chairs value stored in the file in the object's chair variable 
             chairs = (int)input["chairs"];
@@ -48,7 +50,9 @@ namespace Cinema
             }
             //store the array in the object
             layout = inputMatrix;
+            */
         }
+        
 
         public void updateRoom(string room)
         {

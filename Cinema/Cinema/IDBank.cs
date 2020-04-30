@@ -6,14 +6,14 @@ using System.Globalization;
 
 namespace Cinema
 {
-
+    /*
     class Order
     {
         public int number;
         public ScheduleElement scheduleElement;
         public Seat seat;
 
-
+       
         public Order(int number,ScheduleElement scheduleElement, Seat seat)
         {
             this.number = number;
@@ -24,8 +24,8 @@ namespace Cinema
 
         }
 
-
     }
+    */
    
 
     class IDBank
