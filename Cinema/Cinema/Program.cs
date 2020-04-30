@@ -141,7 +141,7 @@ namespace Cinema
 
 
                     default:
-                        Console.WriteLine("That's not an option you knucklehead");
+                        StandardMessages.GivenOptions();
                         caseSwitch = 0;
                         break;
                 }
@@ -180,7 +180,7 @@ namespace Cinema
             }
             catch
             {
-                //display error to user 
+                StandardMessages.SomethingWW();
             }
             string[] roomRows = new string[rows];
 
@@ -208,7 +208,7 @@ namespace Cinema
             }
             catch
             {
-                Console.WriteLine($"Please only enter a number.");
+                StandardMessages.EnterNumber();
             }
 
             //Set room type
@@ -220,7 +220,7 @@ namespace Cinema
             }
             catch
             {
-                Console.WriteLine($"Only choose between the given options please.");
+                StandardMessages.GivenOptions();
             }
 
             //Convert roomRows and chairAmount
@@ -278,7 +278,7 @@ namespace Cinema
                 }
                 catch
                 {
-                    Console.WriteLine($"Something went wrong. Next time enter your username.");
+                    StandardMessages.SomethingWW("Next time enter your username.");
                 }
 
                 //Exit login screen
@@ -296,7 +296,7 @@ namespace Cinema
                 }
                 catch
                 {
-                    Console.WriteLine($"Something went wrong. Next time enter your password");
+                    StandardMessages.SomethingWW("Next time enter your password.");
                 }
 
                 //checks if user input correct.
@@ -337,7 +337,7 @@ namespace Cinema
                 }
                 catch
                 {
-                    Console.WriteLine($"Please enter a number");
+                    StandardMessages.EnterNumber();
                 }
                 bool isParsable = Int32.TryParse(function, out parsable);
                 if (isParsable)
@@ -346,17 +346,17 @@ namespace Cinema
                     if (!login)
                     {
                         if (0 < parsable && parsable < 10) { return parsable; } //number equal to possible functions +1
-                        else { Console.WriteLine("Please only select from the options given."); }
+                        else { StandardMessages.GivenOptions(); }
                     }
                     //checks if number is the same as a user OR admin fucntion
                     if (login)
                     {
                         if (0 < parsable && parsable < 151) { return parsable; } //number equal to possible functions +1
-                        else { Console.WriteLine("Please only select from the options given."); }
+                        else { StandardMessages.GivenOptions(); }
                     }
 
                 }
-                else { Console.WriteLine("Please only select from the options given."); }
+                else { StandardMessages.GivenOptions(); }
             }
         }
 
@@ -438,7 +438,7 @@ namespace Cinema
                 }
                 catch
                 {
-                    Console.WriteLine($"Please enter a number only");
+                    StandardMessages.EnterNumber();
                 }
                 Console.WriteLine();
                 Console.Clear();
@@ -454,12 +454,16 @@ namespace Cinema
                             "If you would like to ask questions about partnership etc. call our business number" +
                             "Buisiness number: 010-123456");
 
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                        StandardMessages.PressAnyKey(); 
+                        Console.ReadLine(); 
+                        break;
                     case 2:
                         Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mails depending on your question\n" +
                             "E-mail: deltascope@gmail.com" +
                             "Business E-mail: b.deltascope@gmail.com");
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                        StandardMessages.PressAnyKey();
+                        Console.ReadLine();
+                        break;
                     case 3:
                         Console.WriteLine("If you would like to visit our headquarters you can by making an appointment and coming to the following adress\n" +
                             "Street address: Monopolystraat 124\n" +
@@ -467,7 +471,9 @@ namespace Cinema
                             "City: Rotterdam\n" +
                             "Country: Netherlands\n" +
                             "Province: Zuid-Holland\n");
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                        StandardMessages.PressAnyKey();
+                        Console.ReadLine();
+                        break;
                     case 4:
                         Console.Clear();
                         Console.WriteLine("Going back"); looping = false; break;
@@ -554,7 +560,7 @@ namespace Cinema
             }
             catch
             {
-                Console.WriteLine($"Please enter a number only");
+                StandardMessages.EnterNumber();
             }
             Console.Clear();
 
@@ -583,7 +589,7 @@ namespace Cinema
             }
             catch
             {
-                Console.WriteLine($"Please enter a date");
+                Console.WriteLine($"Please enter a date.");
             }
 
 
