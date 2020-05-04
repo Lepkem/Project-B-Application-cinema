@@ -20,3 +20,4 @@
 !*/Cinema/Cinema/movies/*
 !*/Cinema/Cinema/bin/Debug/netcoreapp3.1/rooms/*
 !*/Cinema/Cinema/bin/Debug/netcoreapp3.1/movies/*
+!*/Cinema/Cinema/*.cs
