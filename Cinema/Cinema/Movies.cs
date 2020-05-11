@@ -15,24 +15,12 @@ namespace Cinema
         public string releaseDate;
 
 
-        //public Movie(string name, string genre, int runtime, string synopsis, DateTime releaseDate)
-        //{
-            //this.name = name;
-            //this.genre = genre;
-            //this.runtime = runtime;
-            //this.synopsis = synopsis;
-            //this.releaseDate = releaseDate;
-        //}
-
-        //constructor overloading: redefine a constructor in more than one form
         public Movie(string name, string genre, int runtime, string synopsis, string releaseDate)
         {
             this.name = name;
             this.genre = genre;
             this.runtime = runtime;
             this.synopsis = synopsis;
-            //CultureInfo provider = CultureInfo.InvariantCulture;
-            //this.releaseDate = DateTime.ParseExact(releaseDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
             this.releaseDate = releaseDate;
         }
     }
@@ -144,12 +132,10 @@ namespace Cinema
                     break;
                 case "5":
                     Console.WriteLine("new releaseDate:");
-                    //CultureInfo provider = CultureInfo.InvariantCulture;
-                    //movie.releaseDate = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
                     movie.releaseDate = Console.ReadLine();
                     break;
                 default:
-                    Console.WriteLine("That is not an option, please choose again");
+                    Console.WriteLine("\nThat is not an option, please choose again\n");
                     updateMovie(movie);
                     break;
             }
@@ -191,7 +177,6 @@ namespace Cinema
                     new JProperty("genre", movie.genre),
                     new JProperty("runtime", movie.runtime),
                     new JProperty("synopsis", movie.synopsis),
-                    //new JProperty("releaseDate", movie.releaseDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
                     new JProperty("releaseDate", movie.releaseDate)));
             }
             File.WriteAllText(location, movieArray.ToString());
