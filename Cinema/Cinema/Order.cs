@@ -15,13 +15,13 @@ namespace Cinema
             int inputFilm = 0;
             while (quit == false)
             {
-                Console.WriteLine("Which movie do you want to watch? enter number\n\n");
+                Console.WriteLine("Which movie do you want to watch? Enter number\n\n");
 
                 int i = 0;
                 foreach (Films f in Program.myFilms)
                 {
                     string x = f.printFilms();
-                    Console.WriteLine(i + " " + x + "\n");
+                    Console.WriteLine("[" + i + "]" + "\n" + x + "\n");
                     i++;
                 }
 

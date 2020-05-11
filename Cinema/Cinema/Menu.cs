@@ -105,7 +105,7 @@ namespace Cinema
                         break;
 
                     default:
-                        Console.WriteLine("That's not an option you knucklehead");
+                        Console.WriteLine("That's not an option, please choose again");
                         caseSwitch = 0;
                         break;
                 }
@@ -117,6 +117,7 @@ namespace Cinema
             int parsable = 0;
             string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Print Maasvlakte 1 \n5:Order Tickets \n8:FAQ \n9:Contact\n";
             //text being displayed in menu
+            Console.WriteLine("Welcome to the Deltascope!\n");
             Console.WriteLine("What action do you want to do?");
 
             if (!login) { Console.WriteLine(menu); }

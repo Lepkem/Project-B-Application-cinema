@@ -12,17 +12,17 @@ namespace Cinema
         public string genre;
         public int runtime;
         public string synopsis;
-        public DateTime releaseDate;
+        public string releaseDate;
 
 
-        public Movie(string name, string genre, int runtime, string synopsis, DateTime releaseDate)
-        {
-            this.name = name;
-            this.genre = genre;
-            this.runtime = runtime;
-            this.synopsis = synopsis;
-            this.releaseDate = releaseDate;
-        }
+        //public Movie(string name, string genre, int runtime, string synopsis, DateTime releaseDate)
+        //{
+            //this.name = name;
+            //this.genre = genre;
+            //this.runtime = runtime;
+            //this.synopsis = synopsis;
+            //this.releaseDate = releaseDate;
+        //}
 
         //constructor overloading: redefine a constructor in more than one form
         public Movie(string name, string genre, int runtime, string synopsis, string releaseDate)
@@ -31,8 +31,9 @@ namespace Cinema
             this.genre = genre;
             this.runtime = runtime;
             this.synopsis = synopsis;
-            CultureInfo provider = CultureInfo.InvariantCulture;
-            this.releaseDate = DateTime.ParseExact(releaseDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            //CultureInfo provider = CultureInfo.InvariantCulture;
+            //this.releaseDate = DateTime.ParseExact(releaseDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            this.releaseDate = releaseDate;
         }
     }
 
@@ -93,20 +94,20 @@ namespace Cinema
 
         public void updateCreateMovie()
         {
-            Console.WriteLine("Enter the name of the movie: ");
+            Console.WriteLine("Enter the name of the movie.\nIf the name of the movie already exists, you will be automatically redirected to adding a movie. ");
             string movieName = Console.ReadLine();
             foreach (Movie movie in this.movieList)
             {
                 if (movie.name == movieName)
                 {
-                    Console.WriteLine("Do you want to remove or edit the movie?");
+                    Console.WriteLine("Do you want to remove or edit the movie? Choose from:\n[1] Edit\n[2] Remove");
                     string addOrDelete = Console.ReadLine();
-                    if (addOrDelete == "edit")
+                    if (addOrDelete == "1")
                     {
                         this.updateMovie(movie);
                         return;
                     }
-                    if (addOrDelete == "remove")
+                    if (addOrDelete == "2")
                     {
                         this.deleteMovie(movie);
                         return;
@@ -121,33 +122,35 @@ namespace Cinema
         }
         private void updateMovie(Movie movie)
         {
-            Console.WriteLine("What do you want to edit?");
+            Console.WriteLine("What do you want to edit? Choose from:\n[1] Genre\n[2] Synopsis\n[3] Name\n[4] Runtime\n[5] Release Date");
             string update = Console.ReadLine();
             switch (update)
             {
-                case "genre":
+                case "1":
                     Console.WriteLine("new genre:");
                     movie.genre = Console.ReadLine();
                     break;
-                case "synopsis":
+                case "2":
                     Console.WriteLine("new synopsis:");
                     movie.synopsis = Console.ReadLine();
                     break;
-                case "name":
+                case "3":
                     Console.WriteLine("new name:");
                     movie.name = Console.ReadLine();
                     break;
-                case "runtime":
+                case "4":
                     Console.WriteLine("new runtime:");
                     movie.runtime = int.Parse(Console.ReadLine());
                     break;
-                case "releaseDate":
+                case "5":
                     Console.WriteLine("new releaseDate:");
-                    CultureInfo provider = CultureInfo.InvariantCulture;
-                    movie.releaseDate = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    //CultureInfo provider = CultureInfo.InvariantCulture;
+                    //movie.releaseDate = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    movie.releaseDate = Console.ReadLine();
                     break;
                 default:
-                    Console.WriteLine("Default case");
+                    Console.WriteLine("That is not an option, please choose again");
+                    updateMovie(movie);
                     break;
             }
             this.createJson();
@@ -157,18 +160,19 @@ namespace Cinema
         {
             Console.WriteLine("Add a movie\nTitle:");
             string addMovie = Console.ReadLine();
-            Console.WriteLine("Genre:");
+            Console.WriteLine("\nGenre:");
             string genre = Console.ReadLine();
-            Console.WriteLine("runtime:");
+            Console.WriteLine("\nruntime:");
             string runtime = Console.ReadLine();
-            Console.WriteLine("synopsis:");
+            Console.WriteLine("\nsynopsis:");
             string synopsis = Console.ReadLine();
-            Console.WriteLine("releaseDate:");
+            Console.WriteLine("\nreleaseDate (Format: MM/dd/yyyy):");
             string releaseDate = Console.ReadLine();
 
 
             this.movieList.Add(new Movie(movieName, genre, int.Parse(runtime), synopsis, releaseDate));
             this.createJson();
+            Console.WriteLine("You succesfully added a movie");        
         }
         private void createJson()
         {
@@ -187,11 +191,11 @@ namespace Cinema
                     new JProperty("genre", movie.genre),
                     new JProperty("runtime", movie.runtime),
                     new JProperty("synopsis", movie.synopsis),
-                    new JProperty("releaseDate", movie.releaseDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
+                    //new JProperty("releaseDate", movie.releaseDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
+                    new JProperty("releaseDate", movie.releaseDate)));
             }
             File.WriteAllText(location, movieArray.ToString());
         }
-
     }
 }
 
