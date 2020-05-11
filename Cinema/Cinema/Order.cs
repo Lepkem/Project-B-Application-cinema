@@ -116,7 +116,7 @@ namespace Cinema
                 while (seatLoop)
                 {
                     Console.Clear();
-                    Console.WriteLine("Please pick a seat. You can select " + s + " more seats\n the upper left corner is 0,0");
+                    Console.WriteLine("Please pick a seat. You can select " + s + " more seats\n the upper left corner is 0,0\n");                 
                     possibleMovies[x].room.printRoom(true);
 
                     Console.WriteLine("select the X coordinate: ");
