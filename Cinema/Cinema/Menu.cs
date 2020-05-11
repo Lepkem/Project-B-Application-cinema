@@ -47,9 +47,7 @@ namespace Cinema
 
                     case 4:
                         //print a room
-                       
-                        Program.rooms[0].printRoom(true);
-                        Program.rooms[0].printRoom(false);
+                        ShowRoom();
                         caseSwitch = 0;
                         break;
 
@@ -115,7 +113,7 @@ namespace Cinema
         static int MenuHandler(Boolean login)
         {
             int parsable = 0;
-            string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Print Maasvlakte 1 \n5:Order Tickets \n8:FAQ \n9:Contact\n";
+            string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Show Rooms \n5:Order Tickets \n8:FAQ \n9:Contact\n";
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 
@@ -288,6 +286,40 @@ namespace Cinema
                         Console.WriteLine("Enter an existing value"); break;
                 }
             }
+        }
+
+        public static void ShowRoom()
+        {
+            Console.Clear();
+            Console.WriteLine("Wich room do you want to look at?");
+            int i = 0;
+            int inputRoom= 0;
+            
+            foreach (Room r in Program.rooms) 
+            {
+                string  y = r.printInfo();
+                Console.WriteLine("[" + i + "] Maasvlakte:"+ i +" "+  y + "\n");
+                i++;
+            }
+            while (true)
+            {
+                try
+                {
+                    inputRoom = int.Parse(Console.ReadLine());
+                    if (inputRoom <= (i-1) && inputRoom > -1)
+                    {
+                        break;
+                    }
+                    else {Console.WriteLine($"Please enter valid number only"); }
+                }
+                catch
+                {
+                    Console.WriteLine($"Please enter a number only");
+                }
+            }
+
+            Program.rooms[inputRoom].printRoom(true);
+            Program.rooms[inputRoom].printRoom(false);
         }
     }
 }

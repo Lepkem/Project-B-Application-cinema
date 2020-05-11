@@ -143,7 +143,7 @@ namespace Cinema
             if (roomType == 1){ type = "normal";}
             if (roomType == 2) { type = "3D"; }
             if (roomType == 3) { type = "IMAX"; }
-            return string.Format("Type: {0} Chairs: {1} ", type, chairs);
+            return string.Format("Type:{0}  Chairs:{1} ", type, chairs);
         }
     }
 }
