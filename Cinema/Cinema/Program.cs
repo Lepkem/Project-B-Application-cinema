@@ -113,11 +113,19 @@ namespace Cinema
                 Console.WriteLine($"Only choose between the given options please.");
             }
 
+            //fill the vacancy
+            string[] vacancyArr = new string[rows];
+            for (int i = 0; i < rows; i++)
+            {
+                vacancyArr[i] = string.Concat(Enumerable.Repeat("0", roomRows[0].Length));
+            }
+
             //Convert roomRows and chairAmount
             JObject output = new JObject();
             output["layout"] = JArray.FromObject(roomRows);
             output["chairs"] = chairAmount.ToString();
             output["roomType"] = roomType;
+            output["vacancy"] = JArray.FromObject(vacancyArr);
 
             //Set new file name in x location
             string filePath = string.Format(@".\rooms\room{0}.json", rooms.Count + 1);
