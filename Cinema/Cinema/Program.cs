@@ -4,10 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using System.Collections.Generic;
-using System.Globalization;
-
-
 namespace Cinema
 {
     class Program
@@ -24,12 +20,6 @@ namespace Cinema
 
         static void Main(string[] args)
         {
-            
-            Movies movies = new Movies(@"./movies/movie.json");
-            movies.updateCreateMovie();
-
-        }
-    }
             //console program
             readRooms();
 
@@ -154,7 +144,7 @@ namespace Cinema
             printSchedule();
 
             //input time
-            Console.WriteLine($"What time wil the movie start?\nFormat: dd-mm-yyyy" );
+            Console.WriteLine($"What time wil the movie start?\nFormat: dd-mm-yyyy");
             string time = "";
             try
             {
@@ -172,8 +162,8 @@ namespace Cinema
             int i = 0;
             foreach (Films f in myFilms)
             {
-               string x = f.printFilms();
-                Console.WriteLine(i + " " + x +"\n");
+                string x = f.printFilms();
+                Console.WriteLine(i + " " + x + "\n");
                 i++;
             }
 
@@ -189,18 +179,18 @@ namespace Cinema
             Console.Clear();
 
             //input room
-            Console.WriteLine("Time: " + time +"\nMovie: " + myFilms[inputFilm].Name);
+            Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name);
             Console.WriteLine("\n\nWhat room do you want assign? Select a number\n");
             int j = 0;
             foreach (Room r in rooms)
             {
                 string y = r.printInfo();
-                Console.WriteLine(j + " " + y +"\n");
+                Console.WriteLine(j + " " + y + "\n");
                 j++;
             }
 
             int inputRoom = 0;
-            try{ inputRoom = int.Parse(Console.ReadLine());} catch { }
+            try { inputRoom = int.Parse(Console.ReadLine()); } catch { }
             Console.Clear();
 
             //input date
@@ -225,4 +215,4 @@ namespace Cinema
             get { return schedule; }
         }
     }
-
+}
