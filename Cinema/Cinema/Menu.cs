@@ -114,7 +114,7 @@ namespace Cinema
         {
             int parsable = 0;
 
-            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Print Maasvlakte 1 \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n";
+            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n";
 
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
@@ -122,7 +122,7 @@ namespace Cinema
             if (!login) { Console.WriteLine(menu); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Print Maasvlakte 1 \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Create movie Jitske\n[14]Add to schedule"); }
+            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Create movie Jitske\n[14]Add to schedule"); }
             while (true)
             {
 
