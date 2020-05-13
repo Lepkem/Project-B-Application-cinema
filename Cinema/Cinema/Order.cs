@@ -104,7 +104,7 @@ namespace Cinema
 
             ScheduleElement ticket = possibleMovies[x];
             string file = string.Format(@".\rooms\room{0}.json", (Array.IndexOf(Program.rooms.ToArray(), ticket.room) + 1));
-
+            List<Tuple<Seat, Tuple<int, int>>> selectedSeats = new List<Tuple<Seat, Tuple<int, int>>>();
             for (int i = seats; i > 0; i--)
             {
                 while (true)
@@ -127,6 +127,7 @@ namespace Cinema
                         if (ticket.room.layout[coords.Item2, coords.Item1].vacant)
                         {
                             ticket.room.layout[coords.Item2, coords.Item1].vacant = false;
+                            selectedSeats.Add(new Tuple<Seat, Tuple<int, int>>(ticket.room.layout[coords.Item2, coords.Item1], coords));
                             break;
                         }
                         else
@@ -137,6 +138,15 @@ namespace Cinema
                 }
             }
             ticket.room.printRoom(true);
+
+            IDBank.storeOrder(ticket, selectedSeats);
+
+
+
+
+
+
+
             /*for (int s = seats; s >= 1; s--)
             {
                 seatLoop = true;
