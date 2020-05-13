@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using System.IO;
 
 namespace Cinema
 {
@@ -56,7 +54,7 @@ namespace Cinema
             while (quit == false)
             {
                 Console.WriteLine("Choose your preference: select number \n\n");
-                
+
                 IEnumerable<ScheduleElement> query = Program.schedule.Where(schedule => schedule.movie == Program.myFilms[input]);
                 int i = 0;
                 foreach (ScheduleElement schedule in query)
@@ -104,19 +102,48 @@ namespace Cinema
                 }
             }
 
+            ScheduleElement ticket = possibleMovies[x];
+            string file = string.Format(@".\rooms\room{0}.json", (Array.IndexOf(Program.rooms.ToArray(), ticket.room) + 1));
 
-            int cord_x = 0;
-            int cord_y = 0;
-            bool seatLoop = true;
-            string file = string.Format(@".\rooms\room{0}.json", (x + 1));
+            for (int i = seats; i > 0; i--)
+            {
+                while (true)
+                {
+                    Console.WriteLine("\nPlease pick a seat. You can select " + i + " more seats\nThe upper left corner is 1,1.");
+                    ticket.room.printRoom(true);
 
-            for (int s = seats; s >= 1; s--)
+                    Console.Write("Input the coordinates of your desired seat; coordinates must be in the format ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write("x,y");
+                    Console.ResetColor();
+                    Console.Write(".\n");
+
+                    string coordInput = Console.ReadLine();
+                    Tuple<int, int> coords = new Tuple<int, int>((int)char.GetNumericValue(coordInput[0]) - 1, (int)char.GetNumericValue(coordInput[2]) - 1);
+                    if (coords.Item1 < 0 || coords.Item2 < 0)
+                        Console.WriteLine("Please write the coordinates as instructed.\n");
+                    else
+                    {
+                        if (ticket.room.layout[coords.Item2, coords.Item1].vacant)
+                        {
+                            ticket.room.layout[coords.Item2, coords.Item1].vacant = false;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("That seat is already taken.\n");
+                        }
+                    }
+                }
+            }
+            ticket.room.printRoom(true);
+            /*for (int s = seats; s >= 1; s--)
             {
                 seatLoop = true;
                 while (seatLoop)
                 {
                     Console.Clear();
-                    Console.WriteLine("Please pick a seat. You can select " + s + " more seats\n the upper left corner is 0,0");
+                    Console.WriteLine("Please pick a seat. You can select " + s + " more seats\n the upper left corner is 0,0\n");                 
                     possibleMovies[x].room.printRoom(true);
 
                     Console.WriteLine("select the X coordinate: ");
@@ -131,9 +158,7 @@ namespace Cinema
                         possibleMovies[x].room.Initialize(File.ReadAllText(file));
                         seatLoop = false;
                     }
-                    else { Console.WriteLine("Seats are already taken."); }
-                }
-            }
+                    else { Console.WriteLine("Seats are already taken."); }*/
         }
     }
 }

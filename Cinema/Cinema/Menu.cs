@@ -113,14 +113,18 @@ namespace Cinema
         static int MenuHandler(Boolean login)
         {
             int parsable = 0;
+<<<<<<< HEAD
             string menu = "1:Login \n2:Print schedule\n3:Search  \n4:Show Rooms \n5:Order Tickets \n8:FAQ \n9:Contact\n";
+=======
+            string menu = "[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Print Maasvlakte 1 \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n";
+>>>>>>> Mattias
             //text being displayed in menu
             Console.WriteLine("What action do you want to do?");
 
             if (!login) { Console.WriteLine(menu); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine(menu + "10:Edit room \n11:Create room \n12:Create movie\n13:Create movie Jitske\n14:Add to schedule"); }
+            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Print Maasvlakte 1 \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Create movie Jitske\n[14]Add to schedule"); }
             while (true)
             {
 
@@ -188,7 +192,7 @@ namespace Cinema
             while (looping)
             {
                 int question = 0;
-                Console.WriteLine("\n1: Is de bioscoop geschikt voor mensen in een rolstoel? \n2: Heeft de bioscoop zoete popcorn?\n3: Wat zijn de openingstijden van de bioscoop?\n4: Quit");
+                Console.WriteLine("\n[1]Is the cinema suitable for people in a wheelchair? \n[2]Does the cinema have sweet popcorn? \n[3]What are the opening hours of the cinema \n[4]Quit");
 
                 //Ask for case input and quit when input is invalid
                 try { question = int.Parse(Console.ReadLine()); } catch { }
@@ -199,17 +203,17 @@ namespace Cinema
                 switch (question)
                 {
                     case 1:
-                        Console.WriteLine("De bioscoop is zeker geschikt voor mensen in een rolstoel.\n" +
-                            "Er is beschikking tot een lift voor de 2de verdieping en alle\n" +
-                            "gangpaden zijn breed genoeg voor rolstoelen.\n");
+                        Console.WriteLine("The cinema is certainly suitable for people in a wheelchair. \n" +
+                            "There is a lift for the 2nd floor and all \n" +
+                            "aisles are wide enough for wheelchairs. \n");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 2:
-                        Console.WriteLine("De bioscoop heeft 3 soorten popcorn.\n" +
-                            "Zowel zoet, zout als karamel.\n");
+                        Console.WriteLine("The cinema has 3 types of popcorn.\n" +
+                            "Sweet, salty and caramel.\n");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 3:
-                        Console.WriteLine("Wegens het corona virus zijn wij momenteel gesloten!\n" +
-                            "wel hebben wij een thuisbioscoop klaarstaan! zie hiervoor de website\n");
+                        Console.WriteLine("We are currently closed due to the corona virus! \n" +
+                            "we have a home cinema ready! see the website. \n");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 4:
                         Console.Clear();
@@ -239,15 +243,15 @@ namespace Cinema
             while (looping)
             {
                 //Intro text
-                Console.WriteLine("Welkom bij de Deltascope contactpagina!\n" +
-                    "Deltascope is gevestigd in een modern gebouw, gelegen aan de jachthaven in het centrum van Rotterdam.\n" +
-                    "Vanuit een gastvrije insteek biedt het burgers, bedrijfsleven en verenigingen een accommodatie voor vele uiteenlopende activiteiten.\n" +
-                    "Van feesten en vergaderen tot dansen, sporten en musiceren.\n" +
+                Console.WriteLine("Welcome to the Deltascope contact page! \n" +
+                    "Deltascope is located in a modern building, located at the marina in the center of Rotterdam. \n" +
+                    "VFrom a hospitable approach, it offers citizens, business and associations accommodation for many diverse activities. \n" +
+                    "From parties and meetings to dancing, sports and making music.\n" +
                     "\n" +
                     "If you would like to contact us, you can do so by making a choice");
 
                 //Show menu
-                Console.WriteLine("\n1: Phone number\n2: E-mail\n3: Location\n4: Quit");
+                Console.WriteLine("\n[1]Phone number\n[2]E-mail\n[3]Location\n[4]Quit");
 
                 //Ask for case input and quit when input is invalid
                 try { question = int.Parse(Console.ReadLine()); } catch { }
