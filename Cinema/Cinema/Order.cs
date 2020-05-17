@@ -119,7 +119,8 @@ namespace Cinema
                     Console.Write(".\n");
 
                     string coordInput = Console.ReadLine();
-                    Tuple<int, int> coords = new Tuple<int, int>((int)char.GetNumericValue(coordInput[0]) - 1, (int)char.GetNumericValue(coordInput[2]) - 1);
+                    string[] splitInput = coordInput.Split(',');
+                    Tuple<int, int> coords = new Tuple<int, int>(int.Parse(splitInput[0]) - 1, int.Parse(splitInput[1]) - 1);
                     if (coords.Item1 < 0 || coords.Item2 < 0)
                         Console.WriteLine("Please write the coordinates as instructed.\n");
                     else
