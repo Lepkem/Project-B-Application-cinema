@@ -5,6 +5,8 @@ using System.IO;
 namespace Cinema
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection.Metadata.Ecma335;
 
     using Newtonsoft.Json;
 
@@ -12,9 +14,15 @@ namespace Cinema
 
     //RoomV2 r = RoomBookingSystem.LoadFromJson("sss");
 
+
+
     class RoomV2
     {
-        private string[] layout { get; set; }
+        public RoomV2()
+        {
+         seats = new List<SeatV2>();
+        }
+        public string[] layout { get; set; }
 
         // next line to rename the property 'chairs' from the jsonfile to 'NumberOfChairs' which is more descriptive
         [JsonProperty("chairs")]
@@ -22,7 +30,91 @@ namespace Cinema
 
         public int roomtype { get; set; }
 
-        private string[] vacancy { get; set; }
+        public string[] vacancy { get; set; }
+
+        public List<SeatV2> seats { get; set; }
+
+        public uint AmountOfRows { get; set; }
+        public uint AmountOfSeatsPerRows { get; set; }
+
+
+
+        public void InitSeats()
+        {
+            //V0 working on the assumption that layout and vacancy are the same room
+            // todo add some extra checks
+
+            uint rowNumber = 1;
+            foreach (string row in layout)
+            {
+                uint seatNumber = 1;
+                foreach (char seat in row)
+                {
+                    SeatV2 seatv2 = new SeatV2()
+                                    {
+                                        seatNumber = seatNumber,
+                                        rowNumber = rowNumber,
+                                    };
+
+                    switch (seat)
+                    {
+                        case '0':
+                            seatv2.priceCategory = 0;
+                            break;
+                        case '1':
+                            seatv2.priceCategory = 1;
+                            break;
+                        case '2':
+                            seatv2.priceCategory = 2;
+                            break;
+                        case '3':
+                            seatv2.priceCategory = 3;
+                            break;
+                        default:
+                            seatv2.priceCategory = 0;
+                            break;
+                    }
+
+                    seats.Add(seatv2);
+                    
+                    seatNumber++;
+                }
+
+                rowNumber++;
+            }
+
+           // AmountOfSeatsPerRows = Lite
+           // AmountOfRows = (uint)seats.GroupBy(p => p.rowNumber).Distinct().Count();
+
+            /*
+             "001111111 1 0 0", <= row 
+            "011111111110",
+            "011111111110",
+            "111112211111",
+            "111122221111",
+            "112223322211",
+            "112233332211",
+            "112223322211",
+            "111122221111",
+            "111112211111",
+            "011111111110",
+            "001111111100",
+            "001111111100",
+            "001111111100"*/
+
+
+
+
+
+
+
+
+        }
+
+        // [0] - x x -x -x -x -x 
+        // [1] - x x -x -x -x -x 
+
+        // seats.Where(s=> s.IsAvailable && s.rowNumber <4 && s.PriceCate <2 ) 
 
         //todo roomnumber roomname
     }
