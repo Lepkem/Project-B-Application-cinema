@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Runtime.ExceptionServices;
+using System.Numerics;
 
 namespace Cinema
 {
@@ -64,7 +67,12 @@ namespace Cinema
             int defaultLength = layoutArray.First.ToString().Length;
             for (int i = 0; i < layoutArray.Count; i++)
             {
-                Console.WriteLine("Replace the " + (i + 1) + " line? If yes give new line.");
+                Console.Clear();
+                Console.WriteLine("Replace the " + (i + 1) + " line? If yes give a new line with a length of "+ defaultLength + " characters.");
+                Console.WriteLine("Chair type 0: Blocked chair (cant be purchased)");
+                Console.WriteLine("Chair type 1: Cheap chair");
+                Console.WriteLine("Chair type 2: Normal chair");
+                Console.WriteLine("Chair type 3: Vip chair");
                 string newLine = Console.ReadLine();
                 while (true)
                 {
@@ -72,8 +80,17 @@ namespace Cinema
                     {
                         if (newLine.Length == defaultLength)
                         {
-                            layoutArray[i] = newLine;
-                            break;
+                            try
+                            {
+                                var errorhandling = BigInteger.Parse(newLine);
+                                layoutArray[i] = newLine;
+                                break;
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Fill in integers only!");
+                                newLine = Console.ReadLine();
+                            }
                         }
                         else
                         {
@@ -84,13 +101,56 @@ namespace Cinema
                     else break;
                 }
             }
+            
+            //alter the special object
+            bool quit = false;
+            int seats = 0;
+            while (quit == false)
+            {
+                try
+                {
+                    Console.WriteLine("How many chairs should the room have?");
+                    seats = int.Parse(Console.ReadLine());
+                    quit = true;
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Fill in integers only!");
+                }
+            }
+            fullObject["chairs"] = seats;
+            
+            //alter the special object
+            quit = false;
+            int type = 0;
+            while (quit == false)
+            {
+                try
+                {
+                    
+                    Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
+                    type = int.Parse(Console.ReadLine());
+                    if (type < 1)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Integer must be higher than 0 and lower than 4!");
+                    } else if (type > 3){
+                        Console.Clear();
+                        Console.WriteLine("Integer must be higher than 0 and lower than 4!");
+                    } else
+                    {
+                        quit = true;
+                    }                   
+                }
+                catch
+                {
+                    Console.WriteLine("Fill in integers only!");
+                    Console.Clear();
+                }
+            }
+            fullObject["roomType"] = type;
 
-            Console.WriteLine("How many chairs should the room have?");
-            //alter the special object
-            fullObject["chairs"] = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
-            //alter the special object
-            fullObject["roomType"] = Int32.Parse(Console.ReadLine());
             //turn the object into a string
             string updatedString = fullObject.ToString();
             //update the object
@@ -101,6 +161,29 @@ namespace Cinema
 
         public void printRoom(bool vacancy)
         {
+            //Show screen
+            string screen = "";
+            for (int y = 0; y < layout.GetLength(1); y++)
+            {
+                screen += "+++";
+            }
+            Console.WriteLine(screen + "  (Screen)\n");
+
+            //Show x coordinates
+            string xcostring = "";
+            for (int y = 1; y <= layout.GetLength(1); y++)
+            {
+                if (y < 10)
+                {
+                    xcostring = xcostring + y.ToString() + "  ";
+                }
+                if (y > 9)
+                {
+                    xcostring = xcostring + y.ToString() + " ";
+                }
+            }           
+            Console.WriteLine(xcostring + "\n");
+
             for (int x = 0; x < layout.GetLength(0); x++)
             {
                 string printString = "";
@@ -109,12 +192,14 @@ namespace Cinema
                     if (vacancy)
                     {
                         if (layout[x, y].vacant)
-                            printString += "_";
-                        else printString += "X";
+                            printString += "O  ";
+                        else printString += "X  ";
                     }
                     else printString += layout[x,y].priceMod;
                 }
-                Console.WriteLine(printString);
+
+
+                Console.WriteLine(printString + " " + (x+1));
             }
             Console.WriteLine("\n");
         }
@@ -143,7 +228,7 @@ namespace Cinema
             if (roomType == 1){ type = "normal";}
             if (roomType == 2) { type = "3D"; }
             if (roomType == 3) { type = "IMAX"; }
-            return string.Format("Type: {0} Chairs: {1} ", type, chairs);
+            return string.Format("Type:{0}  Chairs:{1} ", type, chairs);
         }
     }
 }

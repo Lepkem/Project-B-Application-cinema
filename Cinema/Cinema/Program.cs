@@ -68,10 +68,22 @@ namespace Cinema
             for (int i = 0; i < rows; i++)
             {
                 Console.WriteLine("Set row " + (i + 1) + ".");
+                Console.WriteLine("Chair type 0: Blocked chair (cant be purchased)");
+                Console.WriteLine("Chair type 1: Cheap chair");
+                Console.WriteLine("Chair type 2: Normal chair");
+                Console.WriteLine("Chair type 3: Vip chair");
+                Console.WriteLine("Type Exit to exit creating a room.");
                 roomRows[i] = "";
                 try
                 {
-                    roomRows[i] = Console.ReadLine();
+                    string newLine = Console.ReadLine();
+                    if (newLine == "Exit")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Exitted succesfully.\n");
+                        return;
+                    }
+                    roomRows[i] = newLine;
                 }
                 catch
                 {
