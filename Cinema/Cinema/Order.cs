@@ -91,14 +91,14 @@ namespace Cinema
                 try
                 {
 
-                    Console.WriteLine("How many tickets do you want? enter number");
+                    Console.WriteLine("How many tickets do you want? Please enter a number.");
                     seats = int.Parse(Console.ReadLine());
                     quit = true;
                 }
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Fill in integers only!");
+                    Console.WriteLine("Please fill in integers only!");
                 }
             }
 

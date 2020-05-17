@@ -4,13 +4,16 @@
     "genre": "Sci-fi",
     "runtime": 120,
     "synopsis": "idk",
-    "releaseDate": "05/12/2021"
+    "releaseDate": "05/12/2021",
+    "age": "16+"
+  
   },
   {
     "name": "avengers",
     "genre": "adventure",
     "runtime": 120,
     "synopsis": "something",
-    "releaseDate": "06/10/2021"
+    "releaseDate": "06/10/2021",
+    "age": "16+"
   }
 ]

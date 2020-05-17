@@ -68,11 +68,11 @@ namespace Cinema
             for (int i = 0; i < rows; i++)
             {
                 Console.WriteLine("Set row " + (i + 1) + ".");
-                Console.WriteLine("Chair type 0: Blocked chair (cant be purchased)");
+                Console.WriteLine("Chair type 0: Blocked chair (can not be purchased)");
                 Console.WriteLine("Chair type 1: Cheap chair");
                 Console.WriteLine("Chair type 2: Normal chair");
                 Console.WriteLine("Chair type 3: Vip chair");
-                Console.WriteLine("Type Exit to exit creating a room.");
+                Console.WriteLine("Type 'Exit' to exit creating a room.");
                 roomRows[i] = "";
                 try
                 {
@@ -80,7 +80,7 @@ namespace Cinema
                     if (newLine == "Exit")
                     {
                         Console.Clear();
-                        Console.WriteLine("Exitted succesfully.\n");
+                        Console.WriteLine("Exitted successfully.\n");
                         return;
                     }
                     roomRows[i] = newLine;
@@ -192,7 +192,7 @@ namespace Cinema
 
             //input room
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name);
-            Console.WriteLine("\n\nWhat room do you want assign? Select a number\n");
+            Console.WriteLine("\n\nWhat room do you want to assign? Select a number\n");
             int j = 0;
             foreach (Room r in rooms)
             {
@@ -207,7 +207,7 @@ namespace Cinema
 
             //input date
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
-            Console.WriteLine("\n\nWhat date do you want assign? Example: 1 march");
+            Console.WriteLine("\n\nWhat date do you want to assign? Example: 1 march");
             string inputDate = "";
             try
             {

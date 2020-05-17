@@ -13,15 +13,17 @@ namespace Cinema
         public int runtime;
         public string synopsis;
         public string releaseDate;
+        public string age; 
 
 
-        public Movie(string name, string genre, int runtime, string synopsis, string releaseDate)
+        public Movie(string name, string genre, int runtime, string synopsis, string releaseDate, string age)
         {
             this.name = name;
             this.genre = genre;
             this.runtime = runtime;
             this.synopsis = synopsis;
             this.releaseDate = releaseDate;
+            this.age = age;
         }
     }
 
@@ -76,7 +78,7 @@ namespace Cinema
             JArray movieArray = JArray.Parse(File.ReadAllText(this.jsonFileLocation));
             foreach (JObject obj in movieArray)
             {
-                this.movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (int)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"]));
+                this.movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (int)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"], (string)obj["age"]));
             }
         }
 
@@ -110,7 +112,7 @@ namespace Cinema
         }
         private void updateMovie(Movie movie)
         {
-            Console.WriteLine("What do you want to edit? Choose from:\n[1] Genre\n[2] Synopsis\n[3] Name\n[4] Runtime\n[5] Release Date");
+            Console.WriteLine("What do you want to edit? Choose from:\n[1] Genre\n[2] Synopsis\n[3] Name\n[4] Runtime\n[5] Release Date\n[6] Age restriction\n");
             string update = Console.ReadLine();
             switch (update)
             {
@@ -127,13 +129,17 @@ namespace Cinema
                     movie.name = Console.ReadLine();
                     break;
                 case "4":
-                    Console.WriteLine("new runtime:");
+                    Console.WriteLine("new runtime (in minutes):");
                     movie.runtime = int.Parse(Console.ReadLine());
                     break;
                 case "5":
-                    Console.WriteLine("new releaseDate:");
+                    Console.WriteLine("new releaseDate (format: MM/dd/yyyy):");
                     movie.releaseDate = Console.ReadLine();
                     break;
+                case "6":
+                    Console.WriteLine("new age restriction:");
+                    movie.age = Console.ReadLine();
+                    break;    
                 default:
                     Console.WriteLine("\nThat is not an option, please choose again\n");
                     updateMovie(movie);
@@ -148,15 +154,17 @@ namespace Cinema
             string addMovie = Console.ReadLine();
             Console.WriteLine("\nGenre:");
             string genre = Console.ReadLine();
-            Console.WriteLine("\nruntime:");
+            Console.WriteLine("\nruntime (in minutes):");
             string runtime = Console.ReadLine();
             Console.WriteLine("\nsynopsis:");
             string synopsis = Console.ReadLine();
             Console.WriteLine("\nreleaseDate (Format: MM/dd/yyyy):");
             string releaseDate = Console.ReadLine();
+            Console.WriteLine("\nAge restriction:");
+            string age = Console.ReadLine();
 
 
-            this.movieList.Add(new Movie(movieName, genre, int.Parse(runtime), synopsis, releaseDate));
+            this.movieList.Add(new Movie(movieName, genre, int.Parse(runtime), synopsis, releaseDate, age));
             this.createJson();
             Console.WriteLine("You succesfully added a movie");        
         }
@@ -177,7 +185,8 @@ namespace Cinema
                     new JProperty("genre", movie.genre),
                     new JProperty("runtime", movie.runtime),
                     new JProperty("synopsis", movie.synopsis),
-                    new JProperty("releaseDate", movie.releaseDate)));
+                    new JProperty("releaseDate", movie.releaseDate),
+                    new JProperty("age", movie.age)));
             }
             File.WriteAllText(location, movieArray.ToString());
         }
