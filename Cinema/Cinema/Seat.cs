@@ -8,9 +8,9 @@ namespace Cinema
     {
         public bool vacant;
 
-        public uint seatNumber;
+        public int seatNumber;
 
-        public uint rowNumber;
+        public int rowNumber;
 
         public int priceCategory;
 

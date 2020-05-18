@@ -20,8 +20,15 @@ namespace Cinema
 
         static void Main(string[] args)
         {
-            //console program
-            readRooms();
+            //console program		AmountOfRows	0	uint
+
+            //readRooms();
+
+
+
+            RoomParser.LoadRooms().First().SaveRoom();
+
+            Console.ReadLine();
 
             schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
             schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
