@@ -108,10 +108,10 @@
                     switch (rowValueVacancy[seat])
                     {
                         case '0':
-                            seatv2.vacant = false;
+                            seatv2.vacant = true;
                             break;
                         case '1':
-                            seatv2.vacant = true;
+                            seatv2.vacant = false;
                             break;
                         default:
                             seatv2.vacant = true;

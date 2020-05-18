@@ -24,9 +24,12 @@ namespace Cinema
 
             //readRooms();
 
+            string[] testarr = new string[] { "000010101", "000101010", "101001100", "111111100" };
+            RoomV2 room = new RoomV2();
+            room.CreateFromLayout(testarr, "pathe");
+            room.SaveRoom("pathe");
 
-
-            RoomParser.LoadRooms().First().SaveRoom();
+            //RoomParser.LoadRooms().First().SaveRoom("test1");
 
             Console.ReadLine();
 

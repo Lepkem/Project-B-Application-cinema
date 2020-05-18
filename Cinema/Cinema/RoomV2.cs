@@ -1,8 +1,12 @@
 ﻿namespace Cinema
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
 
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     //todo OPEN     Standard message class met enkel static void methodes.
     //todo OPEN     Het programma kan bij startup lezen of er een .txt-bestand in een
@@ -37,17 +41,70 @@
 
         public List<SeatV2> seats { get; set; }
 
-        public uint AmountOfRows { get; set; }
+        public int AmountOfRows
+        {
+            get => seats.Select(s => s.rowNumber).Distinct().Count();
+        }
 
         public int Number { get; set; }
 
         public string Name { get; set; }
 
-        public void SaveRoom()
-        { 
-            System.IO.File.WriteAllText(@"myrooms.json", JsonConvert.SerializeObject(this, Formatting.Indented));
+        public void CreateFromLayout(string[] mapLayout, string name = null)
+        {
+            this.Name = name;
+            for (int row = 0; row < mapLayout.Length; row++)
+            {
+                string rowValueLayout = mapLayout[row].ToString();
+                
+                for (int seat = 0; seat < rowValueLayout.Length; seat++)
+                {
+                    SeatV2 seatv2 = new SeatV2()
+                                    {
+                                        seatNumber = seat,
+                                        rowNumber = row,
+                                    };
+
+
+                    // switch 1 - get price category per chair in row
+                    // switch 2 - get vacant per chair in row
+
+                    switch (rowValueLayout[seat])
+                    {
+                        case '0':
+                            seatv2.priceCategory = 0;
+                            break;
+                        case '1':
+                            seatv2.priceCategory = 1;
+                            break;
+                        case '2':
+                            seatv2.priceCategory = 2;
+                            break;
+                        case '3':
+                            seatv2.priceCategory = 3;
+                            break;
+                        default:
+                            seatv2.priceCategory = 0;
+                            break;
+                    }
+
+                    seats.Add(seatv2);
+                }
+            }
         }
 
+        public void SaveRoom(string fileName)
+        {
+            try
+            {
+                File.WriteAllText(@$"rooms\{fileName}.json", JsonConvert.SerializeObject(this, Formatting.Indented));
+            }
+            catch (Exception e)
+            {
+                StandardMessages.SomethingWW(e.Message);
+            }
+        }
+        // rooms\test1\.json
         //public string SerializeJson(object objToSave)
         //{
         //    return JsonConvert.SerializeObject(objToSave);
