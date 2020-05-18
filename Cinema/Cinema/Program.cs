@@ -156,7 +156,7 @@ namespace Cinema
             printSchedule();
 
             //input time
-            Console.WriteLine($"What time wil the movie start?\nFormat: dd-mm-yyyy" );
+            Console.WriteLine($"What time will the movie start?\nFormat: HH:MM (13:50 for instance)" );
             string time = "";
             try
             {
