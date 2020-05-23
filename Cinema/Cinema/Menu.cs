@@ -86,12 +86,6 @@ namespace Cinema
                         break;
 
                     case 12:
-                        //Add movie
-                        Program.myFilms.Add(new Films { Name = "Invisible Man", Genre = "Horror", Runtime = "130 min", Synopsis = "Invisible Man stalks his ex.", ReleaseDate = "24-02-2020" });
-                        caseSwitch = 0;
-                        break;
-
-                    case 13:
                         //Add movie Jitske
                         // This will get the current WORKING directory (i.e. \bin\Debug)
                         string workingDirectory = Environment.CurrentDirectory;
@@ -99,12 +93,13 @@ namespace Cinema
 
                         // This will get the current PROJECT directory
                         string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-                        Movies movies = new Movies(Path.Combine( projectDirectory, @"movies/movie.json"));
+                        Movies movies = new Movies(Path.Combine(projectDirectory, @"movies/movie.json"));
 
                         movies.updateCreateMovie();
+                        Program.readMovies();
                         caseSwitch = 0;
                         break;
-                    case 14:
+                    case 13:
                         //Add a scheduleElement
                         Program.createShedule();
                         caseSwitch = 0;
@@ -131,7 +126,7 @@ namespace Cinema
             if (!login) { Console.WriteLine(menu); }
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Create movie Jitske\n[14]Add to schedule"); }
+            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Add to schedule"); }
             while (true)
             {
 

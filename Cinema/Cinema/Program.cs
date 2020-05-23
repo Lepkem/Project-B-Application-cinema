@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 
 namespace Cinema
 {
@@ -10,26 +11,49 @@ namespace Cinema
     {
         static public List<Room> rooms = new List<Room>();
         static public List<ScheduleElement> schedule = new List<ScheduleElement>();
-        public static List<Films> myFilms = new List<Films>
-
-            {
-                new Films{ Name = "Sonic", Genre = "Comedy", Runtime = "120 min", Synopsis = "Blue hedgehog collects rings.", ReleaseDate = "12-02-2020" },
-                new Films{ Name = "Birds", Genre = "Comedy", Runtime = "100 min", Synopsis = "Clown girl does funny stuff.", ReleaseDate = "18-02-2020" },
-                new Films{ Name = "Bloodshot", Genre = "Action", Runtime = "110 min", Synopsis = "Vin Diesel shoots enemies.", ReleaseDate = "21-02-2020" },
-            };
+        public static List<Films> myFilms = new List<Films>();
 
         static void Main(string[] args)
         {
             //console program
             readRooms();
-
+            readMovies();
             schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
             schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
             schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
-            schedule.Add(new ScheduleElement("23:55", myFilms[0], rooms[2], "5 may"));
+            schedule.Add(new ScheduleElement("23:55", myFilms[4], rooms[2], "5 may"));
 
             Menu menu = new Menu();
             menu.switchCase();
+        }
+
+        public static void readMovies()
+        {
+            bool add = true;
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            Movies movies = new Movies(Path.Combine(projectDirectory, @"movies/movie.json"));
+
+            List<Movie> movieList = Movies.GetList();
+            JArray movie = new JArray();
+
+            foreach (Movie m in movieList)
+            {
+                add = true;
+                foreach (Films f in myFilms) 
+                { 
+                    if (f.Name == m.name)
+                    {
+                        add = false;
+                    }    
+                }
+                if (add)
+                {
+                    movie.Add(JObject.FromObject(m));
+                    myFilms.Add(new Films { Name = m.name, Genre = m.genre, Runtime = m.runtime, Synopsis = m.synopsis, ReleaseDate = m.releaseDate, Age = m.age });
+                }
+                
+            }  
         }
 
         static void readRooms()

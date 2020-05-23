@@ -29,7 +29,7 @@ namespace Cinema
 
     class Movies
     {
-        List<Movie> movieList;
+        static List<Movie> movieList;
 
 
         string jsonFileLocation;
@@ -79,11 +79,11 @@ namespace Cinema
                 File.WriteAllText(jsonFileLocation, "[]");
             }
 
-            this.movieList = new List<Movie>();
+            movieList = new List<Movie>();
             JArray movieArray = JArray.Parse(File.ReadAllText(this.jsonFileLocation));
             foreach (JObject obj in movieArray)
             {
-                this.movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (string)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"], (string)obj["age"]));
+                movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (string)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"], (string)obj["age"]));
             }
         }
 
@@ -91,7 +91,7 @@ namespace Cinema
         {
             Console.WriteLine("Enter the name of the movie.\nIf the name of the movie already exists, you will be automatically redirected to adding a movie. ");
             string movieName = Console.ReadLine();
-            foreach (Movie movie in this.movieList)
+            foreach (Movie movie in movieList)
             {
                 if (movie.name == movieName)
                 {
@@ -135,7 +135,7 @@ namespace Cinema
                     break;
                 case "4":
                     Console.WriteLine("new runtime (in minutes):");
-                    movie.runtime = int.Parse(Console.ReadLine());
+                    movie.runtime = Console.ReadLine();
                     break;
                 case "5":
                     Console.WriteLine("new releaseDate (format: MM/dd/yyyy):");
@@ -169,7 +169,7 @@ namespace Cinema
             string age = Console.ReadLine();
 
 
-            this.movieList.Add(new Movie(movieName, genre, runtime, synopsis, releaseDate, age));
+            movieList.Add(new Movie(movieName, genre, runtime, synopsis, releaseDate, age));
             this.createJson();
             Console.WriteLine("You succesfully added a movie");        
         }
@@ -184,7 +184,7 @@ namespace Cinema
                 File.Delete(location);
             }
             JArray movieArray = new JArray();
-            foreach (Movie movie in this.movieList)
+            foreach (Movie movie in movieList)
             {
                 movieArray.Add(new JObject(
                     new JProperty("name", movie.name),
@@ -196,6 +196,11 @@ namespace Cinema
             }
 
             File.WriteAllText(location, movieArray.ToString());
+        }
+
+        public static List<Movie> GetList()
+        {
+            return Movies.movieList;
         }
     }
 }
