@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Cinema
         Boolean running = true;
         int caseSwitch = 0;
         Boolean login = false;
-       
+
         public void switchCase()
         {
             while (running)
@@ -85,25 +86,27 @@ namespace Cinema
                         break;
 
                     case 12:
-                        //Add movie
-                        Program.myFilms.Add(new Films { Name = "Invisible Man", Genre = "Horror", Runtime = "130 min", Synopsis = "Invisible Man stalks his ex.", ReleaseDate = "24-02-2020" });
-                        caseSwitch = 0;
-                        break;
-
-                    case 13:
                         //Add movie Jitske
-                        Movies movies = new Movies(@"./movies/movie.json");
+                        // This will get the current WORKING directory (i.e. \bin\Debug)
+                        string workingDirectory = Environment.CurrentDirectory;
+                        // or: Directory.GetCurrentDirectory() gives the same result
+
+                        // This will get the current PROJECT directory
+                        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                        Movies movies = new Movies(Path.Combine(projectDirectory, @"movies/movie.json"));
+
                         movies.updateCreateMovie();
+                        Program.readMovies();
                         caseSwitch = 0;
                         break;
-                    case 14:
+                    case 13:
                         //Add a scheduleElement
                         Program.createShedule();
                         caseSwitch = 0;
                         break;
 
                     default:
-                        Console.WriteLine("That's not an option you knucklehead");
+                        Console.WriteLine("That's not an option, please choose again");
                         caseSwitch = 0;
                         break;
                 }
@@ -118,7 +121,7 @@ namespace Cinema
             //text being displayed in menu
 
             //text being displayed in menu Admin version
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Create movie Jitske\n[14]Add to schedule"); }
+            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Add to schedule"); }
             while (true)
             {
 
@@ -292,8 +295,8 @@ namespace Cinema
             Console.WriteLine("Wich room do you want to look at?");
             int i = 0;
             int inputRoom= 0;
-            
-            foreach (Room r in Program.rooms) 
+
+            foreach (Room r in Program.rooms)
             {
                 string  y = r.printInfo();
                 Console.WriteLine("[" + i + "] Maasvlakte:"+ i +" "+  y + "\n");
@@ -321,4 +324,3 @@ namespace Cinema
         }
     }
 }
-
