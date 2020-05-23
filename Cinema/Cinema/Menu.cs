@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
@@ -92,7 +93,14 @@ namespace Cinema
 
                     case 13:
                         //Add movie Jitske
-                        Movies movies = new Movies(@"./movies/movie.json");
+                        // This will get the current WORKING directory (i.e. \bin\Debug)
+                        string workingDirectory = Environment.CurrentDirectory;
+                        // or: Directory.GetCurrentDirectory() gives the same result
+
+                        // This will get the current PROJECT directory
+                        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                        Movies movies = new Movies(Path.Combine( projectDirectory, @"movies/movie.json"));
+
                         movies.updateCreateMovie();
                         caseSwitch = 0;
                         break;

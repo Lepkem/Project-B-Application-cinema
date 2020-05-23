@@ -69,11 +69,16 @@ namespace Cinema
             {
                 delete.Add(JObject.FromObject(m));
             }
-            File.WriteAllText(@"./movies/movie.json", delete.ToString());
+            File.WriteAllText(jsonFileLocation, delete.ToString());
         }
 
         public void initialize()
         {
+            if (!File.Exists(jsonFileLocation))
+            {
+                File.WriteAllText(jsonFileLocation, "[]");
+            }
+
             this.movieList = new List<Movie>();
             JArray movieArray = JArray.Parse(File.ReadAllText(this.jsonFileLocation));
             foreach (JObject obj in movieArray)
@@ -175,6 +180,7 @@ namespace Cinema
             //checking if file exists
             if (File.Exists(location))
             {
+                
                 File.Delete(location);
             }
             JArray movieArray = new JArray();
@@ -188,6 +194,7 @@ namespace Cinema
                     new JProperty("releaseDate", movie.releaseDate),
                     new JProperty("age", movie.age)));
             }
+
             File.WriteAllText(location, movieArray.ToString());
         }
     }
