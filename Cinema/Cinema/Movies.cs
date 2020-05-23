@@ -10,13 +10,13 @@ namespace Cinema
     {
         public string name;
         public string genre;
-        public int runtime;
+        public string runtime;
         public string synopsis;
         public string releaseDate;
         public string age; 
 
 
-        public Movie(string name, string genre, int runtime, string synopsis, string releaseDate, string age)
+        public Movie(string name, string genre, string runtime, string synopsis, string releaseDate, string age)
         {
             this.name = name;
             this.genre = genre;
@@ -83,7 +83,7 @@ namespace Cinema
             JArray movieArray = JArray.Parse(File.ReadAllText(this.jsonFileLocation));
             foreach (JObject obj in movieArray)
             {
-                this.movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (int)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"], (string)obj["age"]));
+                this.movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (string)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"], (string)obj["age"]));
             }
         }
 
@@ -169,7 +169,7 @@ namespace Cinema
             string age = Console.ReadLine();
 
 
-            this.movieList.Add(new Movie(movieName, genre, int.Parse(runtime), synopsis, releaseDate, age));
+            this.movieList.Add(new Movie(movieName, genre, runtime, synopsis, releaseDate, age));
             this.createJson();
             Console.WriteLine("You succesfully added a movie");        
         }
