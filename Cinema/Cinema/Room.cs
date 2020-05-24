@@ -161,6 +161,11 @@ namespace Cinema
 
         public void printRoom(bool vacancy)
         {
+            //Print legend with colors and prices
+            PrintLegend();
+
+            WriteInColor(ConsoleColor.Cyan, "O  ");
+
             //Show screen
             string screen = "";
             for (int y = 0; y < layout.GetLength(1); y++)
@@ -229,6 +234,25 @@ namespace Cinema
             if (roomType == 2) { type = "3D"; }
             if (roomType == 3) { type = "IMAX"; }
             return string.Format("Type:{0}  Chairs:{1} ", type, chairs);
+        }
+
+        /// <summary>
+        /// PrintLegend is a helper function and prints the legend suited for the PrintRoom
+        /// </summary>
+        public void PrintLegend()
+        {
+            WriteInColor(ConsoleColor.Green, "Price cat \t$\n");
+            WriteInColor(ConsoleColor.Cyan, "Price cat \t$$\n");
+            WriteInColor(ConsoleColor.Yellow, "Price cat \t$$$\n");
+            WriteInColor(ConsoleColor.Red, "unavailable seat\n\n");
+        }
+
+
+        private void WriteInColor(ConsoleColor color, string text)
+        {
+            Console.ForegroundColor = color;
+            Console.Write($"{text}");
+            Console.ResetColor();
         }
     }
 }
