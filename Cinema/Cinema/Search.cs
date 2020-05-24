@@ -17,7 +17,7 @@ namespace Cinema
 
             while (userWrong)
             {
-                Console.WriteLine("What do you want to do? \n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n");
+                Console.WriteLine("What do you want to do?\nEnter the number \n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n");
                 var val = Console.ReadLine();
                 filmChoice = Convert.ToInt32(val);
 

@@ -13,13 +13,13 @@ namespace Cinema
             int inputFilm = 0;
             while (quit == false)
             {
-                Console.WriteLine("Which movie do you want to watch? enter number\n\n");
+                Console.WriteLine("Which movie do you want to watch? Enter number\n\n");
 
                 int i = 0;
                 foreach (Films f in Program.myFilms)
                 {
                     string x = f.printFilms();
-                    Console.WriteLine(i + " " + x + "\n");
+                    Console.WriteLine("[" + i + "]" + "\n" + x + "\n");
                     i++;
                 }
 
@@ -91,14 +91,14 @@ namespace Cinema
                 try
                 {
 
-                    Console.WriteLine("How many tickets do you want? enter number");
+                    Console.WriteLine("How many tickets do you want? Please enter a number.");
                     seats = int.Parse(Console.ReadLine());
                     quit = true;
                 }
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Fill in integers only!");
+                    Console.WriteLine("Please fill in integers only!");
                 }
             }
 

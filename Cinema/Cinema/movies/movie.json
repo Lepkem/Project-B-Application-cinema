@@ -1,16 +1,74 @@
 [
   {
-    "name": "Star Wars",
-    "genre": "Sci-fi",
-    "runtime": 120,
-    "synopsis": "idk",
-    "releaseDate": "2020-04-15T00:00:00"
+    "name": "Sonic",
+    "genre": "Comedy",
+    "runtime": "130 min",
+    "synopsis": "Blue hedgehog collects rings.",
+    "releaseDate": "12-02-2020",
+    "age": "10+"
   },
   {
-    "name": "avengers",
-    "genre": "adventure",
-    "runtime": 120,
+    "name": "Birds",
+    "genre": "Comedy",
+    "runtime": "120 min",
+    "synopsis": "Clown girl does funny stuff.",
+    "releaseDate": "18-02-2020",
+    "age": "10+"
+  },
+  {
+    "name": "Bloodshot",
+    "genre": "Action",
+    "runtime": "110 min",
+    "synopsis": "Vin Diesel shoots enemies.",
+    "releaseDate": "21-02-2020",
+    "age": "16+"
+  },
+  {
+    "name": "Star Wars",
+    "genre": "Sci-fi",
+    "runtime": "120 min",
+    "synopsis": "idk",
+    "releaseDate": "12-03-2021",
+    "age": "16+"
+  },
+  {
+    "name": "Avengers",
+    "genre": "Adventure",
+    "runtime": "120 min",
     "synopsis": "something",
-    "releaseDate": "2020-08-13T00:00:00"
+    "releaseDate": "04-02-2022",
+    "age": "16+"
+  },
+  {
+    "name": "Lord of the rings",
+    "genre": "Adventure",
+    "runtime": "200 mins",
+    "synopsis": "Magic and good vs evil",
+    "releaseDate": "12-1-2020",
+    "age": "16"
+  },
+  {
+    "name": "Titanic",
+    "genre": "Drama",
+    "runtime": "150 min",
+    "synopsis": "Boat that sinks",
+    "releaseDate": "16-07-2020",
+    "age": "12"
+  },
+  {
+    "name": "Die hard",
+    "genre": "Action",
+    "runtime": "100 mins",
+    "synopsis": "Free man",
+    "releaseDate": "12-02-1999",
+    "age": "16"
+  },
+  {
+    "name": "Toy story",
+    "genre": "Kids",
+    "runtime": "100 min",
+    "synopsis": "Toys come to life",
+    "releaseDate": "12-04-2020",
+    "age": "All"
   }
 ]
