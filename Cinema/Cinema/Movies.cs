@@ -171,7 +171,8 @@ namespace Cinema
 
             movieList.Add(new Movie(movieName, genre, runtime, synopsis, releaseDate, age));
             this.createJson();
-            Console.WriteLine("You succesfully added a movie");        
+            Console.WriteLine("You succesfully added the movie:");
+            Console.WriteLine( "Title: " + addMovie + "\n" + "Genre: " + genre + "\n" + "Runtime: " + runtime + "\n" + "Synopsis: " + synopsis + "\n" + "Release Date: " + releaseDate + "\n");
         }
         private void createJson()
         {
