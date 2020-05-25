@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Cinema
@@ -47,6 +48,7 @@ namespace Cinema
 
         static void OrderMovie(int input)
         {
+            //prints all available movies
             Console.Clear();
             bool quit = false;
             int x = 0;
@@ -54,7 +56,7 @@ namespace Cinema
             while (quit == false)
             {
                 Console.WriteLine("Choose your preference: select number \n\n");
-
+                //finds all schedule elements that contain that movie
                 IEnumerable<ScheduleElement> query = Program.schedule.Where(schedule => schedule.movie == Program.myFilms[input]);
                 int i = 0;
                 foreach (ScheduleElement schedule in query)
@@ -103,72 +105,56 @@ namespace Cinema
             }
 
             ScheduleElement ticket = possibleMovies[x];
+            //takes the index number of the room in the room list, adds one to that number, and that **should** always be the number in the room's name
             string file = string.Format(@".\rooms\room{0}.json", (Array.IndexOf(Program.rooms.ToArray(), ticket.room) + 1));
             List<Tuple<Seat, Tuple<int, int>>> selectedSeats = new List<Tuple<Seat, Tuple<int, int>>>();
-            for (int i = seats; i > 0; i--)
+            bool running = true;
+            while (running)
             {
-                while (true)
+                Console.WriteLine("\nPlease pick a row of seats. The row has to be " + seats + " seats long.\nThe upper left corner is 1,1.");
+                ticket.room.printRoom(true);
+
+                Console.Write("Input the coordinates of the leftmost seat; coordinates must be in the format ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("x,y");
+                Console.ResetColor();
+                Console.Write(".\n");
+
+                string coordInput = Console.ReadLine();
+                string[] splitInput = coordInput.Split(',');
+                Tuple<int, int> coords = new Tuple<int, int>(int.Parse(splitInput[0]), int.Parse(splitInput[1]));
+                if (coords.Item1 < 1 || coords.Item2 < 1 || coords.Item2 > ticket.room.layout.GetLength(0) || coords.Item1 > (ticket.room.layout.GetLength(1) - seats))
                 {
-                    Console.WriteLine("\nPlease pick a seat. You can select " + i + " more seats\nThe upper left corner is 1,1.");
-                    ticket.room.printRoom(true);
-
-                    Console.Write("Input the coordinates of your desired seat; coordinates must be in the format ");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.Write("x,y");
-                    Console.ResetColor();
-                    Console.Write(".\n");
-
-                    string coordInput = Console.ReadLine();
-                    Tuple<int, int> coords = new Tuple<int, int>((int)char.GetNumericValue(coordInput[0]) - 1, (int)char.GetNumericValue(coordInput[2]) - 1);
-                    if (coords.Item1 < 0 || coords.Item2 < 0)
-                        Console.WriteLine("Please write the coordinates as instructed.\n");
-                    else
+                    Console.WriteLine("Please write the coordinates as instructed, and ensure there is enough space for the other seats in the row.\n\nPress Enter to continue...");
+                    Console.ReadLine();
+                }
+                else
+                    //takes every seat to the left of the given chair up to a certain point and checks if they're free
+                    for (int i = 0; i < seats; i++)
                     {
-                        if (ticket.room.layout[coords.Item2, coords.Item1].vacant)
+                        Tuple<int, int> tempcoords = new Tuple<int, int>(coords.Item1 + i, coords.Item2);
+                        if (ticket.room.layout[tempcoords.Item2 - 1, tempcoords.Item1 - 1].vacant)
                         {
-                            ticket.room.layout[coords.Item2, coords.Item1].vacant = false;
-                            selectedSeats.Add(new Tuple<Seat, Tuple<int, int>>(ticket.room.layout[coords.Item2, coords.Item1], coords));
-                            break;
+                            ticket.room.layout[tempcoords.Item2 - 1, tempcoords.Item1 - 1].vacant = false;
+                            selectedSeats.Add(new Tuple<Seat, Tuple<int, int>>(ticket.room.layout[tempcoords.Item2, tempcoords.Item1], tempcoords));
+                            running = false;
                         }
                         else
                         {
-                            Console.WriteLine("That seat is already taken.\n");
+                            Console.WriteLine("That seat is already taken.\n\nPress enter to continue...");
+                            selectedSeats = new List<Tuple<Seat, Tuple<int, int>>>();
+                            Console.ReadLine();
+                            break;
                         }
                     }
-                }
+            }
+            foreach (var c in selectedSeats)
+            {
+                ticket.room.updateVacancy(c.Item2.Item1, c.Item2.Item2, file);
             }
             ticket.room.printRoom(true);
-
             IDBank.storeOrder(ticket, selectedSeats);
-
-
-
-
-
-
-
-            /*for (int s = seats; s >= 1; s--)
-            {
-                seatLoop = true;
-                while (seatLoop)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Please pick a seat. You can select " + s + " more seats\n the upper left corner is 0,0\n");                 
-                    possibleMovies[x].room.printRoom(true);
-
-                    Console.WriteLine("select the X coordinate: ");
-                    cord_x = int.Parse(Console.ReadLine());
-                    Console.WriteLine("select the Y coordinate: ");
-                    cord_y = int.Parse(Console.ReadLine());
-
-                    if (possibleMovies[x].room.layout[cord_x, cord_y].vacant == true)//if spot is open
-                    {
-                        //possibleMovies[x].room.layout[cord_x, cord_y].vacant. == "1";
-                        possibleMovies[x].room.updateVacancy(cord_x, cord_y, file);
-                        possibleMovies[x].room.Initialize(File.ReadAllText(file));
-                        seatLoop = false;
-                    }
-                    else { Console.WriteLine("Seats are already taken."); }*/
+            ticket.room.Initialize(File.ReadAllText(file));
         }
     }
 }
