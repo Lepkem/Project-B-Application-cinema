@@ -43,8 +43,10 @@ namespace Cinema
             
             order["Seats"] = positons;
 
-
-            File.AppendAllText(@".\orders\orders.json", order.ToString() + Environment.NewLine);
+            string file = File.ReadAllText(@".\orders.json");
+            file = file.Remove(file.Length - 3);
+            file += "," + order.ToString() + "\n]\n";
+            File.WriteAllText(@".\orders.json", file);
             //LET OP DAT DE COORD IN HET JSON MET -1 te weinig wordt gerekend. DUS DAAR MOET REKENING MEE GEHOUDEN WORDEN.
         }
 

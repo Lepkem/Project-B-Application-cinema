@@ -216,8 +216,7 @@ namespace Cinema
             char[] temp2 = temp.ToCharArray();
             temp2[cord_x - 1]='1';
             temp = new string(temp2);
-
-            vacancyArray[cord_y] = temp;
+            vacancyArray[cord_y - 1] = temp;
 
             string updatedString = fullObject.ToString();
             File.WriteAllText(room, updatedString);
