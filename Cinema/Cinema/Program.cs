@@ -48,7 +48,7 @@ namespace Cinema
             room.CreateFromLayout(testarr, "pathe");
             room.PrintAvailableSeats();
             Console.ReadLine();
-            room.PrintRoom();
+            //todo implement unavailable seats and make them display red
 
             //RoomParser.LoadRooms().First().SaveRoom("test1");
 
