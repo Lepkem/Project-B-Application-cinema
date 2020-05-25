@@ -152,7 +152,8 @@ namespace Cinema
             {
                 ticket.room.updateVacancy(c.Item2.Item1, c.Item2.Item2, file);
             }
-            ticket.room.printRoom(true);
+            ticket.room.printRoom();
+
             IDBank.storeOrder(ticket, selectedSeats);
             ticket.room.Initialize(File.ReadAllText(file));
         }
