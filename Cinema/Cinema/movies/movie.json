@@ -70,5 +70,37 @@
     "synopsis": "Toys come to life",
     "releaseDate": "12-04-2020",
     "age": "All"
+  },
+  {
+    "name": "afdsdf",
+    "genre": "sdffds",
+    "runtime": "120",
+    "synopsis": "dsff",
+    "releaseDate": "02-03-2020",
+    "age": "12"
+  },
+  {
+    "name": "fsfs",
+    "genre": "sdfdsfs",
+    "runtime": "120",
+    "synopsis": "gdfgd",
+    "releaseDate": "04-02-2020",
+    "age": "12"
+  },
+  {
+    "name": "fsfsd",
+    "genre": "asf",
+    "runtime": "120",
+    "synopsis": "sddsg",
+    "releaseDate": "03-02-2020",
+    "age": "12"
+  },
+  {
+    "name": "sdfsd",
+    "genre": "dfgdf",
+    "runtime": "120",
+    "synopsis": "vdffd",
+    "releaseDate": "04-02-2020",
+    "age": "12"
   }
 ]
