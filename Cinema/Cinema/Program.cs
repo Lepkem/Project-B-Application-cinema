@@ -60,7 +60,7 @@ namespace Cinema
         {
             try
             {
-                string[] files = Directory.GetFiles(@".\rooms", "*.json");
+                string[] files = Directory.GetFiles(@"./rooms", "*.json");
                 for (int i = 0; i < files.Length; i++)
                     //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
                     rooms.Add(new Room(File.ReadAllText(files[i])));
