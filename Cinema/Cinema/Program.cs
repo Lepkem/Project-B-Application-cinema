@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 
 namespace Cinema
 {
@@ -249,6 +248,47 @@ namespace Cinema
         public List<ScheduleElement> schedules
         {
             get { return schedule; }
+        }
+
+        public static void ShowComingSoon( int monthsUntilRelease = 2)
+        {
+            List<Films> filmslist = new List<Films>();
+            DateTime releaseDate = DateTime.MaxValue;
+            //V1
+            //var x = myFilms.Where(film =>  Convert.ToDateTime(film.ReleaseDate) <= DateTime.Now.AddMonths(monthsUntilRelease)).ToList();
+            //StandardMessages.ResultsCount(x.Count);
+            // x.ForEach(film => printFilmprops(film.Name, film.Genre, film.Runtime, film.Synopsis, film.ReleaseDate, film.Age));
+
+
+            Random r = new Random();
+
+            (from m in myFilms
+                    select new {   Name = m.Name, 
+                                   Genre = m.Genre, 
+                                   Runtime = m.Runtime, 
+                                   Synopsis = m.Synopsis,  Age = m.Age,
+                                   ReleaseDate = DateTime.TryParse(m.ReleaseDate, out releaseDate) ? releaseDate : new DateTime(r.Next(2020, 2021), r.Next(5, 12), r.Next(1, 28))
+                               })
+                .Where(t => 
+                    t.ReleaseDate < DateTime.Now.AddMonths(monthsUntilRelease) && t.ReleaseDate >= DateTime.Now.AddDays(-1))
+                .ToList()
+                .ForEach(
+                    mv =>
+                    {
+                        printFilmprops(mv.Name, mv.Genre, mv.Runtime, mv.Synopsis, mv.ReleaseDate.ToString("D"), mv.Age);
+                    });
+
+            
+        }
+
+        private static void printFilmprops(string t, string g, string rt, string s, string rd, string age)
+        {
+            Console.WriteLine($"Title:\t\t\t {t}");
+            Console.WriteLine($"Genre:\t\t\t {g}");
+            Console.WriteLine($"Runtime:\t\t\t {rt}");
+            Console.WriteLine($"Synopsis:\t\t\t {s}");
+            Console.WriteLine($"RELEASE DATE:\t\t\t {rd}");
+            Console.WriteLine($"Age restriction:\t\t\t {age}\n\n");
         }
     }
 }
