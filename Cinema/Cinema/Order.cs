@@ -110,7 +110,7 @@ namespace Cinema
                 while (true)
                 {
                     Console.WriteLine("\nPlease pick a seat. You can select " + i + " more seats\nThe upper left corner is 1,1.");
-                    ticket.room.printRoom(true);
+                    ticket.room.printRoom();
 
                     Console.Write("Input the coordinates of your desired seat; coordinates must be in the format ");
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -137,7 +137,7 @@ namespace Cinema
                     }
                 }
             }
-            ticket.room.printRoom(true);
+            ticket.room.printRoom();
 
             IDBank.storeOrder(ticket, selectedSeats);
 

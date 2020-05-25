@@ -319,8 +319,7 @@ namespace Cinema
                 }
             }
 
-            Program.rooms[inputRoom].printRoom(true);
-            Program.rooms[inputRoom].printRoom(false);
+            Program.rooms[inputRoom].printRoom();
         }
     }
 }

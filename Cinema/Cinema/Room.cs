@@ -159,7 +159,7 @@ namespace Cinema
             File.WriteAllText(room, updatedString);
         }
 
-        public void printRoom(bool vacancy)
+        public void printRoom()
         {
             //Print legend with colors and prices
             PrintLegend();
@@ -191,20 +191,36 @@ namespace Cinema
 
             for (int x = 0; x < layout.GetLength(0); x++)
             {
-                string printString = "";
                 for (int y = 0; y < layout.GetLength(1); y++)
                 {
-                    if (vacancy)
+                    
                     {
-                        if (layout[x, y].vacant)
-                            printString += "O  ";
-                        else printString += "X  ";
+                        if (!layout[x, y].vacant)
+                            WriteInColor(ConsoleColor.Red, "X  ");
+                        else
+                        {
+                            switch (layout[x, y].priceMod)
+                            {
+                                case 1:
+                                    WriteInColor(ConsoleColor.Green, "O  ");
+                                    break;
+                                case 2:
+                                    WriteInColor(ConsoleColor.Cyan, "O  ");
+                                    break;
+                                case 3:
+                                    WriteInColor(ConsoleColor.Yellow, "O  ");
+                                    break;
+                                default:
+                                    WriteInColor(ConsoleColor.Magenta, "O  ");
+                                    break;
+                            }
+                        }
+
                     }
-                    else printString += layout[x,y].priceMod;
                 }
 
 
-                Console.WriteLine(printString + " " + (x+1));
+                Console.WriteLine(" " + (x+1));
             }
             Console.WriteLine("\n");
         }
