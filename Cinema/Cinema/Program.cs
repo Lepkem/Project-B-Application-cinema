@@ -20,8 +20,39 @@ namespace Cinema
 
         static void Main(string[] args)
         {
-            //console program
-            readRooms();
+            //console program		AmountOfRows	0	uint
+
+            //readRooms();
+
+            string[] testarr = new string[] {    "123123123123123123",
+                                                "011111222222111110",
+                                                "011112222222211110",
+                                                "011112222222211110",
+                                                "011122222222221110",
+                                                "011122223322221110",
+                                                "111222233332222111",
+                                                "111222333333222111",
+                                                "112222333333222211",
+                                                "112222333333222211",
+                                                "112222333333222211",
+                                                "011222233332222110",
+                                                "011122223322221110",
+                                                "011112222222211110",
+                                                "001111222222111100",
+                                                "001111222222111100",
+                                                "001111111111111100",
+                                                "000111111111111000",
+                                                "000111111111111000" };
+           
+            RoomV2 room = new RoomV2();
+            room.CreateFromLayout(testarr, "pathe");
+            room.PrintAvailableSeats();
+            Console.ReadLine();
+            //todo implement unavailable seats and make them display red
+
+            //RoomParser.LoadRooms().First().SaveRoom("test1");
+
+            Console.ReadLine();
 
             schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
             schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));

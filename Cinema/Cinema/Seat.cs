@@ -4,6 +4,8 @@ using System.Text;
 
 namespace Cinema
 {
+    
+
     class Seat
     {
         public bool vacant;

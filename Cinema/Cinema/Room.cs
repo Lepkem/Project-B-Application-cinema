@@ -1,12 +1,26 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Runtime.ExceptionServices;
-using System.Numerics;
 
 namespace Cinema
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection.Metadata.Ecma335;
+
+    using Newtonsoft.Json;
+
+    //todo Seat row and seat number > 0 == example 2 (dotnetfiddle)
+
+
+    //an override of the reading and writing (deserializing, serializing) of a json from the newtonsoft package
+    
+
+    
+
+
+    
+
     class Room
     {
         public Seat[,] layout;
@@ -22,8 +36,6 @@ namespace Cinema
         {
             File.Delete(room);
         }
-
-        
         public void Initialize(string l)
         {
             //this line takes the string and turns it into a special object that contains the attributes of the JSON
@@ -53,9 +65,7 @@ namespace Cinema
             }
             //store the array in the object
             layout = inputMatrix;
-            
         }
-        
 
         public void updateRoom(string room)
         {
@@ -67,12 +77,7 @@ namespace Cinema
             int defaultLength = layoutArray.First.ToString().Length;
             for (int i = 0; i < layoutArray.Count; i++)
             {
-                Console.Clear();
-                Console.WriteLine("Replace the " + (i + 1) + " line? If yes give a new line with a length of "+ defaultLength + " characters.");
-                Console.WriteLine("Chair type 0: Blocked chair (cant be purchased)");
-                Console.WriteLine("Chair type 1: Cheap chair");
-                Console.WriteLine("Chair type 2: Normal chair");
-                Console.WriteLine("Chair type 3: Vip chair");
+                Console.WriteLine("Replace the " + (i + 1) + " line? If yes give new line.");
                 string newLine = Console.ReadLine();
                 while (true)
                 {
@@ -80,17 +85,8 @@ namespace Cinema
                     {
                         if (newLine.Length == defaultLength)
                         {
-                            try
-                            {
-                                var errorhandling = BigInteger.Parse(newLine);
-                                layoutArray[i] = newLine;
-                                break;
-                            }
-                            catch
-                            {
-                                Console.WriteLine("Fill in integers only!");
-                                newLine = Console.ReadLine();
-                            }
+                            layoutArray[i] = newLine;
+                            break;
                         }
                         else
                         {
@@ -101,56 +97,13 @@ namespace Cinema
                     else break;
                 }
             }
-            
-            //alter the special object
-            bool quit = false;
-            int seats = 0;
-            while (quit == false)
-            {
-                try
-                {
-                    Console.WriteLine("How many chairs should the room have?");
-                    seats = int.Parse(Console.ReadLine());
-                    quit = true;
-                }
-                catch
-                {
-                    Console.Clear();
-                    Console.WriteLine("Fill in integers only!");
-                }
-            }
-            fullObject["chairs"] = seats;
-            
-            //alter the special object
-            quit = false;
-            int type = 0;
-            while (quit == false)
-            {
-                try
-                {
-                    
-                    Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
-                    type = int.Parse(Console.ReadLine());
-                    if (type < 1)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Integer must be higher than 0 and lower than 4!");
-                    } else if (type > 3){
-                        Console.Clear();
-                        Console.WriteLine("Integer must be higher than 0 and lower than 4!");
-                    } else
-                    {
-                        quit = true;
-                    }                   
-                }
-                catch
-                {
-                    Console.WriteLine("Fill in integers only!");
-                    Console.Clear();
-                }
-            }
-            fullObject["roomType"] = type;
 
+            Console.WriteLine("How many chairs should the room have?");
+            //alter the special object
+            fullObject["chairs"] = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
+            //alter the special object
+            fullObject["roomType"] = Int32.Parse(Console.ReadLine());
             //turn the object into a string
             string updatedString = fullObject.ToString();
             //update the object
@@ -161,29 +114,6 @@ namespace Cinema
 
         public void printRoom(bool vacancy)
         {
-            //Show screen
-            string screen = "";
-            for (int y = 0; y < layout.GetLength(1); y++)
-            {
-                screen += "+++";
-            }
-            Console.WriteLine(screen + "  (Screen)\n");
-
-            //Show x coordinates
-            string xcostring = "";
-            for (int y = 1; y <= layout.GetLength(1); y++)
-            {
-                if (y < 10)
-                {
-                    xcostring = xcostring + y.ToString() + "  ";
-                }
-                if (y > 9)
-                {
-                    xcostring = xcostring + y.ToString() + " ";
-                }
-            }           
-            Console.WriteLine(xcostring + "\n");
-
             for (int x = 0; x < layout.GetLength(0); x++)
             {
                 string printString = "";
@@ -192,14 +122,12 @@ namespace Cinema
                     if (vacancy)
                     {
                         if (layout[x, y].vacant)
-                            printString += "O  ";
-                        else printString += "X  ";
+                            printString += "_";
+                        else printString += "X";
                     }
-                    else printString += layout[x,y].priceMod;
+                    else printString += layout[x, y].priceMod;
                 }
-
-
-                Console.WriteLine(printString + " " + (x+1));
+                Console.WriteLine(printString);
             }
             Console.WriteLine("\n");
         }
@@ -214,7 +142,7 @@ namespace Cinema
 
             string temp = vacancyArray[cord_y - 1].ToString();
             char[] temp2 = temp.ToCharArray();
-            temp2[cord_x - 1]='1';
+            temp2[cord_x - 1] = '1';
             temp = new string(temp2);
 
             vacancyArray[cord_y] = temp;
@@ -222,13 +150,13 @@ namespace Cinema
             string updatedString = fullObject.ToString();
             File.WriteAllText(room, updatedString);
         }
-        public string printInfo() 
+        public string printInfo()
         {
-            
-            if (roomType == 1){ type = "normal";}
+
+            if (roomType == 1) { type = "normal"; }
             if (roomType == 2) { type = "3D"; }
             if (roomType == 3) { type = "IMAX"; }
-            return string.Format("Type:{0}  Chairs:{1} ", type, chairs);
+            return string.Format("Type: {0} Chairs: {1} ", type, chairs);
         }
     }
 }
