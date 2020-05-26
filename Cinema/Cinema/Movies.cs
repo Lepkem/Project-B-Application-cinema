@@ -138,7 +138,7 @@ namespace Cinema
                     movie.runtime = Console.ReadLine();
                     break;
                 case "5":
-                    Console.WriteLine("new releaseDate (format: MM/dd/yyyy):");
+                    Console.WriteLine("new releaseDate (format: dd/mm/yyyy):");
                     movie.releaseDate = Console.ReadLine();
                     break;
                 case "6":

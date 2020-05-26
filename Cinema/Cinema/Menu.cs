@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Cinema
 {
+    using System.Globalization;
 
     class Menu
     {
@@ -58,6 +59,14 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
+                    case 6:
+                        ExpectedMovies();
+                        StandardMessages.PressAnyKey();
+                        StandardMessages.PressKeyToContinue();
+                        Console.Clear();
+                        caseSwitch = 0;
+                        break;
+
                     case 8:
                         //FAQ
                         faq();
@@ -75,7 +84,6 @@ namespace Cinema
                         //Test update room
                         Console.WriteLine("Which room do you want to change?");
                         Program.rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
-
                         caseSwitch = 0;
                         break;
 
@@ -104,7 +112,7 @@ namespace Cinema
                         Program.createShedule();
                         caseSwitch = 0;
                         break;
-
+                   
                     default:
                         Console.WriteLine("That's not an option, please choose again");
                         caseSwitch = 0;
@@ -116,7 +124,7 @@ namespace Cinema
         static int MenuHandler(Boolean login)
         {
             int parsable = 0;
-            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[8]FAQ \n[9]Contact\n";
+            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact\n";
 
             //text being displayed in menu
             if (!login) { Console.WriteLine(menu); }
@@ -289,6 +297,7 @@ namespace Cinema
             }
         }
 
+
         public static void ShowRoom()
         {
             Console.Clear();
@@ -320,6 +329,147 @@ namespace Cinema
             }
 
             Program.rooms[inputRoom].printRoom();
+        }
+        public static void ExpectedMovies()
+        {
+            Console.Clear();
+            Console.WriteLine($"See the expected movies for the coming X months.\n If you do not make a (valid) choice, the value will be 2 months.");
+            
+            int inputRoom;
+            bool works = int.TryParse(StandardMessages.GetInputForParam("number for the amount of months."), out inputRoom);
+            StandardMessages.PressAnyKey();
+            if (works)
+            {
+                try
+                {
+                    Program.ShowComingSoon(inputRoom);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                
+            }
+            else
+            {
+                Program.ShowComingSoon();
+            }
+
+        }
+    }
+
+    public static class StandardMessages
+    {
+        /// <summary>
+        /// TryAgain displays a try again message 
+        /// </summary>
+        public static void TryAgain()
+        {
+            Console.WriteLine($"Please Try again.");
+        }
+
+        /// <summary>
+        /// NoSearchResults displays that there were no results
+        /// </summary>
+        public static void NoSearchResults()
+        {
+            Console.WriteLine($"Sorry, no search results were found with this input.");
+        }
+
+        /// <summary>
+        /// AreYouSure asks for yes or no and returns bool
+        /// </summary>
+        /// <returns></returns>
+        public static bool AreYouSure()
+        {
+            Console.WriteLine("Are you sure?\n Please enter yes or no.");
+            string yesorno = Console.ReadLine();
+            if (yesorno.ToLower().Equals("yes"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// ResultsCount displays the amount of search results
+        /// </summary>
+        /// <param name="input"></param>
+        public static void ResultsCount(int input)
+        {
+            if (input > 1)
+            {
+                Console.WriteLine($"There were {input} results.");
+            }
+            else
+            {
+                Console.WriteLine($"There was {input} result.");
+            }
+        }
+
+
+        /// <summary>
+        /// GetInputForParam displanys a "please enter a "{}"
+        /// </summary>
+        /// <param name="forParameter"></param>
+        /// <returns></returns>
+        public static string GetInputForParam(string forParameter)
+        {
+            Console.WriteLine($"Please enter a {forParameter}.");
+            return Console.ReadLine();
+        }
+
+        /// <summary>
+        /// WriteInputBelow prints a request of input
+        /// </summary>
+        public static void WriteInputBelow()
+        {
+            Console.WriteLine($"Please write your input below.\n \n");
+        }
+        /// <summary>
+        /// EnterNumber prints a request of input of number
+        /// </summary>
+        public static void EnterNumber()
+        {
+            Console.WriteLine($"Please only enter a number!");
+        }
+
+        /// <summary>
+        /// GivenOptions prints a request of input of given options
+        /// </summary>
+        public static void GivenOptions()
+        {
+            Console.WriteLine($"Only choose from the given options.");
+        }
+
+        /// <summary>
+        /// FilePathError shows path error message and with input of filepath can be specified
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void FilePathError(string filePath = "")
+        {
+            Console.WriteLine($"Oops! Something went wrong. {filePath} was not found.");
+        }
+
+        /// <summary>
+        /// PressAnyKey prints to press any key
+        /// </summary>
+        public static void PressAnyKey()
+        {
+            Console.WriteLine($"Press any key to continue.");
+        }
+
+        /// <summary>
+        /// PressKeyToContinue requires you to press any key and after that clears the screen.
+        /// </summary>
+        public static void PressKeyToContinue()
+        {
+            Console.Write($">");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }
