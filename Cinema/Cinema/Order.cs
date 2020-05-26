@@ -152,11 +152,24 @@ namespace Cinema
 
                 Console.Write("Input the coordinates of the leftmost seat; coordinates must be in the format ");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.Write("x,y");
+                Console.Write("chair,row");
                 Console.ResetColor();
                 Console.Write(".\n");
 
-                string coordInput = Console.ReadLine();
+                bool loop = true;
+                string coordInput = "";
+                while (loop)
+                {
+                    coordInput = Console.ReadLine();
+                    if (coordInput != "")
+                    {
+                        loop = false;
+                    } else
+                    {
+                        Console.WriteLine("Fill in something");
+                    }
+                }
+                
                 string[] splitInput = coordInput.Split(',');
                 Tuple<int, int> coords = new Tuple<int, int>(int.Parse(splitInput[0]), int.Parse(splitInput[1]));
                 if (coords.Item1 < 1 || coords.Item2 < 1 || coords.Item2 > ticket.room.layout.GetLength(0) || coords.Item1 > (ticket.room.layout.GetLength(1) - seats))
