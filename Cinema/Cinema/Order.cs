@@ -11,7 +11,12 @@ namespace Cinema
         {
             Console.Clear();
             bool quit = false;
+            bool ageCheck = true;
             int inputFilm = 0;
+            int userAge = 0;
+
+            userAge = askAge();
+
             while (quit == false)
             {
                 Console.WriteLine("Which movie do you want to watch? Enter number\n\n");
@@ -34,13 +39,18 @@ namespace Cinema
                     }
                     else
                     {
-                        quit = true;
+                        if (checkAge(inputFilm, userAge)) { quit = true; }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Unfortunaly {0} is too young for the offical viewing guide, please select another movie.\n", userAge);
+                        }          
                     }
                 }
                 catch
-                {
-                    Console.Clear();
-                    Console.WriteLine("Please fill in an integer only!\n\n");
+                { 
+                        Console.Clear();
+                        Console.WriteLine("Please fill in an integer only!\n\n");
                 }
             }
             OrderMovie(inputFilm);
@@ -112,7 +122,7 @@ namespace Cinema
             while (running)
             {
                 Console.WriteLine("\nPlease pick a row of seats. The row has to be " + seats + " seats long.\nThe upper left corner is 1,1.");
-                ticket.room.printRoom(true);
+                ticket.room.printRoom();
 
                 Console.Write("Input the coordinates of the leftmost seat; coordinates must be in the format ");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -156,6 +166,56 @@ namespace Cinema
 
             IDBank.storeOrder(ticket, selectedSeats);
             ticket.room.Initialize(File.ReadAllText(file));
+        }
+
+        static int askAge()
+        {
+            int age = 0;
+            bool quit = false;
+            
+            while (quit == false)
+            {
+                Console.WriteLine("To make sure that u wil enjoy the movie you are about to select.\nWe have to request the age of the youngest member for whom your buying ticket(s) for.");
+                Console.WriteLine("Deltascope personal can ask for identification at entry. To make sure the viewing guide is uphold.\n ");
+
+                try
+                {
+                    Console.Write("Age: ");
+                    age = int.Parse(Console.ReadLine());
+                    if (age < 1) { Console.Clear(); Console.WriteLine("Please fill in a positve intiger\n"); }
+                    else
+                    {
+                        Console.Clear();
+                        quit = true;
+                        return age;
+                    }
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please fill in a intiger only!\n\n");
+                }
+            }
+            return age;
+        }
+
+        static bool checkAge(int input, int userAge)
+        {
+            if (Program.myFilms[input].Age == "all" || Program.myFilms[input].Age == "All")
+            {
+                return true;
+            }
+            else
+            {
+                if (int.Parse(Program.myFilms[input].Age) <= userAge)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

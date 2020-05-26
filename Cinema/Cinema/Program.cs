@@ -21,6 +21,7 @@ namespace Cinema
             schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
             schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
             schedule.Add(new ScheduleElement("23:55", myFilms[4], rooms[2], "5 may"));
+            schedule.Add(new ScheduleElement("12:00", myFilms[8], rooms[1], "30 may"));
 
             Menu menu = new Menu();
             menu.switchCase();
