@@ -285,10 +285,10 @@ namespace Cinema
         {
             Console.WriteLine($"Title:\t\t\t {t}");
             Console.WriteLine($"Genre:\t\t\t {g}");
-            Console.WriteLine($"Runtime:\t\t\t {rt}");
-            Console.WriteLine($"Synopsis:\t\t\t {s}");
-            Console.WriteLine($"RELEASE DATE:\t\t\t {rd}");
-            Console.WriteLine($"Age restriction:\t\t\t {age}\n\n");
+            Console.WriteLine($"Runtime:\t\t {rt}");
+            Console.WriteLine($"Synopsis:\t\t {s}");
+            Console.WriteLine($"RELEASE DATE:\t\t {rd}");
+            Console.WriteLine($"Age restriction:\t {age}\n\n");
         }
     }
 }

@@ -70,5 +70,13 @@
     "synopsis": "Toys come to life",
     "releaseDate": "12-04-2020",
     "age": "All"
+  },
+  {
+    "name": "Border patrol",
+    "genre": "Comedy",
+    "runtime": "120 min",
+    "synopsis": "Funny cops",
+    "releaseDate": "26/06/2020",
+    "age": "10"
   }
 ]
