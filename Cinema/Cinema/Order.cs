@@ -19,19 +19,31 @@ namespace Cinema
 
             while (quit == false)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Notice! If you want to quit out of ordering a ticket anywhere, just type exit.\n");
+                Console.ResetColor();
+
                 Console.WriteLine("Which movie do you want to watch? Enter number\n\n");
 
                 int i = 0;
                 foreach (Films f in Program.myFilms)
                 {
                     string x = f.printFilms();
-                    Console.WriteLine("[" + i + "]" + "\n" + x + "\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("[" + i + "]");
+                    Console.ResetColor();
+                    Console.WriteLine("\n" + x + "\n");
                     i++;
                 }
 
                 try
                 {
-                    inputFilm = int.Parse(Console.ReadLine());
+                    string exit = Console.ReadLine();
+                    if (exit == "exit" || exit == "Exit") {
+                        Console.Clear();
+                        return;
+                    }
+                    inputFilm = int.Parse(exit);
                     if (inputFilm > i - 1)
                     {
                         Console.Clear();
@@ -72,13 +84,21 @@ namespace Cinema
                 foreach (ScheduleElement schedule in query)
                 {
                     possibleMovies.Add(schedule);
-                    Console.WriteLine(i);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("[" + i + "]");
+                    Console.ResetColor();
                     schedule.printScheduleElement();
                     i++;
                 }
                 try
                 {
-                    x = int.Parse(Console.ReadLine());
+                    string exit = Console.ReadLine();
+                    if (exit == "exit" || exit == "Exit")
+                    {
+                        Console.Clear();
+                        return;
+                    }
+                    x = int.Parse(exit);
                     if (x > i - 1)
                     {
                         Console.Clear();
@@ -104,7 +124,13 @@ namespace Cinema
                 {
 
                     Console.WriteLine("How many tickets do you want? Please enter a number.");
-                    seats = int.Parse(Console.ReadLine());
+                    string exit = Console.ReadLine();
+                    if (exit == "exit" || exit == "Exit")
+                    {
+                        Console.Clear();
+                        return;
+                    }
+                    seats = int.Parse(exit);
                     quit = true;
                 }
                 catch

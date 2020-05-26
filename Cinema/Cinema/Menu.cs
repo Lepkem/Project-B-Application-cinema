@@ -54,6 +54,7 @@ namespace Cinema
                         break;
 
                     case 5:
+                        //Order
                         Console.Clear();
                         Order.orderMenu();
                         caseSwitch = 0;
