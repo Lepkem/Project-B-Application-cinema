@@ -210,6 +210,9 @@ namespace Cinema
                                 case 3:
                                     WriteInColor(ConsoleColor.Yellow, "O  ");
                                     break;
+                                case 9:
+                                    WriteInColor(ConsoleColor.Black, "   ");
+                                    break;
                                 default:
                                     WriteInColor(ConsoleColor.Magenta, "O  ");
                                     break;
