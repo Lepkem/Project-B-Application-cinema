@@ -164,7 +164,7 @@ namespace Cinema
             //Print legend with colors and prices
             PrintLegend();
 
-            WriteInColor(ConsoleColor.Cyan, "O  ");
+            //WriteInColor(ConsoleColor.Cyan, "O  ");
 
             //Show screen
             string screen = "";
@@ -186,8 +186,8 @@ namespace Cinema
                 {
                     xcostring = xcostring + y.ToString() + " ";
                 }
-            }           
-            Console.WriteLine(xcostring + "\n");
+            }
+            Console.WriteLine("Chairs\n" + xcostring + "\n");
 
             for (int x = 0; x < layout.GetLength(0); x++)
             {
@@ -222,8 +222,29 @@ namespace Cinema
                     }
                 }
 
-
-                Console.WriteLine(" " + (x+1));
+                if (x <= 3)
+                {
+                    if (x == 0)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " r");
+                    }
+                    if (x == 1)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " o");
+                    }
+                    if (x == 2)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " w");
+                    }
+                    if (x == 3)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " s");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(" " + (x + 1));
+                }
             }
             Console.WriteLine("\n");
         }
