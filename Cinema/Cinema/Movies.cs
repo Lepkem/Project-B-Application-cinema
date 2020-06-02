@@ -93,7 +93,7 @@ namespace Cinema
             string movieName = Console.ReadLine();
             foreach (Movie movie in movieList)
             {
-                if (movie.name == movieName)
+                if (movie.name.Equals(movieName))
                 {
                     Console.WriteLine("Do you want to remove or edit the movie? Choose from:\n[1] Edit\n[2] Remove");
                     string addOrDelete = Console.ReadLine();
@@ -108,12 +108,9 @@ namespace Cinema
                         return;
                     }
                 }
-                else
-                {
-                    this.createMovie(movieName);
-                    return;
-                }
             }
+            this.createMovie(movieName);
+            return;
         }
         private void updateMovie(Movie movie)
         {

@@ -4,7 +4,7 @@
     "genre": "Comedy",
     "runtime": "130 min",
     "synopsis": "Blue hedgehog collects rings.",
-    "releaseDate": "12-02-2020",
+    "releaseDate": "12/02/2020",
     "age": "10"
   },
   {
@@ -12,7 +12,7 @@
     "genre": "Comedy",
     "runtime": "120 min",
     "synopsis": "Clown girl does funny stuff.",
-    "releaseDate": "18-02-2020",
+    "releaseDate": "18/02/2020",
     "age": "10"
   },
   {
@@ -20,7 +20,7 @@
     "genre": "Action",
     "runtime": "110 min",
     "synopsis": "Vin Diesel shoots enemies.",
-    "releaseDate": "21-02-2020",
+    "releaseDate": "21/02/2020",
     "age": "16"
   },
   {
@@ -28,7 +28,7 @@
     "genre": "Sci-fi",
     "runtime": "120 min",
     "synopsis": "idk",
-    "releaseDate": "12-03-2021",
+    "releaseDate": "12/03/2021",
     "age": "16"
   },
   {
@@ -36,7 +36,7 @@
     "genre": "Adventure",
     "runtime": "120 min",
     "synopsis": "something",
-    "releaseDate": "04-02-2022",
+    "releaseDate": "04/02/2022",
     "age": "16"
   },
   {
@@ -44,7 +44,7 @@
     "genre": "Adventure",
     "runtime": "200 mins",
     "synopsis": "Magic and good vs evil",
-    "releaseDate": "12-1-2020",
+    "releaseDate": "12/1/2020",
     "age": "16"
   },
   {
@@ -52,7 +52,7 @@
     "genre": "Drama",
     "runtime": "150 min",
     "synopsis": "Boat that sinks",
-    "releaseDate": "16-07-2020",
+    "releaseDate": "16/07/2020",
     "age": "12"
   },
   {
@@ -60,7 +60,7 @@
     "genre": "Action",
     "runtime": "100 mins",
     "synopsis": "Free man",
-    "releaseDate": "12-02-1999",
+    "releaseDate": "12/02/1999",
     "age": "16"
   },
   {
@@ -68,7 +68,7 @@
     "genre": "Kids",
     "runtime": "100 min",
     "synopsis": "Toys come to life",
-    "releaseDate": "12-04-2020",
+    "releaseDate": "12/04/2020",
     "age": "All"
   },
   {
@@ -78,5 +78,13 @@
     "synopsis": "Funny cops",
     "releaseDate": "26/06/2020",
     "age": "10"
+  },
+  {
+    "name": "Number1",
+    "genre": "Drama",
+    "runtime": "150 min",
+    "synopsis": "A Woman wants to be the very best",
+    "releaseDate": "22/06/2020",
+    "age": "All"
   }
 ]
