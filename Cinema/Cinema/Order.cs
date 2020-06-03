@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace Cinema
 {
@@ -144,8 +145,10 @@ namespace Cinema
             string file = string.Format(@".\rooms\room{0}.json", (Array.IndexOf(Program.rooms.ToArray(), ticket.room) + 1));
             List<Tuple<Seat, Tuple<int, int>>> selectedSeats = new List<Tuple<Seat, Tuple<int, int>>>();
             bool running = true;
+            
             while (running)
             {
+                bool print = false;
                 Console.WriteLine("\nPlease pick a row of seats. The row has to be " + seats + " seats long.\nThe upper left corner is 1,1.");
                 ticket.room.printRoom();
 
@@ -185,7 +188,7 @@ namespace Cinema
                         {
                             ticket.room.layout[tempcoords.Item2 - 1, tempcoords.Item1 - 1].vacant = false;
                             selectedSeats.Add(new Tuple<Seat, Tuple<int, int>>(ticket.room.layout[tempcoords.Item2, tempcoords.Item1], tempcoords));
-                            running = false;
+                            print = true;
                         }
                         else
                         {
@@ -195,6 +198,34 @@ namespace Cinema
                             break;
                         }
                     }
+                //Print confirmation of order
+                if (print)
+                {
+                    Console.WriteLine("\nYou about to purchase the folowing chairs: ");
+                    foreach (var b in selectedSeats)
+                    {
+                        Console.WriteLine("Row: {0} Chair: {1}", b.Item2.Item2.ToString() ,b.Item2.Item1.ToString());
+                    }
+                    bool choise = StandardMessages.AreYouSure();
+                    if (choise)
+                    {
+                        running = false;
+                    }
+                    else
+                    //reverse vacancy and emty selected seats
+                    {
+                        for (int i = 0; i < seats; i++)
+                        {
+                            Tuple<int, int> tempcoords = new Tuple<int, int>(coords.Item1 + i, coords.Item2);
+                            if (!ticket.room.layout[tempcoords.Item2 - 1, tempcoords.Item1 - 1].vacant)
+                            {
+                                ticket.room.layout[tempcoords.Item2 - 1, tempcoords.Item1 - 1].vacant = true;
+                                selectedSeats.Remove(new Tuple<Seat, Tuple<int, int>>(ticket.room.layout[tempcoords.Item2, tempcoords.Item1], tempcoords));
+                            }
+                        }
+                    }
+
+                }
             }
             foreach (var c in selectedSeats)
             {

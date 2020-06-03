@@ -137,11 +137,10 @@ namespace Cinema
             //text being displayed in menu
             if (!login) { Console.WriteLine(menu); }
             //text being displayed in menu Admin version
-<<<<<<< HEAD
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies  \n[8]FAQ \n[9]Contact\n[10]Edit room \n[11]Create room \n[12]Create movie\n[13]Add to schedule"); }
-=======
+
+
             if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search Order"); }
->>>>>>> Mattias
+
             while (true)
             {
 
@@ -394,7 +393,7 @@ namespace Cinema
         /// <returns></returns>
         public static bool AreYouSure()
         {
-            Console.WriteLine("Are you sure?\n Please enter yes or no.");
+            Console.WriteLine("Are you sure?\nPlease enter yes or no.");
             string yesorno = Console.ReadLine();
             if (yesorno.ToLower().Equals("yes"))
             {
