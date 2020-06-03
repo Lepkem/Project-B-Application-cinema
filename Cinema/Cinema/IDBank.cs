@@ -52,6 +52,7 @@ namespace Cinema
 
         public static void searchOrder()
         {
+            Console.Clear();
             JArray orders = JArray.Parse(File.ReadAllText(@".\orders.json"));
             Console.WriteLine("Please enter the ID of the order.");
             string input = Console.ReadLine();
@@ -62,12 +63,24 @@ namespace Cinema
                     //I wrote this code at 2 AM, the only thing keeping me awake is 00's punk
                     List<Tuple<Seat, Tuple<int, int>>> seatlist = new List<Tuple<Seat, Tuple<int, int>>>();
                     foreach (var s in o["Seats"])
-                        seatlist.Add(new Tuple<Seat, Tuple<int, int>>(s["Seat"].ToObject<Seat>(), new Tuple<int, int>(int.Parse(s["Coords"]["X"].ToString()), int.Parse(s["Coords"]["X"].ToString()))));
+                        seatlist.Add(new Tuple<Seat, Tuple<int, int>>(s["Seat"].ToObject<Seat>(), new Tuple<int, int>(int.Parse(s["Coords"]["X"].ToString()), int.Parse(s["Coords"]["Y"].ToString()))));
                     JToken jse = o["Movie"];
                     ScheduleElement se = new ScheduleElement(jse["time"].ToString(), jse["movie"].ToObject<Films>(), Program.rooms[int.Parse(jse["room"].ToString())], jse["date"].ToString());
                     selectedOrder = new Tuple<string, ScheduleElement, List<Tuple<Seat, Tuple<int, int>>>>(input, se, seatlist);
+
+                    //Prints the info of the searched order(Room is not correctly working and should display a number not Cinema.Room)
+                    Console.WriteLine("\n\nMovie: {0} \nDate: {1} \nTime: {2} \nRoom: {3} Type: {4}",selectedOrder.Item2.movie.Name ,selectedOrder.Item2.date ,selectedOrder.Item2.time, selectedOrder.Item2.room ,selectedOrder.Item2.room.getType());
+                    int count = selectedOrder.Item3.Count;
+                    for (int i = 0; i < count; i++)
+                    {
+                        Console.WriteLine("Seat: {0} Row: {1} Chair: {2}", (i+1), selectedOrder.Item3[i].Item2.Item2.ToString() , selectedOrder.Item3[i].Item2.Item1.ToString());
+                    }
+                    Console.WriteLine("\n\nPress enter to continue..");
+                    StandardMessages.PressKeyToContinue();
+
                 }
         }
+
 
         public void editOrder()
         {
