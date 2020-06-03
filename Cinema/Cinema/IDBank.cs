@@ -18,6 +18,7 @@ namespace Cinema
             Console.Clear();
             Console.WriteLine("You succesfully finished ordering your ticket(s).");
             Console.WriteLine("Your order id: " + uniqueNumber + ". Please make sure to save it.\n");
+            StandardMessages.PressKeyToContinue();
             return uniqueNumber.ToString();
         }
 
