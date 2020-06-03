@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 namespace Cinema
 {
@@ -19,27 +18,27 @@ namespace Cinema
 
             while (quit == false)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Notice! If you want to quit out of ordering a ticket anywhere, just type exit.\n");
-                Console.ResetColor();
-
-                Console.WriteLine("Which movie do you want to watch? Enter number\n\n");
+                Console.WriteLine("Which movie do you want to watch? Enter number\n");
 
                 int i = 0;
                 foreach (Films f in Program.myFilms)
                 {
-                    string x = f.printFilms();
+                    string x = f.printOrderFilms();
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("[" + i + "]");
                     Console.ResetColor();
-                    Console.WriteLine("\n" + x + "\n");
+                    Console.WriteLine(x + "\n");
                     i++;
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Notice! If you want to quit out of ordering a ticket anywhere, just type exit.\n");
+                Console.ResetColor();
 
                 try
                 {
                     string exit = Console.ReadLine();
-                    if (exit == "exit" || exit == "Exit") {
+                    if (exit == "exit" || exit == "Exit")
+                    {
                         Console.Clear();
                         return;
                     }
@@ -56,13 +55,13 @@ namespace Cinema
                         {
                             Console.Clear();
                             Console.WriteLine("Unfortunaly {0} is too young for the offical viewing guide, please select another movie.\n", userAge);
-                        }          
+                        }
                     }
                 }
                 catch
-                { 
-                        Console.Clear();
-                        Console.WriteLine("Please fill in an integer only!\n\n");
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please fill in an integer only!\n\n");
                 }
             }
             OrderMovie(inputFilm);
@@ -77,7 +76,7 @@ namespace Cinema
             List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
             while (quit == false)
             {
-                Console.WriteLine("Choose your preference: select number \n\n");
+                Console.WriteLine("Choose your preference: select number \n");
                 //finds all schedule elements that contain that movie
                 IEnumerable<ScheduleElement> query = Program.schedule.Where(schedule => schedule.movie == Program.myFilms[input]);
                 int i = 0;
@@ -145,7 +144,7 @@ namespace Cinema
             string file = string.Format(@".\rooms\room{0}.json", (Array.IndexOf(Program.rooms.ToArray(), ticket.room) + 1));
             List<Tuple<Seat, Tuple<int, int>>> selectedSeats = new List<Tuple<Seat, Tuple<int, int>>>();
             bool running = true;
-            
+
             while (running)
             {
                 bool print = false;
@@ -160,18 +159,33 @@ namespace Cinema
 
                 bool loop = true;
                 string coordInput = "";
+                string[] try0 = coordInput.Split();
                 while (loop)
                 {
                     coordInput = Console.ReadLine();
+                    if (coordInput == "exit" || coordInput == "Exit")
+                    {
+                        return;
+                    }
                     if (coordInput != "")
                     {
-                        loop = false;
-                    } else
+                        try
+                        {
+                            try0 = coordInput.Split(',');
+                            Tuple<int, int> try1 = new Tuple<int, int>(int.Parse(try0[0]), int.Parse(try0[1]));
+                            loop = false;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Please fill in integers only including the ','!");
+                        }
+                    }
+                    else
                     {
                         Console.WriteLine("Fill in something");
                     }
                 }
-                
+
                 string[] splitInput = coordInput.Split(',');
                 Tuple<int, int> coords = new Tuple<int, int>(int.Parse(splitInput[0]), int.Parse(splitInput[1]));
                 if (coords.Item1 < 1 || coords.Item2 < 1 || coords.Item2 > ticket.room.layout.GetLength(0) || coords.Item1 > (ticket.room.layout.GetLength(1) - seats))
@@ -204,7 +218,7 @@ namespace Cinema
                     Console.WriteLine("\nYou about to purchase the folowing chairs: ");
                     foreach (var b in selectedSeats)
                     {
-                        Console.WriteLine("Row: {0} Chair: {1}", b.Item2.Item2.ToString() ,b.Item2.Item1.ToString());
+                        Console.WriteLine("Row: {0} Chair: {1}", b.Item2.Item2.ToString(), b.Item2.Item1.ToString());
                     }
                     bool choise = StandardMessages.AreYouSure();
                     if (choise)
@@ -241,7 +255,7 @@ namespace Cinema
         {
             int age = 0;
             bool quit = false;
-            
+
             while (quit == false)
             {
                 Console.WriteLine("To make sure that u wil enjoy the movie you are about to select.\nWe have to request the age of the youngest member for whom your buying ticket(s) for.");

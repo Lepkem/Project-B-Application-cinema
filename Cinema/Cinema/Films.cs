@@ -15,6 +15,11 @@ namespace Cinema
         {
             return string.Format("name: {0} Genre: {1} runtime: {2} \nSynopsis: {3}\nRELEASE DATE: {4}\nAge: {5}", Name, Genre, Runtime, Synopsis, ReleaseDate,Age);
         }
+
+        public string printOrderFilms()
+        {
+            return string.Format("name: {0} | Genre: {1} | runtime: {2} | Age: {3}", Name, Genre, Runtime, Age);
+        }
     }
 }
  
