@@ -275,6 +275,15 @@ namespace Cinema
             return string.Format("Type:{0}  Chairs:{1} ", type, chairs);
         }
 
+        public string getType()
+        {
+
+            if (roomType == 1) { type = "normal"; }
+            if (roomType == 2) { type = "3D"; }
+            if (roomType == 3) { type = "IMAX"; }
+            return type;
+        }
+
         /// <summary>
         /// PrintLegend is a helper function and prints the legend suited for the PrintRoom
         /// </summary>

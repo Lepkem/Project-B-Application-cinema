@@ -11,7 +11,6 @@ namespace Cinema
         {
             Console.Clear();
             bool quit = false;
-            bool ageCheck = true;
             int inputFilm = 0;
             int userAge = 0;
 
