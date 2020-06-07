@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Enumeration;
 using System.Linq;
 
 namespace Cinema
@@ -17,11 +18,11 @@ namespace Cinema
             //console program
             readRooms();
             readMovies();
-            schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
-            schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
-            schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
-            schedule.Add(new ScheduleElement("23:55", myFilms[4], rooms[2], "5 may"));
-            schedule.Add(new ScheduleElement("12:00", myFilms[8], rooms[1], "30 may"));
+            schedule.Add(new ScheduleElement("12-00", myFilms[0], createScheduleRoom(0, "12-00", "20-04"), "20-04"));
+            schedule.Add(new ScheduleElement("15-30", myFilms[1], createScheduleRoom(1, "15-30", "09-05"), "09-05"));
+            schedule.Add(new ScheduleElement("18-00", myFilms[2], createScheduleRoom(2, "18-00", "30-02"), "30-02"));
+            schedule.Add(new ScheduleElement("23-55", myFilms[4], createScheduleRoom(1, "23-55", "05-05"), "05-05"));
+            schedule.Add(new ScheduleElement("12-00", myFilms[8], createScheduleRoom(0, "12-00", "30-05"), "30-05"));
             Menu menu = new Menu();
             menu.switchCase();
         }
@@ -71,6 +72,9 @@ namespace Cinema
             }
         }
 
+        /// <summary>
+        /// Creates a base/template room
+        /// </summary>
         public static void createRoom()
         {
             //Set row amount
@@ -162,6 +166,47 @@ namespace Cinema
             rooms.Add(new Room(File.ReadAllText(filePath)));
         }
 
+        public static Room createScheduleRoom(int roomNumber, string time, string inputdate)
+        {
+            Room template = rooms[roomNumber];
+            string[] vacancyArr = new string[template.layout.GetLength(0)];
+            for (int i = 0; i < vacancyArr.Length; i++)
+            {
+                vacancyArr[i] = string.Concat(Enumerable.Repeat("0", template.layout.GetLength(1)));
+            }
+
+            string[] priceArr = new string[template.layout.GetLength(0)];
+            for (int i = 0; i < priceArr.Length; i++)
+            {
+                string currentRow = "";
+                for (int j = 0; j < template.layout.GetLength(1); j++)
+                {
+
+                    currentRow += (int)template.layout[i, j].priceMod;
+                }
+                priceArr[i] = currentRow;
+            }
+
+
+            JObject output = new JObject();
+            output["layout"] = JArray.FromObject(priceArr);
+            output["chairs"] = template.chairs.ToString();
+            output["roomType"] = template.roomType;
+            output["vacancy"] = JArray.FromObject(vacancyArr);
+
+
+            //Set new file name in x location
+            string fileName = $"{inputdate}--{time}-{rooms.IndexOf(template)}";
+            string filePath = @$".\rooms\ScheduledRooms\{fileName}.json";
+
+            //Create the new file
+            File.WriteAllText(filePath, output.ToString());
+
+            //Reads new file and makes it a room object
+            return new Room(File.ReadAllText(filePath));
+
+        }
+
         public static void printSchedule()
         {
             foreach (ScheduleElement se in schedule)
@@ -230,7 +275,7 @@ namespace Cinema
 
             //input date
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
-            Console.WriteLine("\n\nWhat date do you want to assign? Example: 1 march");
+            Console.WriteLine("\n\nWhat date do you want to assign? Example: dd:mm");
             string inputDate = "";
             try
             {
@@ -242,7 +287,7 @@ namespace Cinema
             }
 
 
-            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate));
+            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], createScheduleRoom(inputRoom,time,inputDate), inputDate));
         }
 
         public List<ScheduleElement> schedules

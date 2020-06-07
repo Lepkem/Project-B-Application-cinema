@@ -141,7 +141,8 @@ namespace Cinema
 
             ScheduleElement ticket = possibleMovies[x];
             //takes the index number of the room in the room list, adds one to that number, and that **should** always be the number in the room's name
-            string file = string.Format(@".\rooms\room{0}.json", (Array.IndexOf(Program.rooms.ToArray(), ticket.room) + 1));
+            string filename = $"{ticket.date}--{ticket.time}{Program.rooms.IndexOf(ticket.room)}";
+            string file = @$".\rooms\ScheduledRooms\{filename}.json";
             List<Tuple<Seat, Tuple<int, int>>> selectedSeats = new List<Tuple<Seat, Tuple<int, int>>>();
             bool running = true;
 

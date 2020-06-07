@@ -10,9 +10,9 @@ namespace Cinema
     class Room
     {
         public Seat[,] layout;
-        int chairs;
-        int roomType;
-        string type;
+        public int chairs;
+        public int roomType;
+        public string type;
         public Room(string l)
         {
             //the actual initialization function is its own method so that it can be called manually
