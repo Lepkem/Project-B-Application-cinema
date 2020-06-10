@@ -10,6 +10,7 @@ namespace Cinema
         public static void orderMenu()
         {
             Console.Clear();
+            Console.WriteLine("Main menu > Order Tickets");
             bool quit = false;
             int inputFilm = 0;
             int userAge = 0;
@@ -18,6 +19,7 @@ namespace Cinema
 
             while (quit == false)
             {
+                Console.WriteLine("Main menu > Order Tickets > Select Movie");
                 Console.WriteLine("Which movie do you want to watch? Enter number\n");
 
                 int i = 0;
@@ -76,6 +78,7 @@ namespace Cinema
             List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
             while (quit == false)
             {
+                Console.WriteLine("Main menu > Order Tickets > Select Movie");
                 Console.WriteLine("Choose your preference: select number \n");
                 //finds all schedule elements that contain that movie
                 IEnumerable<ScheduleElement> query = Program.schedule.Where(schedule => schedule.movie == Program.myFilms[input]);
@@ -121,7 +124,7 @@ namespace Cinema
             {
                 try
                 {
-
+                    Console.WriteLine("Main menu > Order Tickets > Select Movie > Select Tickets");
                     Console.WriteLine("How many tickets do you want? Please enter a number.");
                     string exit = Console.ReadLine();
                     if (exit == "exit" || exit == "Exit")
@@ -149,6 +152,7 @@ namespace Cinema
             while (running)
             {
                 bool print = false;
+                Console.WriteLine("Main menu > Order Tickets > Select Movie > Select Tickets > Select Seats");
                 Console.WriteLine("\nPlease pick a row of seats. The row has to be " + seats + " seats long.\nThe upper left corner is 1,1.");
                 ticket.room.printRoom();
 
