@@ -5,11 +5,16 @@ using System.Linq;
 
 namespace Cinema
 {
+    using System.ComponentModel.DataAnnotations;
+
     class Order
     {
+
+        
         public static void orderMenu()
         {
             Console.Clear();
+            Console.WriteLine("Main menu > Order Tickets");
             bool quit = false;
             int inputFilm = 0;
             int userAge = 0;
@@ -18,6 +23,7 @@ namespace Cinema
 
             while (quit == false)
             {
+                Console.WriteLine("Main menu > Order Tickets > Select Movie");
                 Console.WriteLine("Which movie do you want to watch? Enter number\n");
 
                 int i = 0;
@@ -54,7 +60,7 @@ namespace Cinema
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Unfortunaly {0} is too young for the offical viewing guide, please select another movie.\n", userAge);
+                            Console.WriteLine("Unfortunately {0} is too young for the official viewing guide, please select another movie.\n", userAge);
                         }
                     }
                 }
@@ -76,6 +82,7 @@ namespace Cinema
             List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
             while (quit == false)
             {
+                Console.WriteLine("Main menu > Order Tickets > Select Movie");
                 Console.WriteLine("Choose your preference: select number \n");
                 //finds all schedule elements that contain that movie
                 IEnumerable<ScheduleElement> query = Program.schedule.Where(schedule => schedule.movie == Program.myFilms[input]);
@@ -122,7 +129,9 @@ namespace Cinema
                 try
                 {
 
-                    Console.WriteLine("How many tickets do you want? Please enter a number.");
+                    Console.WriteLine("Main menu > Order Tickets > Select Movie > Select Tickets");
+                    Console.WriteLine("How many tickets do you want? Please enter a number below 11.");
+
                     string exit = Console.ReadLine();
                     if (exit == "exit" || exit == "Exit")
                     {
@@ -130,12 +139,13 @@ namespace Cinema
                         return;
                     }
                     seats = int.Parse(exit);
-                    quit = true;
+                    quit = seats <= 10;
+                    
                 }
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Please fill in integers only!");
+                    Console.WriteLine("Please fill in numbers below 10 only!");
                 }
             }
 
@@ -149,6 +159,7 @@ namespace Cinema
             while (running)
             {
                 bool print = false;
+                Console.WriteLine("Main menu > Order Tickets > Select Movie > Select Tickets > Select Seats");
                 Console.WriteLine("\nPlease pick a row of seats. The row has to be " + seats + " seats long.\nThe upper left corner is 1,1.");
                 ticket.room.printRoom();
 
@@ -193,6 +204,7 @@ namespace Cinema
                 {
                     Console.WriteLine("Please write the coordinates as instructed, and ensure there is enough space for the other seats in the row.\n\nPress Enter to continue...");
                     Console.ReadLine();
+                    Console.Clear();
                 }
                 else
                     //takes every seat to the left of the given chair up to a certain point and checks if they're free
@@ -229,6 +241,7 @@ namespace Cinema
                     else
                     //reverse vacancy and emty selected seats
                     {
+                        Console.Clear();
                         for (int i = 0; i < seats; i++)
                         {
                             Tuple<int, int> tempcoords = new Tuple<int, int>(coords.Item1 + i, coords.Item2);
@@ -246,7 +259,7 @@ namespace Cinema
             {
                 ticket.room.updateVacancy(c.Item2.Item1, c.Item2.Item2, file);
             }
-            ticket.room.printRoom();
+            
 
             IDBank.storeOrder(ticket, selectedSeats);
             ticket.room.Initialize(File.ReadAllText(file));

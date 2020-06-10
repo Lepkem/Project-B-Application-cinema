@@ -59,6 +59,7 @@ namespace Cinema
 
         public void updateRoom(string room)
         {
+           
             //read the file as one big string and turn it into a special object
             JObject fullObject = JObject.Parse(File.ReadAllText(room));
             //read the array in the object and store it
@@ -68,6 +69,7 @@ namespace Cinema
             for (int i = 0; i < layoutArray.Count; i++)
             {
                 Console.Clear();
+                Console.WriteLine("Main menu > Edit room");
                 Console.WriteLine("Replace the " + (i + 1) + " line? If yes give a new line with a length of "+ defaultLength + " characters.");
                 Console.WriteLine("Chair type 0: Blocked chair (cant be purchased)");
                 Console.WriteLine("Chair type 1: Cheap chair");
