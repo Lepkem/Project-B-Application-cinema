@@ -6,6 +6,8 @@ using System.Text;
 namespace Cinema
 {
     using System.Globalization;
+    using System.Net;
+    using System.Security.Cryptography;
 
     class Menu
     {
@@ -75,19 +77,24 @@ namespace Cinema
 
                     case 8:
                         //FAQ
-                        
-                        faq();
+                        printFAQ();
                         caseSwitch = 0;
                         break;
 
                     case 9:
+                        //FAQ submit question
+                        submitQuestion();
+                        caseSwitch = 0;
+                        break;
+
+                    case 10:
                         //Contact
                         contact();
                         caseSwitch = 0;
                         break;
 
                     //Admin functions
-                    case 10:
+                    case 11:
                         //Test update room
                         Console.WriteLine("Main menu > Edit room");
                         Console.WriteLine("Which room do you want to change?");
@@ -95,15 +102,15 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
-                    case 11:
+                    case 12:
                         //Test create room
                         Console.WriteLine("Main menu > Edit room");
                         Program.createRoom();
                         caseSwitch = 0;
                         break;
 
-                    case 12:
-                        
+
+                    case 13:
                         //Add movie Jitske
                         // This will get the current WORKING directory (i.e. \bin\Debug)
                         string workingDirectory = Environment.CurrentDirectory;
@@ -118,21 +125,31 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
-                    case 13:
+                    case 14:
                         //Add a scheduleElement
                         Program.createShedule();
                         caseSwitch = 0;
                         break;
 
-                     case 14:
+                     case 15:
+                        //Search Order
+                        IDBank.searchOrder();
+
+                     case 16:
                         //Search Order by ID
                         IDBank.searchOrderByID();
                         caseSwitch = 0;
                         break;
 
-                    case 15:
+                    case 17:
                         //Search Order by emailAddress
                         IDBank.SearchOrderByEmail();
+                        caseSwitch = 0;
+                        break;
+
+                    case 18:
+                        //print submitted questions
+                        printSubmittedQuestions();
                         caseSwitch = 0;
                         break;
 
@@ -147,9 +164,8 @@ namespace Cinema
         static int MenuHandler(Boolean login)
         {
             int parsable = 0;
-         
-            
-            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact\n";
+            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Submit a question \n[10]Contact\n";
+
 
             //text being displayed in menu
             
@@ -162,12 +178,10 @@ namespace Cinema
             //text being displayed in menu Admin version
 
 
+            Console.WriteLine("Main menu");
+            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search order \n[15]Search order by email \n[16]Print the submitted questions"); }
 
-            if (login) {
-                
-                Console.WriteLine("Main menu");
-                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n" +
-                    "[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search Order"); }
+
 
 
             while (true)
@@ -202,9 +216,8 @@ namespace Cinema
             {
                 string username, password = string.Empty;
 
-                //asks user input username
-                Console.Write("Enter a username: (admin) ");
-                username = Console.ReadLine();
+                
+                username = StandardMessages.GetInputForParam("username");
 
                 //Exit login screen
                 if (username == "b")
@@ -220,6 +233,7 @@ namespace Cinema
                 //checks if user input correct.
                 if (username == "admin" && password == "admin")
                 {
+                    Console.Clear();
                     Console.WriteLine("\n \nWelcome admin");
                     return true;
                 }
@@ -227,14 +241,34 @@ namespace Cinema
 
             }
         }
-
-        static void faq()
+        
+        /// <summary>
+        /// prints the questions in the file faq.txt
+        /// </summary>
+        static void printFAQ() 
         {
-            //Set variables
-            bool looping = true;
-
-            //While loop
+            string FileContentString = ""; 
+            FileContentString = System.IO.File.ReadAllText("faq.txt"); 
             Console.Clear();
+            Console.WriteLine($"{FileContentString}\n"); 
+            StandardMessages.PressAnyKey();
+            StandardMessages.PressKeyToContinue();
+        }
+
+        /// <summary>
+        /// prints the questions in the file submittedQuestions.txt
+        /// </summary>
+        static void printSubmittedQuestions()
+        {
+            string FileContentString = "";
+            System.IO.File.ReadAllText("submitQuestion.txt");
+            Console.WriteLine($"{FileContentString}\n");
+            StandardMessages.PressAnyKey();
+            StandardMessages.PressKeyToContinue();
+            Console.Clear();
+
+        }
+
             
             while (looping)
             {
@@ -242,10 +276,30 @@ namespace Cinema
                 Console.WriteLine("Main menu > FAQ");
                 Console.WriteLine("\n[1]Is the cinema suitable for people in a wheelchair? \n[2]Does the cinema have sweet popcorn? \n[3]What are the opening hours of the cinema \n[4]Quit");
 
-                //Ask for case input and quit when input is invalid
-                try { question = int.Parse(Console.ReadLine()); } catch { }
-                Console.WriteLine();
+
+        /// <summary>
+        /// lets a user add a question after solving a riddle
+        /// </summary>
+        static void submitQuestion()
+        {
+            if (riddle())
+            {
+                string[] question = new string[2] { StandardMessages.GetInputForParam("question of your choice"), "" };
+                System.IO.File.AppendAllLines("submitQuestion.txt", question);
+                StandardMessages.PressAnyKey();
+                StandardMessages.PressKeyToContinue();
                 Console.Clear();
+            }
+
+            else
+            {
+                StandardMessages.TryAgain();
+            }
+        }
+        
+        static bool riddle()
+        {
+            Console.WriteLine($"Prove that you are a human\n Don't use capitals");
 
                 //Switch case
                 switch (question)
@@ -273,16 +327,140 @@ namespace Cinema
                         Console.WriteLine("Enter an existing value"); break;
                 }
 
-                //static void printFAQ()
-                //{
-                //    string FileContentString = "";
-                //   FileContentString = System.IO.File.ReadAllText("faq.txt");
-                //    Console.WriteLine(FileContentString);
-                //    Console.WriteLine("\n");
-                //}
+              
 
+            int RandomNum = RandomNumberGenerator.GetInt32(1, 11);
+            switch (RandomNum)
+            {
+                case 1:
+                    Console.WriteLine("How many holes does a normal t-shirt have?");
+                    if (StandardMessages.GetInputForParam("number") == "4")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Finish the saying: Curiosity killed the cat");
+                    if (StandardMessages.GetInputForParam("proper ending") == "but satisfaction brought him back")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 3:
+                    Console.WriteLine($"What animal smaller than a centimeter kills most humans a year?");
+                    if (StandardMessages.GetInputForParam("animal name") == "mosquito")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 4:
+                    Console.WriteLine($"Add the 5th flavour: sour, salty, bitter, umami and");
+                    if (StandardMessages.GetInputForParam("flavour") == "sweet")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 5:
+                    Console.WriteLine($"What animal smaller than a centimeter kills most humans a year?");
+                    if (StandardMessages.GetInputForParam("animal name") == "mosquito")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 6:
+                    Console.WriteLine($"What animal is the mascot of Australia?");
+                    if (StandardMessages.GetInputForParam("animal name") == "kangaroo")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 7:
+                    Console.WriteLine($"Who painted the night's watch?");
+                    string ans = StandardMessages.GetInputForParam("painter's name");
+                    if (ans == "Rembrandt" || ans == "rembrandt")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 8:
+                    Console.WriteLine($"What is the name of the most famous sunken boat? \n Don't type the 'the'");
+                    string answ = StandardMessages.GetInputForParam("boat's name");
+                    if (answ == "Titanic" || answ == "titanic")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 9:
+                    Console.WriteLine($"What superhero was bitten by a spider?");
+                    string ansr = StandardMessages.GetInputForParam("hero name");
+                    if (ansr == "Spiderman" || ansr == "spiderman")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                case 10:
+                    Console.WriteLine($"Which cat loves lasagna?");
+                    string anns = StandardMessages.GetInputForParam("cat name");
+                    if (anns == "Garfield" || anns == "garfield")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    break;
+                default:
+                    Console.WriteLine($"What superhero was bitten by a spider?");
+                    string ansrr = StandardMessages.GetInputForParam("hero name");
+                    if (ansrr == "Spiderman" || ansrr == "spiderman")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
             }
+
         }
+        
 
         static void contact()
         {
