@@ -5,8 +5,12 @@ using System.Linq;
 
 namespace Cinema
 {
+    using System.ComponentModel.DataAnnotations;
+
     class Order
     {
+
+        
         public static void orderMenu()
         {
             Console.Clear();
@@ -54,7 +58,7 @@ namespace Cinema
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("Unfortunaly {0} is too young for the offical viewing guide, please select another movie.\n", userAge);
+                            Console.WriteLine("Unfortunately {0} is too young for the official viewing guide, please select another movie.\n", userAge);
                         }
                     }
                 }
@@ -121,8 +125,7 @@ namespace Cinema
             {
                 try
                 {
-
-                    Console.WriteLine("How many tickets do you want? Please enter a number.");
+                    Console.WriteLine("How many tickets do you want? Please enter a number below 11.");
                     string exit = Console.ReadLine();
                     if (exit == "exit" || exit == "Exit")
                     {
@@ -130,12 +133,13 @@ namespace Cinema
                         return;
                     }
                     seats = int.Parse(exit);
-                    quit = true;
+                    quit = seats <= 10;
+                    
                 }
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Please fill in integers only!");
+                    Console.WriteLine("Please fill in numbers below 10 only!");
                 }
             }
 
@@ -193,6 +197,7 @@ namespace Cinema
                 {
                     Console.WriteLine("Please write the coordinates as instructed, and ensure there is enough space for the other seats in the row.\n\nPress Enter to continue...");
                     Console.ReadLine();
+                    Console.Clear();
                 }
                 else
                     //takes every seat to the left of the given chair up to a certain point and checks if they're free
@@ -229,6 +234,7 @@ namespace Cinema
                     else
                     //reverse vacancy and emty selected seats
                     {
+                        Console.Clear();
                         for (int i = 0; i < seats; i++)
                         {
                             Tuple<int, int> tempcoords = new Tuple<int, int>(coords.Item1 + i, coords.Item2);
@@ -246,7 +252,7 @@ namespace Cinema
             {
                 ticket.room.updateVacancy(c.Item2.Item1, c.Item2.Item2, file);
             }
-            ticket.room.printRoom();
+            
 
             IDBank.storeOrder(ticket, selectedSeats);
             ticket.room.Initialize(File.ReadAllText(file));

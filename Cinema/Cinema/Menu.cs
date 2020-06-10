@@ -116,8 +116,14 @@ namespace Cinema
                         break;
 
                      case 14:
-                        //Search Order
-                        IDBank.searchOrder();
+                        //Search Order by ID
+                        IDBank.searchOrderByID();
+                        caseSwitch = 0;
+                        break;
+
+                    case 15:
+                        //Search Order by emailAddress
+                        IDBank.SearchOrderByEmail();
                         caseSwitch = 0;
                         break;
 
@@ -139,7 +145,7 @@ namespace Cinema
             //text being displayed in menu Admin version
 
 
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search Order"); }
+            if (login) { Console.WriteLine($"[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search order by ID \n[15]Search order by Email address customer"); }
 
             while (true)
             {
