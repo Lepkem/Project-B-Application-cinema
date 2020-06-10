@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Enumeration;
 using System.Linq;
 
 namespace Cinema
@@ -10,33 +11,56 @@ namespace Cinema
     {
         static public List<Room> rooms = new List<Room>();
         static public List<ScheduleElement> schedule = new List<ScheduleElement>();
-        public static List<Films> myFilms = new List<Films>
-
-            {
-                new Films{ Name = "Sonic", Genre = "Comedy", Runtime = "120 min", Synopsis = "Blue hedgehog collects rings.", ReleaseDate = "12-02-2020" },
-                new Films{ Name = "Birds", Genre = "Comedy", Runtime = "100 min", Synopsis = "Clown girl does funny stuff.", ReleaseDate = "18-02-2020" },
-                new Films{ Name = "Bloodshot", Genre = "Action", Runtime = "110 min", Synopsis = "Vin Diesel shoots enemies.", ReleaseDate = "21-02-2020" },
-            };
+        public static List<Films> myFilms = new List<Films>();
 
         static void Main(string[] args)
         {
             //console program
             readRooms();
-
-            schedule.Add(new ScheduleElement("12:00", myFilms[0], rooms[0], "20 april"));
-            schedule.Add(new ScheduleElement("15:30", myFilms[1], rooms[2], "9 may"));
-            schedule.Add(new ScheduleElement("18:00", myFilms[2], rooms[1], "30 february"));
-            schedule.Add(new ScheduleElement("23:55", myFilms[0], rooms[2], "5 may"));
-
+            readMovies();
+            schedule.Add(new ScheduleElement("12-00", myFilms[0], createScheduleRoom(0, "12-00", "20-04"), "20-04"));
+            schedule.Add(new ScheduleElement("15-30", myFilms[1], createScheduleRoom(1, "15-30", "09-05"), "09-05"));
+            schedule.Add(new ScheduleElement("18-00", myFilms[2], createScheduleRoom(2, "18-00", "30-02"), "30-02"));
+            schedule.Add(new ScheduleElement("23-55", myFilms[4], createScheduleRoom(1, "23-55", "05-05"), "05-05"));
+            schedule.Add(new ScheduleElement("12-00", myFilms[8], createScheduleRoom(0, "12-00", "30-05"), "30-05"));
             Menu menu = new Menu();
             menu.switchCase();
+        }
+
+        public static void readMovies()
+        {
+            bool add = true;
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            Movies movies = new Movies(Path.Combine(projectDirectory, @"movies/movie.json"));
+
+            List<Movie> movieList = Movies.GetList();
+            JArray movie = new JArray();
+
+            foreach (Movie m in movieList)
+            {
+                add = true;
+                foreach (Films f in myFilms)
+                {
+                    if (f.Name == m.name)
+                    {
+                        add = false;
+                    }
+                }
+                if (add)
+                {
+                    movie.Add(JObject.FromObject(m));
+                    myFilms.Add(new Films { Name = m.name, Genre = m.genre, Runtime = m.runtime, Synopsis = m.synopsis, ReleaseDate = m.releaseDate, Age = m.age });
+                }
+
+            }
         }
 
         static void readRooms()
         {
             try
             {
-                string[] files = Directory.GetFiles(@".\rooms", "*.json");
+                string[] files = Directory.GetFiles(@"./rooms", "*.json");
                 for (int i = 0; i < files.Length; i++)
                     //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
                     rooms.Add(new Room(File.ReadAllText(files[i])));
@@ -48,6 +72,9 @@ namespace Cinema
             }
         }
 
+        /// <summary>
+        /// Creates a base/template room
+        /// </summary>
         public static void createRoom()
         {
             //Set row amount
@@ -68,11 +95,11 @@ namespace Cinema
             for (int i = 0; i < rows; i++)
             {
                 Console.WriteLine("Set row " + (i + 1) + ".");
-                Console.WriteLine("Chair type 0: Blocked chair (cant be purchased)");
+                Console.WriteLine("Chair type 0: Blocked chair (can not be purchased)");
                 Console.WriteLine("Chair type 1: Cheap chair");
                 Console.WriteLine("Chair type 2: Normal chair");
                 Console.WriteLine("Chair type 3: Vip chair");
-                Console.WriteLine("Type Exit to exit creating a room.");
+                Console.WriteLine("Type 'Exit' to exit creating a room.");
                 roomRows[i] = "";
                 try
                 {
@@ -80,7 +107,7 @@ namespace Cinema
                     if (newLine == "Exit")
                     {
                         Console.Clear();
-                        Console.WriteLine("Exitted succesfully.\n");
+                        Console.WriteLine("Exitted successfully.\n");
                         return;
                     }
                     roomRows[i] = newLine;
@@ -139,6 +166,47 @@ namespace Cinema
             rooms.Add(new Room(File.ReadAllText(filePath)));
         }
 
+        public static Room createScheduleRoom(int roomNumber, string time, string inputdate)
+        {
+            Room template = rooms[roomNumber];
+            string[] vacancyArr = new string[template.layout.GetLength(0)];
+            for (int i = 0; i < vacancyArr.Length; i++)
+            {
+                vacancyArr[i] = string.Concat(Enumerable.Repeat("0", template.layout.GetLength(1)));
+            }
+
+            string[] priceArr = new string[template.layout.GetLength(0)];
+            for (int i = 0; i < priceArr.Length; i++)
+            {
+                string currentRow = "";
+                for (int j = 0; j < template.layout.GetLength(1); j++)
+                {
+
+                    currentRow += (int)template.layout[i, j].priceMod;
+                }
+                priceArr[i] = currentRow;
+            }
+
+
+            JObject output = new JObject();
+            output["layout"] = JArray.FromObject(priceArr);
+            output["chairs"] = template.chairs.ToString();
+            output["roomType"] = template.roomType;
+            output["vacancy"] = JArray.FromObject(vacancyArr);
+
+
+            //Set new file name in x location
+            string fileName = $"{inputdate}--{time}-{rooms.IndexOf(template)}";
+            string filePath = @$".\rooms\ScheduledRooms\{fileName}.json";
+
+            //Create the new file
+            File.WriteAllText(filePath, output.ToString());
+
+            //Reads new file and makes it a room object
+            return new Room(File.ReadAllText(filePath));
+
+        }
+
         public static void printSchedule()
         {
             foreach (ScheduleElement se in schedule)
@@ -156,7 +224,7 @@ namespace Cinema
             printSchedule();
 
             //input time
-            Console.WriteLine($"What time wil the movie start?\nFormat: dd-mm-yyyy" );
+            Console.WriteLine($"What time will the movie start?\nFormat: HH:MM (13:50 for instance)" );
             string time = "";
             try
             {
@@ -174,8 +242,8 @@ namespace Cinema
             int i = 0;
             foreach (Films f in myFilms)
             {
-               string x = f.printFilms();
-                Console.WriteLine(i + " " + x +"\n");
+                string x = f.printFilms();
+                Console.WriteLine(i + " " + x + "\n");
                 i++;
             }
 
@@ -191,23 +259,23 @@ namespace Cinema
             Console.Clear();
 
             //input room
-            Console.WriteLine("Time: " + time +"\nMovie: " + myFilms[inputFilm].Name);
-            Console.WriteLine("\n\nWhat room do you want assign? Select a number\n");
+            Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name);
+            Console.WriteLine("\n\nWhat room do you want to assign? Select a number\n");
             int j = 0;
             foreach (Room r in rooms)
             {
                 string y = r.printInfo();
-                Console.WriteLine(j + " " + y +"\n");
+                Console.WriteLine(j + " " + y + "\n");
                 j++;
             }
 
             int inputRoom = 0;
-            try{ inputRoom = int.Parse(Console.ReadLine());} catch { }
+            try { inputRoom = int.Parse(Console.ReadLine()); } catch { }
             Console.Clear();
 
             //input date
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
-            Console.WriteLine("\n\nWhat date do you want assign? Example: 1 march");
+            Console.WriteLine("\n\nWhat date do you want to assign? Example: dd:mm");
             string inputDate = "";
             try
             {
@@ -219,12 +287,53 @@ namespace Cinema
             }
 
 
-            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], rooms[inputRoom], inputDate));
+            schedule.Add(new ScheduleElement(time, myFilms[inputFilm], createScheduleRoom(inputRoom,time,inputDate), inputDate));
         }
 
         public List<ScheduleElement> schedules
         {
             get { return schedule; }
+        }
+
+        public static void ShowComingSoon( int monthsUntilRelease = 2)
+        {
+            List<Films> filmslist = new List<Films>();
+            DateTime releaseDate = DateTime.MaxValue;
+            //V1
+            //var x = myFilms.Where(film =>  Convert.ToDateTime(film.ReleaseDate) <= DateTime.Now.AddMonths(monthsUntilRelease)).ToList();
+            //StandardMessages.ResultsCount(x.Count);
+            // x.ForEach(film => printFilmprops(film.Name, film.Genre, film.Runtime, film.Synopsis, film.ReleaseDate, film.Age));
+
+
+            Random r = new Random();
+
+            (from m in myFilms
+                    select new {   Name = m.Name, 
+                                   Genre = m.Genre, 
+                                   Runtime = m.Runtime, 
+                                   Synopsis = m.Synopsis,  Age = m.Age,
+                                   ReleaseDate = DateTime.TryParse(m.ReleaseDate, out releaseDate) ? releaseDate : new DateTime(r.Next(2020, 2021), r.Next(5, 12), r.Next(1, 28))
+                               })
+                .Where(t => 
+                    t.ReleaseDate < DateTime.Now.AddMonths(monthsUntilRelease) && t.ReleaseDate >= DateTime.Now.AddDays(-1))
+                .ToList()
+                .ForEach(
+                    mv =>
+                    {
+                        printFilmprops(mv.Name, mv.Genre, mv.Runtime, mv.Synopsis, mv.ReleaseDate.ToString("D"), mv.Age);
+                    });
+
+            
+        }
+
+        private static void printFilmprops(string t, string g, string rt, string s, string rd, string age)
+        {
+            Console.WriteLine($"Title:\t\t\t {t}");
+            Console.WriteLine($"Genre:\t\t\t {g}");
+            Console.WriteLine($"Runtime:\t\t {rt}");
+            Console.WriteLine($"Synopsis:\t\t {s}");
+            Console.WriteLine($"RELEASE DATE:\t\t {rd}");
+            Console.WriteLine($"Age restriction:\t {age}\n\n");
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Cinema
     class Room
     {
         public Seat[,] layout;
-        int chairs;
-        int roomType;
-        string type;
+        public int chairs;
+        public int roomType;
+        public string type;
         public Room(string l)
         {
             //the actual initialization function is its own method so that it can be called manually
@@ -159,8 +159,13 @@ namespace Cinema
             File.WriteAllText(room, updatedString);
         }
 
-        public void printRoom(bool vacancy)
+        public void printRoom()
         {
+            //Print legend with colors and prices
+            PrintLegend();
+
+            //WriteInColor(ConsoleColor.Cyan, "O  ");
+
             //Show screen
             string screen = "";
             for (int y = 0; y < layout.GetLength(1); y++)
@@ -181,25 +186,65 @@ namespace Cinema
                 {
                     xcostring = xcostring + y.ToString() + " ";
                 }
-            }           
-            Console.WriteLine(xcostring + "\n");
+            }
+            Console.WriteLine("Chairs\n" + xcostring + "\n");
 
             for (int x = 0; x < layout.GetLength(0); x++)
             {
-                string printString = "";
                 for (int y = 0; y < layout.GetLength(1); y++)
                 {
-                    if (vacancy)
+                    
                     {
-                        if (layout[x, y].vacant)
-                            printString += "O  ";
-                        else printString += "X  ";
+                        if (!layout[x, y].vacant)
+                            WriteInColor(ConsoleColor.Red, "X  ");
+                        else
+                        {
+                            switch (layout[x, y].priceMod)
+                            {
+                                case 1:
+                                    WriteInColor(ConsoleColor.Green, "O  ");
+                                    break;
+                                case 2:
+                                    WriteInColor(ConsoleColor.Cyan, "O  ");
+                                    break;
+                                case 3:
+                                    WriteInColor(ConsoleColor.Yellow, "O  ");
+                                    break;
+                                case 9:
+                                    WriteInColor(ConsoleColor.Black, "   ");
+                                    break;
+                                default:
+                                    WriteInColor(ConsoleColor.Magenta, "O  ");
+                                    break;
+                            }
+                        }
+
                     }
-                    else printString += layout[x,y].priceMod;
                 }
 
-
-                Console.WriteLine(printString + " " + (x+1));
+                if (x <= 3)
+                {
+                    if (x == 0)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " r");
+                    }
+                    if (x == 1)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " o");
+                    }
+                    if (x == 2)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " w");
+                    }
+                    if (x == 3)
+                    {
+                        Console.WriteLine(" " + (x + 1) + " s");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(" " + (x + 1));
+                }
             }
             Console.WriteLine("\n");
         }
@@ -216,8 +261,7 @@ namespace Cinema
             char[] temp2 = temp.ToCharArray();
             temp2[cord_x - 1]='1';
             temp = new string(temp2);
-
-            vacancyArray[cord_y] = temp;
+            vacancyArray[cord_y - 1] = temp;
 
             string updatedString = fullObject.ToString();
             File.WriteAllText(room, updatedString);
@@ -229,6 +273,34 @@ namespace Cinema
             if (roomType == 2) { type = "3D"; }
             if (roomType == 3) { type = "IMAX"; }
             return string.Format("Type:{0}  Chairs:{1} ", type, chairs);
+        }
+
+        public string getType()
+        {
+
+            if (roomType == 1) { type = "normal"; }
+            if (roomType == 2) { type = "3D"; }
+            if (roomType == 3) { type = "IMAX"; }
+            return type;
+        }
+
+        /// <summary>
+        /// PrintLegend is a helper function and prints the legend suited for the PrintRoom
+        /// </summary>
+        public void PrintLegend()
+        {
+            WriteInColor(ConsoleColor.Green, "Price cat \t$\n");
+            WriteInColor(ConsoleColor.Cyan, "Price cat \t$$\n");
+            WriteInColor(ConsoleColor.Yellow, "Price cat \t$$$\n");
+            WriteInColor(ConsoleColor.Red, "unavailable seat\n\n");
+        }
+
+
+        private void WriteInColor(ConsoleColor color, string text)
+        {
+            Console.ForegroundColor = color;
+            Console.Write($"{text}");
+            Console.ResetColor();
         }
     }
 }

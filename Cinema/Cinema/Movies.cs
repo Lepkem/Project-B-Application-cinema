@@ -10,35 +10,26 @@ namespace Cinema
     {
         public string name;
         public string genre;
-        public int runtime;
+        public string runtime;
         public string synopsis;
-        public DateTime releaseDate;
+        public string releaseDate;
+        public string age; 
 
 
-        public Movie(string name, string genre, int runtime, string synopsis, DateTime releaseDate)
+        public Movie(string name, string genre, string runtime, string synopsis, string releaseDate, string age)
         {
             this.name = name;
             this.genre = genre;
             this.runtime = runtime;
             this.synopsis = synopsis;
             this.releaseDate = releaseDate;
-        }
-
-        //constructor overloading: redefine a constructor in more than one form
-        public Movie(string name, string genre, int runtime, string synopsis, string releaseDate)
-        {
-            this.name = name;
-            this.genre = genre;
-            this.runtime = runtime;
-            this.synopsis = synopsis;
-            CultureInfo provider = CultureInfo.InvariantCulture;
-            this.releaseDate = DateTime.ParseExact(releaseDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            this.age = age;
         }
     }
 
     class Movies
     {
-        List<Movie> movieList;
+        static List<Movie> movieList;
 
 
         string jsonFileLocation;
@@ -78,76 +69,82 @@ namespace Cinema
             {
                 delete.Add(JObject.FromObject(m));
             }
-            File.WriteAllText(@"./movies/movie.json", delete.ToString());
+            File.WriteAllText(jsonFileLocation, delete.ToString());
         }
 
         public void initialize()
         {
-            this.movieList = new List<Movie>();
+            if (!File.Exists(jsonFileLocation))
+            {
+                File.WriteAllText(jsonFileLocation, "[]");
+            }
+
+            movieList = new List<Movie>();
             JArray movieArray = JArray.Parse(File.ReadAllText(this.jsonFileLocation));
             foreach (JObject obj in movieArray)
             {
-                this.movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (int)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"]));
+                movieList.Add(new Movie((string)obj["name"], (string)obj["genre"], (string)obj["runtime"], (string)obj["synopsis"], (string)obj["releaseDate"], (string)obj["age"]));
             }
         }
 
         public void updateCreateMovie()
         {
-            Console.WriteLine("Enter the name of the movie: ");
+            Console.WriteLine("Enter the name of the movie.\nIf the name of the movie already exists, you will be automatically redirected to adding a movie. ");
             string movieName = Console.ReadLine();
-            foreach (Movie movie in this.movieList)
+            foreach (Movie movie in movieList)
             {
-                if (movie.name == movieName)
+                if (movie.name.Equals(movieName))
                 {
-                    Console.WriteLine("Do you want to remove or edit the movie?");
+                    Console.WriteLine("Do you want to remove or edit the movie? Choose from:\n[1] Edit\n[2] Remove");
                     string addOrDelete = Console.ReadLine();
-                    if (addOrDelete == "edit")
+                    if (addOrDelete == "1")
                     {
                         this.updateMovie(movie);
                         return;
                     }
-                    if (addOrDelete == "remove")
+                    if (addOrDelete == "2")
                     {
                         this.deleteMovie(movie);
                         return;
                     }
                 }
-                else
-                {
-                    this.createMovie(movieName);
-                    return;
-                }
             }
+            this.createMovie(movieName);
+            return;
         }
         private void updateMovie(Movie movie)
         {
-            Console.WriteLine("What do you want to edit?");
+            Console.WriteLine("What do you want to edit? Choose from:\n[1] Genre\n[2] Synopsis\n[3] Name\n[4] Runtime\n[5] Release Date\n[6] Age restriction\n");
             string update = Console.ReadLine();
             switch (update)
             {
-                case "genre":
+                case "1":
                     Console.WriteLine("new genre:");
                     movie.genre = Console.ReadLine();
                     break;
-                case "synopsis":
+                case "2":
                     Console.WriteLine("new synopsis:");
                     movie.synopsis = Console.ReadLine();
                     break;
-                case "name":
+                case "3":
                     Console.WriteLine("new name:");
                     movie.name = Console.ReadLine();
                     break;
-                case "runtime":
-                    Console.WriteLine("new runtime:");
-                    movie.runtime = int.Parse(Console.ReadLine());
+                case "4":
+                    Console.WriteLine("new runtime (in minutes):");
+                    movie.runtime = Console.ReadLine();
                     break;
-                case "releaseDate":
-                    Console.WriteLine("new releaseDate:");
-                    CultureInfo provider = CultureInfo.InvariantCulture;
-                    movie.releaseDate = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                case "5":
+                    Console.WriteLine("new releaseDate (format: dd/mm/yyyy):");
+                    movie.releaseDate = Console.ReadLine();
                     break;
+                case "6":
+                    Console.WriteLine("new age restriction:");
+                    movie.age = Console.ReadLine();
+                    break;    
                 default:
-                    Console.WriteLine("Default case");
+                    Console.WriteLine("\nThat is not an option, please choose again\n");
+                    updateMovie(movie);
                     break;
             }
             this.createJson();
@@ -157,18 +154,22 @@ namespace Cinema
         {
             Console.WriteLine("Add a movie\nTitle:");
             string addMovie = Console.ReadLine();
-            Console.WriteLine("Genre:");
+            Console.WriteLine("\nGenre:");
             string genre = Console.ReadLine();
-            Console.WriteLine("runtime:");
+            Console.WriteLine("\nruntime (in minutes):");
             string runtime = Console.ReadLine();
-            Console.WriteLine("synopsis:");
+            Console.WriteLine("\nsynopsis:");
             string synopsis = Console.ReadLine();
-            Console.WriteLine("releaseDate:");
+            Console.WriteLine("\nreleaseDate (Format: MM/dd/yyyy):");
             string releaseDate = Console.ReadLine();
+            Console.WriteLine("\nAge restriction:");
+            string age = Console.ReadLine();
 
 
-            this.movieList.Add(new Movie(movieName, genre, int.Parse(runtime), synopsis, releaseDate));
+            movieList.Add(new Movie(movieName, genre, runtime, synopsis, releaseDate, age));
             this.createJson();
+            Console.WriteLine("You succesfully added the movie:");
+            Console.WriteLine( "Title: " + addMovie + "\n" + "Genre: " + genre + "\n" + "Runtime: " + runtime + "\n" + "Synopsis: " + synopsis + "\n" + "Release Date: " + releaseDate + "\n" + "Age: " + age + "\n");
         }
         private void createJson()
         {
@@ -177,21 +178,28 @@ namespace Cinema
             //checking if file exists
             if (File.Exists(location))
             {
+                
                 File.Delete(location);
             }
             JArray movieArray = new JArray();
-            foreach (Movie movie in this.movieList)
+            foreach (Movie movie in movieList)
             {
                 movieArray.Add(new JObject(
                     new JProperty("name", movie.name),
                     new JProperty("genre", movie.genre),
                     new JProperty("runtime", movie.runtime),
                     new JProperty("synopsis", movie.synopsis),
-                    new JProperty("releaseDate", movie.releaseDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture))));
+                    new JProperty("releaseDate", movie.releaseDate),
+                    new JProperty("age", movie.age)));
             }
+
             File.WriteAllText(location, movieArray.ToString());
         }
 
+        public static List<Movie> GetList()
+        {
+            return Movies.movieList;
+        }
     }
 }
 
