@@ -15,6 +15,7 @@ namespace Cinema
 
         public void switchCase()
         {
+            
             while (running)
             {
                 switch (caseSwitch)
@@ -35,13 +36,15 @@ namespace Cinema
                     case 2:
                         Console.Clear();
                         //Print a Shedule
+                        Console.WriteLine("Main menu > Print Schedule\n");
                         Program.printSchedule();
+                       
                         caseSwitch = 0;
                         break;
 
                     case 3:
                         Console.Clear();
-                        //Search
+                        //Search      
                         Search search = new Search();
                         caseSwitch = 0;
                         break;
@@ -56,6 +59,8 @@ namespace Cinema
                     case 5:
                         //Order
                         Console.Clear();
+                        
+
                         Order.orderMenu();
                         caseSwitch = 0;
                         break;
@@ -70,6 +75,7 @@ namespace Cinema
 
                     case 8:
                         //FAQ
+                        
                         faq();
                         caseSwitch = 0;
                         break;
@@ -83,6 +89,7 @@ namespace Cinema
                     //Admin functions
                     case 10:
                         //Test update room
+                        Console.WriteLine("Main menu > Edit room");
                         Console.WriteLine("Which room do you want to change?");
                         Program.rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
                         caseSwitch = 0;
@@ -90,11 +97,13 @@ namespace Cinema
 
                     case 11:
                         //Test create room
+                        Console.WriteLine("Main menu > Edit room");
                         Program.createRoom();
                         caseSwitch = 0;
                         break;
 
                     case 12:
+                        
                         //Add movie Jitske
                         // This will get the current WORKING directory (i.e. \bin\Debug)
                         string workingDirectory = Environment.CurrentDirectory;
@@ -138,14 +147,28 @@ namespace Cinema
         static int MenuHandler(Boolean login)
         {
             int parsable = 0;
+         
+            
             string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact\n";
 
             //text being displayed in menu
-            if (!login) { Console.WriteLine(menu); }
+            
+            if (!login) { 
+                
+                Console.WriteLine("Main menu");
+                Console.WriteLine(menu);
+               
+            }
             //text being displayed in menu Admin version
 
 
-            if (login) { Console.WriteLine($"[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search order by ID \n[15]Search order by Email address customer"); }
+
+            if (login) {
+                
+                Console.WriteLine("Main menu");
+                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n" +
+                    "[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search Order"); }
+
 
             while (true)
             {
@@ -174,6 +197,7 @@ namespace Cinema
 
         static Boolean Login()
         {
+            Console.WriteLine("Main menu > Login");
             while (true)
             {
                 string username, password = string.Empty;
@@ -211,9 +235,11 @@ namespace Cinema
 
             //While loop
             Console.Clear();
+            
             while (looping)
             {
                 int question = 0;
+                Console.WriteLine("Main menu > FAQ");
                 Console.WriteLine("\n[1]Is the cinema suitable for people in a wheelchair? \n[2]Does the cinema have sweet popcorn? \n[3]What are the opening hours of the cinema \n[4]Quit");
 
                 //Ask for case input and quit when input is invalid
@@ -225,15 +251,18 @@ namespace Cinema
                 switch (question)
                 {
                     case 1:
+                        Console.WriteLine("Main menu > FAQ");
                         Console.WriteLine("The cinema is certainly suitable for people in a wheelchair. \n" +
                             "There is a lift for the 2nd floor and all \n" +
                             "aisles are wide enough for wheelchairs. \n");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 2:
+                        Console.WriteLine("Main menu > FAQ");
                         Console.WriteLine("The cinema has 3 types of popcorn.\n" +
                             "Sweet, salty and caramel.\n");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 3:
+                        Console.WriteLine("Main menu > FAQ");
                         Console.WriteLine("We are currently closed due to the corona virus! \n" +
                             "we have a home cinema ready! see the website. \n");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
@@ -262,9 +291,11 @@ namespace Cinema
 
             //While looping is true
             Console.Clear();
+           
             while (looping)
             {
                 //Intro text
+                Console.WriteLine("Main menu > Contact");
                 Console.WriteLine("Welcome to the Deltascope contact page! \n" +
                     "Deltascope is located in a modern building, located at the marina in the center of Rotterdam. \n" +
                     "VFrom a hospitable approach, it offers citizens, business and associations accommodation for many diverse activities. \n" +
@@ -284,6 +315,7 @@ namespace Cinema
                 switch (question)
                 {
                     case 1:
+                        Console.WriteLine("Main menu > Contact > Phone Number");
                         Console.WriteLine("Welcome to our phone number dialog. Call our phone number and follow the menu as told!\n" +
                             "Mobile number: 06-12345678\n" +
                             "Cinema number: 010-234567\n" +
@@ -293,11 +325,13 @@ namespace Cinema
 
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 2:
+                        Console.WriteLine("Main menu > Contact > E-mail");
                         Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mails depending on your question\n" +
                             "E-mail: deltascope@gmail.com" +
                             "Business E-mail: b.deltascope@gmail.com");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 3:
+                        Console.WriteLine("Main menu > Contact > Location");
                         Console.WriteLine("If you would like to visit our headquarters you can by making an appointment and coming to the following adress\n" +
                             "Street address: Monopolystraat 124\n" +
                             "Postal code: 2777 ID\n" +
@@ -318,6 +352,7 @@ namespace Cinema
         public static void ShowRoom()
         {
             Console.Clear();
+            Console.WriteLine("Main menu > Show Room");
             Console.WriteLine("Wich room do you want to look at?");
             int i = 0;
             int inputRoom= 0;
@@ -350,6 +385,7 @@ namespace Cinema
         public static void ExpectedMovies()
         {
             Console.Clear();
+            Console.WriteLine("Main menu > Coming Movies");
             Console.WriteLine($"See the expected movies for the coming X months.\n If you do not make a (valid) choice, the value will be 2 months.");
             
             int inputRoom;

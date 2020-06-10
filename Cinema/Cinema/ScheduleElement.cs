@@ -21,6 +21,7 @@ namespace Cinema
 
         public void printScheduleElement()
         {
+           
             Console.WriteLine(string.Format("{0}, {1} in Maasvlakte {2}\nMovie: {3}\nRuntime: {4}\nGenre: {5}\nSynopsis: {6}\nAge: {7}\n", date, time, Program.rooms.IndexOf(room), movie.Name, movie.Runtime, movie.Genre, movie.Synopsis, movie.Age));
         }
     }
