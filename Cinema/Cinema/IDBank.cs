@@ -59,6 +59,9 @@ namespace Cinema
             //LET OP DAT DE COORD IN HET JSON MET -1 te weinig wordt gerekend. DUS DAAR MOET REKENING MEE GEHOUDEN WORDEN.
         }
 
+        /// <summary>
+        /// Prints a list of the wanted information beloging to an order of which the ID matches
+        /// </summary>
         public static void searchOrderByID()
         {
             Console.Clear();
@@ -74,7 +77,21 @@ namespace Cinema
                     foreach (var s in o["Seats"])
                         seatlist.Add(new Tuple<Seat, Tuple<int, int>>(s["Seat"].ToObject<Seat>(), new Tuple<int, int>(int.Parse(s["Coords"]["X"].ToString()), int.Parse(s["Coords"]["Y"].ToString()))));
                     JToken jse = o["Movie"];
-                    ScheduleElement se = new ScheduleElement(jse["time"].ToString(), jse["movie"].ToObject<Films>(), Program.rooms[int.Parse(jse["room"].ToString())], jse["date"].ToString());
+
+
+                    string de1 = jse["time"].ToString();
+                    var de2 = jse["movie"].ToObject<Films>();
+                    int de3 = int.Parse((string)jse["room"]);
+                    var de4 = jse["date"].ToString();
+
+                    if (de3 < 0)
+                    {
+                        Console.WriteLine("*** Default room selected ***");
+                        de3 = 0;
+                    }
+
+
+                    ScheduleElement se = new ScheduleElement(de1, de2, Program.rooms[de3], de4);
                     selectedOrder = new Tuple<string, string, ScheduleElement, List<Tuple<Seat, Tuple<int, int>>>>(input, EmailAddressOrder, se, seatlist);
 
                     //Prints the info of the searched order(Room is not correctly working and should display a number not Cinema.Room)
@@ -90,6 +107,9 @@ namespace Cinema
                 }
         }
 
+        /// <summary>
+        /// Prints a list of the wanted information beloging to an order of which the email matches.
+        /// </summary>
         public static void SearchOrderByEmail()
         {
             Console.Clear();
@@ -105,8 +125,21 @@ namespace Cinema
                     foreach (var s in o["Seats"])
                         seatlist.Add(new Tuple<Seat, Tuple<int, int>>(s["Seat"].ToObject<Seat>(), new Tuple<int, int>(int.Parse(s["Coords"]["X"].ToString()), int.Parse(s["Coords"]["Y"].ToString()))));
                     JToken jse = o["Movie"];
-                    ScheduleElement se;
-                    se  = new ScheduleElement(jse["time"].ToString(), jse["movie"].ToObject<Films>(), Program.rooms[int.Parse(jse["room"].ToString())], jse["date"].ToString());
+
+
+                    string de1 = jse["time"].ToString();
+                    var de2 = jse["movie"].ToObject<Films>();
+                    int de3 = int.Parse((string)jse["room"]);
+                    var de4 = jse["date"].ToString();
+
+                    if (de3 < 0)
+                    {
+                        Console.WriteLine("*** Default room selected ***");
+                        de3 = 0;
+                    }
+
+
+                    ScheduleElement se  = new ScheduleElement(de1, de2, Program.rooms[de3], de4);
                     selectedOrder = new Tuple<string, string, ScheduleElement, List<Tuple<Seat, Tuple<int, int>>>>(input, EmailAddressOrder, se, seatlist);
 
                     //Prints the info of the searched order(Room is not correctly working and should display a number not Cinema.Room)
