@@ -325,7 +325,7 @@ namespace Cinema
                                    Runtime = m.Runtime, 
                                    Synopsis = m.Synopsis,  Age = m.Age,
                                    ReleaseDate = DateTime.TryParse(m.ReleaseDate, out releaseDate) ? releaseDate : new DateTime(r.Next(2020, 2021), r.Next(5, 12), r.Next(1, 28))
-                               })
+                               })  
                 .Where(t => 
                     t.ReleaseDate < DateTime.Now.AddMonths(monthsUntilRelease) && t.ReleaseDate >= DateTime.Now.AddDays(-1))
                 .ToList()
@@ -334,6 +334,7 @@ namespace Cinema
                     {
                         counter++;
                         printFilmprops(mv.Name, mv.Genre, mv.Runtime, mv.Synopsis, mv.ReleaseDate.ToString("D"), mv.Age);
+                        
                     });
                     StandardMessages.ResultsCount(counter);
 

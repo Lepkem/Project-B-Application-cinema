@@ -97,12 +97,14 @@ namespace Cinema
 
                     //Prints the info of the searched order(Room is not correctly working and should display a number not Cinema.Room)
                     Console.WriteLine($"\n\nMovie: {selectedOrder.Item3.movie.Name} \nDate: {selectedOrder.Item3.date} \nTime: {selectedOrder.Item3.time} \nRoom: {selectedOrder.Item3.room.roomNumber} Type: {selectedOrder.Item3.room.getType()}");
+                    int i = 0;
                     int count = selectedOrder.Item4.Count;
-                    for (int i = 0; i < count; i++)
+                    for ( i = 0; i < count; i++)
                     {
                         Console.WriteLine($"Seat: {(i+1)} Row: {selectedOrder.Item4[i].Item2.Item2.ToString()} Chair: {selectedOrder.Item4[i].Item2.Item1.ToString()}");
                     }
-                    Console.WriteLine("\n\nPress enter to continue..");
+                    StandardMessages.ResultsCount(i);
+                    StandardMessages.PressAnyKey();
                     StandardMessages.PressKeyToContinue();
 
                 }
@@ -116,7 +118,7 @@ namespace Cinema
             Console.Clear();
             JArray orders = JArray.Parse(File.ReadAllText(@".\orders.json"));
 
-            string input = StandardMessages.GetInputForParam("Email address of the order");
+            string input = StandardMessages.GetInputForParam("valid email address of the order");
             foreach (var o in orders)
                 if (input == o["EmailAddress"].ToString())
                 {
@@ -145,26 +147,19 @@ namespace Cinema
 
                     //Prints the info of the searched order(Room is not correctly working and should display a number not Cinema.Room)
                     Console.WriteLine($"\n\nMovie: {selectedOrder.Item3.movie.Name} \nDate: {selectedOrder.Item3.date} \nTime: {selectedOrder.Item3.time} \nRoom: {selectedOrder.Item3.room} Type: {selectedOrder.Item3.room.getType()}");
+                    int i = 0;
                     int count = selectedOrder.Item4.Count;
-                    for (int i = 0; i < count; i++)
+                    for ( i = 0; i < count; i++)
                     {
                         Console.WriteLine($"Seat: {(i + 1)} Row: {selectedOrder.Item4[i].Item2.Item2.ToString()} Chair: {selectedOrder.Item4[i].Item2.Item1.ToString()}");
                     }
-                    Console.WriteLine("\n\nPress enter to continue..");
+                    StandardMessages.ResultsCount(i);
+                    StandardMessages.PressAnyKey();
                     StandardMessages.PressKeyToContinue();
 
                 }
         }
 
 
-        public void editOrder()
-        {
-            
-        }
-
-        public void deleteOrder()
-        {
-            
-        }
     }
 }
