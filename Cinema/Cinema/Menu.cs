@@ -105,7 +105,7 @@ namespace Cinema
                         Console.WriteLine("Main menu > Edit room");
                         Console.ResetColor();
                         Console.WriteLine("Which room do you want to change?");
-                        Program.rooms[2].updateRoom(string.Format(@"./rooms/room{0}.json", int.Parse(Console.ReadLine())));
+                        Program.rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
                         caseSwitch = 0;
                         break;
 
