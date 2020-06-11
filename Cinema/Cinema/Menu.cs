@@ -77,19 +77,19 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
-                    case 8:
+                    case 7:
                         //FAQ
                         printFAQ();
                         caseSwitch = 0;
                         break;
 
-                    case 9:
+                    case 8:
                         //FAQ submit question
                         submitQuestion();
                         caseSwitch = 0;
                         break;
 
-                    case 10:
+                    case 9:
                         //Contact
                         Console.Clear();
                         contact();
@@ -172,7 +172,7 @@ namespace Cinema
         {
             int parsable = 0;
 
-            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Submit a question \n[10]Contact\n";
+            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[7]FAQ \n[8]Submit a question \n[9]Contact\n";
 
             //text being displayed in menu
 
@@ -191,7 +191,7 @@ namespace Cinema
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Main menu");
                 Console.ResetColor();
-                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Print the submitted questions\n[10]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions");
+                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[7]FAQ \n[8]Print the submitted questions\n[9]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions");
             }
 
             while (true)
