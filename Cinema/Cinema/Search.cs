@@ -20,9 +20,8 @@ namespace Cinema
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Main menu > Search");
                 Console.ResetColor();
-                Console.WriteLine("What do you want to do?\nEnter the number \n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n");
-                var val = Console.ReadLine();
-                filmChoice = Convert.ToInt32(val);
+                
+                filmChoice = Convert.ToInt32(StandardMessages.GetInputForParam("\n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n"));
 
                 if (filmChoice == 1)
                 {
@@ -31,7 +30,7 @@ namespace Cinema
                     Console.WriteLine("Main menu > Search > Film");
                     Console.ResetColor();
                     Console.WriteLine("Which movie are you looking for? \n Our system is case sensitive.");
-                    filmSearch = Console.ReadLine();
+                    filmSearch = StandardMessages.GetInputForParam("movie title");
                     Console.Clear();
 
                     IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.Name == filmSearch);
@@ -39,13 +38,14 @@ namespace Cinema
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Main menu > Search > Film > Result");
                     Console.ResetColor();
-                    Console.WriteLine("Result:");
+                    StandardMessages.ResultsCount(query.Count());
                     foreach (ScheduleElement schedule in query)
                     {
                         schedule.printScheduleElement();
                     }
-                    Console.ReadLine();
-                    Console.Clear();
+                    StandardMessages.ResultsCount(query.Count());
+                    StandardMessages.PressAnyKey();
+                    StandardMessages.PressKeyToContinue();
                 }
 
                 else if (filmChoice == 2)
@@ -63,14 +63,15 @@ namespace Cinema
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Main menu > Search > Genre > Result");
                     Console.ResetColor();
-                    Console.WriteLine("Result:");
+                    StandardMessages.ResultsCount(query.Count());
 
                     foreach (ScheduleElement schedule in query)
                     {
                         schedule.printScheduleElement();
                     }
-                    Console.ReadLine();
-                    Console.Clear();
+                    StandardMessages.ResultsCount(query.Count());
+                    StandardMessages.PressAnyKey();
+                    StandardMessages.PressKeyToContinue();
                 }
 
                 else if (filmChoice == 3)
@@ -79,8 +80,9 @@ namespace Cinema
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Main menu > Search > Date");
                     Console.ResetColor();
-                    Console.WriteLine("Which release date are you looking for?: \nEnter a date in the following format: DD-MM-YYYY");
-                    filmSearch = Console.ReadLine();
+                    Console.WriteLine("Which release date are you looking for?:" );
+                    
+                    filmSearch = StandardMessages.GetInputForParam("date in the following format: DD-MM-YYYY");
                     Console.Clear();
 
                     IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.ReleaseDate == filmSearch);
@@ -88,27 +90,31 @@ namespace Cinema
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Main menu > Search > Date > Result");
                     Console.ResetColor();
-                    Console.WriteLine("Result:");
+                    StandardMessages.ResultsCount(query.Count());
                     
 
                     foreach (ScheduleElement schedule in query)
                     {
                         schedule.printScheduleElement();
                     }
-                    Console.ReadLine();
-                    Console.Clear();
+                    StandardMessages.ResultsCount(query.Count());
+                    StandardMessages.PressAnyKey();
+                    StandardMessages.PressKeyToContinue();
                 }
 
                 else if (filmChoice == 4)
                 {
                     userWrong = false;
-                    Console.Clear();
+                    StandardMessages.PressAnyKey();
+                    StandardMessages.PressKeyToContinue();
                 }
 
                 else
                 {
-                    Console.WriteLine("Invalid choice.");
-                    Console.ReadLine();
+                    StandardMessages.SomethingWentWrong();
+                    StandardMessages.TryAgain();
+                    StandardMessages.PressAnyKey();
+                    StandardMessages.PressKeyToContinue();
                 }
             }
         }
