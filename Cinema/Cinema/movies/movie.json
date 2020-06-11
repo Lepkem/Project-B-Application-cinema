@@ -86,5 +86,13 @@
     "synopsis": "A Woman wants to be the very best",
     "releaseDate": "22/06/2020",
     "age": "All"
+  },
+  {
+    "name": "INF On tour",
+    "genre": "comedy",
+    "runtime": "118",
+    "synopsis": "INF biggest code adventures",
+    "releaseDate": "09/01/2020",
+    "age": "12"
   }
 ]
