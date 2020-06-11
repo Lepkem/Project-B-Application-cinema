@@ -45,10 +45,10 @@ namespace Cinema
                     Console.WriteLine("Main menu > Search > Film");
                     Console.ResetColor();
                     Console.WriteLine("Which movie are you looking for? \n Our system is case sensitive.");
-                    filmSearch = StandardMessages.GetInputForParam("movie title");
+                    filmSearch = StandardMessages.GetInputForParam("movie title").ToLower();
                     Console.Clear();
 
-                    IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.Name == filmSearch);
+                    IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.Name.ToLower() == filmSearch);
 
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Main menu > Search > Film > Result");
@@ -71,10 +71,10 @@ namespace Cinema
                     Console.WriteLine("Main menu > Search > Genre");
                     Console.ResetColor();
                     Console.WriteLine("Which genre do you want to view?: ");
-                    filmSearch = Console.ReadLine();
+                    filmSearch = Console.ReadLine().ToLower();
                     Console.Clear();
 
-                    IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.Genre == filmSearch);
+                    IEnumerable<ScheduleElement> query = Program.schedule.Where(myFilms => myFilms.movie.Genre.ToLower() == filmSearch);
 
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Main menu > Search > Genre > Result");
