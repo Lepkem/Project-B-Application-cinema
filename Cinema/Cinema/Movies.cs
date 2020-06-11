@@ -48,7 +48,9 @@ namespace Cinema
         public void deleteMovie(Movie movie)
         {
             Console.Clear();
-            Console.WriteLine("Main menu > Create Movie > Delete Movie");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Delete movie");
+            Console.ResetColor();
             Console.WriteLine("Delete a movie\nEnter the title:");
             string deleteTitle = Console.ReadLine();
             bool check = false;
@@ -92,7 +94,9 @@ namespace Cinema
         public void updateCreateMovie()
         {
             Console.Clear();
-            Console.WriteLine("Main menu > Create Movie");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Create movie");
+            Console.ResetColor();
             Console.WriteLine("Enter the name of the movie.\nIf the name of the movie already exists, you will be automatically redirected to adding a movie. ");
             string movieName = Console.ReadLine();
             foreach (Movie movie in movieList)
@@ -120,7 +124,9 @@ namespace Cinema
         private void updateMovie(Movie movie)
         {
             Console.Clear();
-            Console.WriteLine("Main menu > Create Movie > Edit Movie");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Edit Movie");
+            Console.ResetColor();
             Console.WriteLine("What do you want to edit? Choose from:\n[1] Genre\n[2] Synopsis\n[3] Name\n[4] Runtime\n[5] Release Date\n[6] Age restriction\n");
             string update = Console.ReadLine();
             switch (update)
@@ -160,7 +166,9 @@ namespace Cinema
         private void createMovie(string movieName)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Main menu > Create Movie > Add New Movie");
+            Console.ResetColor();
             Console.WriteLine("Add a movie\nTitle:");
             string addMovie = Console.ReadLine();
             Console.WriteLine("\nGenre:");
