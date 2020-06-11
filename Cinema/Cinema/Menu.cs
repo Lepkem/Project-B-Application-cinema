@@ -20,6 +20,7 @@ namespace Cinema
 
             while (running)
             {
+                
                 switch (caseSwitch)
                 {   //functions
                     case 0:
@@ -39,7 +40,7 @@ namespace Cinema
                         Console.Clear();
                         //Print a Shedule
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("Main menu > Print Schedule");
+                        Console.WriteLine("Main menu > Print Schedule\n");
                         Console.ResetColor();
                         Program.printSchedule();
 
@@ -493,7 +494,7 @@ namespace Cinema
                             "Mobile number: 06-12345678\n" +
                             "Cinema number: 010-234567\n" +
                             "\n" +
-                            "If you would like to ask questions about partnership etc. call our business number" +
+                            "If you would like to ask questions about partnership etc. Call our business number:\n" +
                             "Buisiness number: 010-123456");
 
                         StandardMessages.PressAnyKey();
@@ -503,8 +504,8 @@ namespace Cinema
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Contact > E-mail");
                         Console.ResetColor();
-                        Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mails depending on your question\n" +
-                            "E-mail: deltascope@gmail.com" +
+                        Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mail addresses depending on your question.\n\n" +
+                            "E-mail: deltascope@gmail.com\n" +
                             "Business E-mail: b.deltascope@gmail.com");
                         StandardMessages.PressAnyKey();
                         StandardMessages.PressKeyToContinue();
@@ -513,7 +514,7 @@ namespace Cinema
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Contact > Location");
                         Console.ResetColor();
-                        Console.WriteLine("If you would like to visit our headquarters you can by making an appointment and coming to the following adress\n" +
+                        Console.WriteLine("If you would like to visit our headquarters you can make an appointment and visit the following adress\n\n" +
                             "Street address: Monopolystraat 124\n" +
                             "Postal code: 2777 ID\n" +
                             "City: Rotterdam\n" +
@@ -584,6 +585,10 @@ namespace Cinema
             {
                 try
                 {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Main menu > Coming movies");
+                    Console.ResetColor();
                     Program.ShowComingSoon(inputRoom);
                 }
                 catch (Exception e)

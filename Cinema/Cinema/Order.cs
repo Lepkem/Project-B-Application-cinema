@@ -27,7 +27,7 @@ namespace Cinema
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Main menu > Order Tickets > Select Movie");
                 Console.ResetColor();
-                Console.WriteLine("Which movie do you want to watch? Enter number\n");
+                Console.WriteLine("Which movie do you want to watch? Enter a number\n");
 
                 int i = 0;
                 foreach (Films f in Program.myFilms)
@@ -90,6 +90,7 @@ namespace Cinema
                 //finds all schedule elements that contain that movie
                 IEnumerable<ScheduleElement> query = Program.schedule.Where(schedule => schedule.movie == Program.myFilms[input]);
                 int i = 0;
+                
                 foreach (ScheduleElement schedule in query)
                 {
                     possibleMovies.Add(schedule);
@@ -133,7 +134,7 @@ namespace Cinema
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Main menu > Select Movie > Select Tickets");
                     Console.ResetColor();
-                    Console.WriteLine("How many tickets do you want? Please enter a number below 11.");
+                    Console.WriteLine("How many tickets do you want? Please enter a number below 11.\n(Or type 'exit' to go back to the main menu.)");
 
                     string exit = Console.ReadLine();
                     if (exit == "exit" || exit == "Exit")
@@ -162,6 +163,7 @@ namespace Cinema
             while (running)
             {
                 bool print = false;
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Main menu > Order Tickets > Select Tickets > Select Seats");
                 Console.ResetColor();
@@ -279,8 +281,8 @@ namespace Cinema
 
             while (quit == false)
             {
-                Console.WriteLine("To make sure that u wil enjoy the movie you are about to select.\nWe have to request the age of the youngest member for whom your buying ticket(s) for.");
-                Console.WriteLine("Deltascope personal can ask for identification at entry. To make sure the viewing guide is uphold.\n ");
+                Console.WriteLine("To make sure that you wil enjoy the movie you are about to select,\nWe have to request the age of the youngest member you are buying ticket(s) for.");
+                Console.WriteLine("Deltascope personal can ask for identification at entry, to make sure the viewing guide is uphold.\n ");
 
                 try
                 {
