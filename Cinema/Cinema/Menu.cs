@@ -109,7 +109,6 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
-
                     case 13:
                         //Add movie Jitske
                         // This will get the current WORKING directory (i.e. \bin\Debug)
@@ -131,28 +130,23 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
 
-                     case 15:
-                        //Search Order
-                        IDBank.searchOrder();
-
-                     case 16:
+                    case 15:
                         //Search Order by ID
                         IDBank.searchOrderByID();
                         caseSwitch = 0;
                         break;
 
-                    case 17:
+                    case 16:
                         //Search Order by emailAddress
                         IDBank.SearchOrderByEmail();
                         caseSwitch = 0;
                         break;
 
-                    case 18:
-                        //print submitted questions
+                    case 17:
+                        //Search Order by emailAddress
                         printSubmittedQuestions();
                         caseSwitch = 0;
                         break;
-
                     default:
                         Console.WriteLine("That's not an option, please choose again");
                         caseSwitch = 0;
@@ -164,8 +158,8 @@ namespace Cinema
         static int MenuHandler(Boolean login)
         {
             int parsable = 0;
-            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Submit a question \n[10]Contact\n";
 
+            string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Submit a question \n[10]Contact\n";
 
             //text being displayed in menu
             
@@ -179,8 +173,7 @@ namespace Cinema
 
 
             Console.WriteLine("Main menu");
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Contact \n[10]Edit room \n[11]Create room \n[12]Create movie \n[13]Add to schedule \n[14]Search order \n[15]Search order by email \n[16]Print the submitted questions"); }
-
+            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[7]FAQ \n[8]Print the submitted questions\n[9]Contact \n[10]Edit room \n[11]Create room \n[13] \n[14]Create movie \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions"); }
 
 
 
@@ -247,6 +240,7 @@ namespace Cinema
         /// </summary>
         static void printFAQ() 
         {
+            Console.WriteLine("Main menu > FAQ");
             string FileContentString = ""; 
             FileContentString = System.IO.File.ReadAllText("faq.txt"); 
             Console.Clear();
@@ -260,22 +254,20 @@ namespace Cinema
         /// </summary>
         static void printSubmittedQuestions()
         {
-            string FileContentString = "";
-            System.IO.File.ReadAllText("submitQuestion.txt");
+            
+            string FileContentString = System.IO.File.ReadAllText("submitQuestion.txt");
             Console.WriteLine($"{FileContentString}\n");
             StandardMessages.PressAnyKey();
             StandardMessages.PressKeyToContinue();
             Console.Clear();
-
         }
 
-            
-            while (looping)
-            {
-                int question = 0;
-                Console.WriteLine("Main menu > FAQ");
-                Console.WriteLine("\n[1]Is the cinema suitable for people in a wheelchair? \n[2]Does the cinema have sweet popcorn? \n[3]What are the opening hours of the cinema \n[4]Quit");
+    
 
+            
+            //while (looping)
+            //{
+                
 
         /// <summary>
         /// lets a user add a question after solving a riddle
@@ -291,43 +283,18 @@ namespace Cinema
                 Console.Clear();
             }
 
+
             else
             {
                 StandardMessages.TryAgain();
             }
         }
         
+        
+
         static bool riddle()
         {
             Console.WriteLine($"Prove that you are a human\n Don't use capitals");
-
-                //Switch case
-                switch (question)
-                {
-                    case 1:
-                        Console.WriteLine("Main menu > FAQ");
-                        Console.WriteLine("The cinema is certainly suitable for people in a wheelchair. \n" +
-                            "There is a lift for the 2nd floor and all \n" +
-                            "aisles are wide enough for wheelchairs. \n");
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
-                    case 2:
-                        Console.WriteLine("Main menu > FAQ");
-                        Console.WriteLine("The cinema has 3 types of popcorn.\n" +
-                            "Sweet, salty and caramel.\n");
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
-                    case 3:
-                        Console.WriteLine("Main menu > FAQ");
-                        Console.WriteLine("We are currently closed due to the corona virus! \n" +
-                            "we have a home cinema ready! see the website. \n");
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
-                    case 4:
-                        Console.Clear();
-                        Console.WriteLine("Going back"); looping = false; break;
-                    default:
-                        Console.WriteLine("Enter an existing value"); break;
-                }
-
-              
 
             int RandomNum = RandomNumberGenerator.GetInt32(1, 11);
             switch (RandomNum)
