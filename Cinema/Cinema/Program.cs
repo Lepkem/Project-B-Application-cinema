@@ -308,7 +308,7 @@ namespace Cinema
 
 
             Random r = new Random();
-
+            int counter = 0;
             (from m in myFilms
                     select new {   Name = m.Name, 
                                    Genre = m.Genre, 
@@ -322,10 +322,12 @@ namespace Cinema
                 .ForEach(
                     mv =>
                     {
+                        counter++;
                         printFilmprops(mv.Name, mv.Genre, mv.Runtime, mv.Synopsis, mv.ReleaseDate.ToString("D"), mv.Age);
                     });
+                    StandardMessages.ResultsCount(counter);
 
-            
+
         }
 
         private static void printFilmprops(string t, string g, string rt, string s, string rd, string age)

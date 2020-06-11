@@ -43,7 +43,7 @@ namespace Cinema
                     {
                         schedule.printScheduleElement();
                     }
-                    StandardMessages.ResultsCount(query.Count());
+                   
                     StandardMessages.PressAnyKey();
                     StandardMessages.PressKeyToContinue();
                 }
