@@ -192,7 +192,7 @@ namespace Cinema
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Main menu");
                 Console.ResetColor();
-                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[7]FAQ \n[8]Print the submitted questions\n[9]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions");
+                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[7]FAQ \n[8]Submit a question\n[9]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions");
             }
 
             while (true)
@@ -297,7 +297,10 @@ namespace Cinema
         /// </summary>
         static void submitQuestion()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Main menu > Submit Question");
+            Console.ResetColor();
             if (riddle())
             {
                 string[] question = new string[2] { StandardMessages.GetInputForParam("question of your choice"), "" };
