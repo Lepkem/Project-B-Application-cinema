@@ -23,5 +23,12 @@ namespace Cinema
         { 
             Console.WriteLine(string.Format("{0}, {1} in Maasvlakte {2}\nMovie: {3}\nRuntime: {4}\nGenre: {5}\nSynopsis: {6}\nAge: {7}\n", date, time,room.roomNumber, movie.Name, movie.Runtime, movie.Genre, movie.Synopsis, movie.Age));
         }
+
+        public string printInfo()
+        {
+
+            return String.Format("time:{0},\nTitle:{1}\nDate:{2}", time,movie.Name,date);
+            
+        }
     }
 }

@@ -143,7 +143,7 @@ namespace Cinema
                     selectedOrder = new Tuple<string, string, ScheduleElement, List<Tuple<Seat, Tuple<int, int>>>>(input, EmailAddressOrder, se, seatlist);
 
                     //Prints the info of the searched order(Room is not correctly working and should display a number not Cinema.Room)
-                    Console.WriteLine($"\n\nMovie: {selectedOrder.Item3.movie.Name} \nDate: {selectedOrder.Item3.date} \nTime: {selectedOrder.Item3.time} \nRoom: {selectedOrder.Item3.room.roomNumber} Type: {selectedOrder.Item3.room.getType()}");
+                    Console.WriteLine($"\n\nMovie: {selectedOrder.Item3.movie.Name} \nDate: {selectedOrder.Item3.date} \nTime: {selectedOrder.Item3.time} \nRoom: {selectedOrder.Item3.room} Type: {selectedOrder.Item3.room.getType()}");
                     int count = selectedOrder.Item4.Count;
                     for (int i = 0; i < count; i++)
                     {

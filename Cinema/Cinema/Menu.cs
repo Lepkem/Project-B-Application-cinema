@@ -536,10 +536,10 @@ namespace Cinema
             int i = 0;
             int inputRoom= 0;
 
-            foreach (Room r in Program.rooms)
+            foreach (ScheduleElement r in Program.schedule)
             {
                 string  y = r.printInfo();
-                Console.WriteLine("[" + i + "] Maasvlakte:"+ i +" "+  y + "\n");
+                Console.WriteLine("[" + i + "] "+ y + " In maasvlakte: " +r.room.roomNumber +"\n");
                 i++;
             }
             while (true)
@@ -559,7 +559,9 @@ namespace Cinema
                 }
             }
 
-            Program.rooms[inputRoom].printRoom();
+            Program.schedule[inputRoom].room.printRoom();
+            StandardMessages.PressAnyKey();
+            StandardMessages.PressKeyToContinue();
         }
         public static void ExpectedMovies()
         {
