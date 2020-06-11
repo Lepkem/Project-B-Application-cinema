@@ -60,6 +60,8 @@ namespace Cinema
             Console.WriteLine("WWWWWWW=-.:=WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
             Console.WriteLine("WWWW#-:#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
             Console.WriteLine("W@*#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("");
+            Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("Press enter to continue");
             Console.ResetColor();
