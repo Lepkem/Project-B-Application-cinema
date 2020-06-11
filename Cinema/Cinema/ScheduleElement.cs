@@ -29,6 +29,8 @@ namespace Cinema
 
             return String.Format("time:{0},\nTitle:{1}\nDate:{2}", time,movie.Name,date);
             
+
+
         }
     }
 }
