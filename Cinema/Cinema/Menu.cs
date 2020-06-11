@@ -652,7 +652,7 @@ namespace Cinema
         /// <param name="input"></param>
         public static void ResultsCount(int input)
         {
-            if (input > 1)
+            if (input > 1 || input == 0)
             {
                 Console.WriteLine($"There were {input} results.");
             }
