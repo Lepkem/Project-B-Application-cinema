@@ -86,5 +86,21 @@
     "synopsis": "A Woman wants to be the very best",
     "releaseDate": "22/06/2020",
     "age": "All"
+  },
+  {
+    "name": "Blade Runner",
+    "genre": "Science Fiction",
+    "runtime": "117",
+    "synopsis": "Deckard hunts Replicants.",
+    "releaseDate": "11/11/1982",
+    "age": "18"
+  },
+  {
+    "name": "John Wick",
+    "genre": "Action",
+    "runtime": "120",
+    "synopsis": "Guy gets revenge.",
+    "releaseDate": "01/01/2012",
+    "age": "18"
   }
 ]
