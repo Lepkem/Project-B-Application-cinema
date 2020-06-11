@@ -65,7 +65,8 @@ namespace Cinema
             }
             if (!check)
             {
-                Console.WriteLine("That movie does not exist.");
+                StandardMessages.NoSearchResults();
+                StandardMessages.TryAgain();
             }
 
             JArray delete = new JArray();

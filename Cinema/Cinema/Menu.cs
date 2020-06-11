@@ -263,6 +263,7 @@ namespace Cinema
             string FileContentString = "";
             FileContentString = System.IO.File.ReadAllText("faq.txt");
             Console.Clear();
+            Console.WriteLine("Main menu > FAQ");
             Console.WriteLine($"{FileContentString}\n");
             StandardMessages.PressAnyKey();
             StandardMessages.PressKeyToContinue();
@@ -291,6 +292,7 @@ namespace Cinema
         /// </summary>
         static void submitQuestion()
         {
+            Console.WriteLine("Main menu > Submit Question");
             if (riddle())
             {
                 string[] question = new string[2] { StandardMessages.GetInputForParam("question of your choice"), "" };
