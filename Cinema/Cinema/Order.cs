@@ -53,7 +53,7 @@ namespace Cinema
                     if (inputFilm > i - 1)
                     {
                         Console.Clear();
-                        Console.WriteLine("Please fill in existing integers only!");
+                        StandardMessages.EnterNumber();
                     }
                     else
                     {
@@ -68,7 +68,7 @@ namespace Cinema
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Please fill in an integer only!\n\n");
+                    StandardMessages.EnterNumber();
                 }
             }
             OrderMovie(inputFilm);
@@ -109,7 +109,7 @@ namespace Cinema
                     if (x > i - 1)
                     {
                         Console.Clear();
-                        Console.WriteLine("Please fill in existing integers only!");
+                        StandardMessages.EnterNumber();
                     }
                     else
                     {
@@ -119,7 +119,7 @@ namespace Cinema
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Please fill in an integer only!\n\n");
+                    StandardMessages.EnterNumber();
                 }
             }
             quit = false;
@@ -289,7 +289,7 @@ namespace Cinema
                     Console.ResetColor();
                     age = int.Parse(Console.ReadLine());
 
-                    if (age < 1) { Console.Clear(); Console.WriteLine("Please fill in a positve intiger\n"); }
+                    if (age < 1) { Console.Clear(); Console.WriteLine("Please fill in a positve integer\n"); }
                     else
                     {
                         Console.Clear();
@@ -300,7 +300,7 @@ namespace Cinema
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Please fill in a intiger only!\n\n");
+                    StandardMessages.NoSearchResults();
                 }
             }
             return age;
