@@ -154,6 +154,7 @@ namespace Cinema
             output["layout"] = JArray.FromObject(roomRows);
             output["chairs"] = chairAmount.ToString();
             output["roomType"] = roomType;
+            output["roomNumber"] = rooms.Count+1;
             output["vacancy"] = JArray.FromObject(vacancyArr);
 
             //Set new file name in x location

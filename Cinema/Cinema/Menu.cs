@@ -126,7 +126,7 @@ namespace Cinema
                         //Test create room
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("Main menu > Edit room");
+                        Console.WriteLine("Main menu > Create room");
                         Console.ResetColor();
                         Program.createRoom();
                         caseSwitch = 0;
