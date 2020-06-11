@@ -95,7 +95,7 @@ namespace Cinema
                             }
                             catch
                             {
-                                Console.WriteLine("Fill in integers only!");
+                                StandardMessages.EnterNumber();
                                 newLine = Console.ReadLine();
                             }
                         }
@@ -123,7 +123,7 @@ namespace Cinema
                 catch
                 {
                     Console.Clear();
-                    Console.WriteLine("Fill in integers only!");
+                    StandardMessages.EnterNumber();
                 }
             }
             fullObject["chairs"] = seats;
@@ -152,7 +152,7 @@ namespace Cinema
                 }
                 catch
                 {
-                    Console.WriteLine("Fill in integers only!");
+                    StandardMessages.EnterNumber();
                     Console.Clear();
                 }
             }

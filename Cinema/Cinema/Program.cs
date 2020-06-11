@@ -128,7 +128,7 @@ namespace Cinema
             }
             catch
             {
-                Console.WriteLine($"Please only enter a number.");
+                StandardMessages.EnterNumber();
             }
 
             //Set room type
@@ -140,7 +140,7 @@ namespace Cinema
             }
             catch
             {
-                Console.WriteLine($"Only choose between the given options please.");
+                StandardMessages.GivenOptions();
             }
 
             //fill the vacancy
@@ -256,7 +256,7 @@ namespace Cinema
             }
             catch
             {
-                Console.WriteLine($"Please enter a number only");
+                StandardMessages.EnterNumber();
             }
             Console.Clear();
 
