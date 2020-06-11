@@ -172,8 +172,13 @@ namespace Cinema
             //text being displayed in menu Admin version
 
 
-            Console.WriteLine("Main menu");
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Print the submitted questions\n10]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions"); }
+            
+            if (login) 
+            {
+                Console.WriteLine("Main menu");
+                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Print the submitted questions\n[10]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions"); 
+            }
+
 
 
 
@@ -424,6 +429,7 @@ namespace Cinema
                     {
                         return false;
                     }
+                    break;
             }
 
         }
