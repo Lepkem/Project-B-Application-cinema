@@ -17,6 +17,7 @@
   ],
   "chairs": 120,
   "roomType": 3,
+  "roomNumber": 1,
   "vacancy": [
     "001111001100",
     "000000000000",

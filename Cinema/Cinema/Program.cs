@@ -192,6 +192,7 @@ namespace Cinema
             output["layout"] = JArray.FromObject(priceArr);
             output["chairs"] = template.chairs.ToString();
             output["roomType"] = template.roomType;
+            output["roomNumber"] = template.roomNumber;
             output["vacancy"] = JArray.FromObject(vacancyArr);
 
 
