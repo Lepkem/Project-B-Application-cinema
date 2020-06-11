@@ -88,19 +88,11 @@
     "age": "All"
   },
   {
-    "name": "Blade Runner",
-    "genre": "Science Fiction",
-    "runtime": "117",
-    "synopsis": "Deckard hunts Replicants.",
-    "releaseDate": "11/11/1982",
-    "age": "18"
-  },
-  {
-    "name": "John Wick",
-    "genre": "Action",
-    "runtime": "120",
-    "synopsis": "Guy gets revenge.",
-    "releaseDate": "01/01/2012",
-    "age": "18"
+    "name": "INF On tour",
+    "genre": "comedy",
+    "runtime": "118",
+    "synopsis": "INF biggest code adventures",
+    "releaseDate": "09/01/2020",
+    "age": "12"
   }
 ]

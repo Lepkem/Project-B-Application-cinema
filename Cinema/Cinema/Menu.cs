@@ -1,12 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Cinema
 {
-    using System.Globalization;
-    using System.Net;
     using System.Security.Cryptography;
 
     class Menu
@@ -20,7 +16,7 @@ namespace Cinema
 
             while (running)
             {
-                
+
                 switch (caseSwitch)
                 {   //functions
                     case 0:
@@ -105,7 +101,24 @@ namespace Cinema
                         Console.WriteLine("Main menu > Edit room");
                         Console.ResetColor();
                         Console.WriteLine("Which room do you want to change?");
-                        Program.rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
+                        foreach (var room in Program.rooms)
+                        {
+                            Console.WriteLine($"[{room.roomNumber - 1}]: Maasvlakte {room.roomNumber}\n");
+                        }
+                        int input;
+                        while (true)
+                        {
+                            try
+                            {
+                                input = int.Parse(Console.ReadLine());
+                                break;
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("Please input a single room number.");
+                            }
+                        }
+                        Program.rooms[input].updateRoom(@$".\rooms\room{input + 1}.json");
                         caseSwitch = 0;
                         break;
 
@@ -177,7 +190,8 @@ namespace Cinema
 
             //text being displayed in menu
 
-            if (!login) {
+            if (!login)
+            {
 
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Main menu");
@@ -544,12 +558,12 @@ namespace Cinema
             Console.ResetColor();
             Console.WriteLine("Which room do you want to look at?");
             int i = 0;
-            int inputRoom= 0;
+            int inputRoom = 0;
 
             foreach (ScheduleElement r in Program.schedule)
             {
-                string  y = r.printInfo();
-                Console.WriteLine("[" + i + "] "+ y + " In Maasvlakte: " +r.room.roomNumber +"\n");
+                string y = r.printInfo();
+                Console.WriteLine("[" + i + "] " + y + " In Maasvlakte: " + r.room.roomNumber + "\n");
                 i++;
             }
             while (true)
@@ -557,11 +571,11 @@ namespace Cinema
                 try
                 {
                     inputRoom = int.Parse(Console.ReadLine());
-                    if (inputRoom <= (i-1) && inputRoom > -1)
+                    if (inputRoom <= (i - 1) && inputRoom > -1)
                     {
                         break;
                     }
-                    else {StandardMessages.GivenOptions(); }
+                    else { StandardMessages.GivenOptions(); }
                 }
                 catch
                 {
@@ -730,7 +744,7 @@ namespace Cinema
             Console.Clear();
         }
 
-       
+
 
 
         /// <summary>
