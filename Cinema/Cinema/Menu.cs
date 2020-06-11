@@ -636,6 +636,7 @@ namespace Cinema
         /// </summary>
         public static void WelcomeMessage()
         {
+            //http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Welcome%20to%20the%20deltascope
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"         ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗");
             Console.WriteLine($"         ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗");
