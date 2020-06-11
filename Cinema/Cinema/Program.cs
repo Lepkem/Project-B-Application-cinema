@@ -225,7 +225,7 @@ namespace Cinema
             printSchedule();
 
             //input time
-            Console.WriteLine($"What time will the movie start?\nFormat: HH:MM (13:50 for instance)" );
+            Console.WriteLine($"What time will the movie start?\nFormat: HH-MM (13-50 for instance)" );
             string time = "";
             try
             {
@@ -268,7 +268,7 @@ namespace Cinema
             foreach (Room r in rooms)
             {
                 string y = r.printInfo();
-                Console.WriteLine(j + " " + y + "\n");
+                Console.WriteLine("["+j+"]" + " " + y + "\n");
                 j++;
             }
 
@@ -279,7 +279,7 @@ namespace Cinema
             //input date
             Console.WriteLine("Main menu > Add to Schedule > Choose movie > Assign Room > Assign Date");
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
-            Console.WriteLine("\n\nWhat date do you want to assign? Example: dd:mm");
+            Console.WriteLine("\n\nWhat date do you want to assign? Example: dd-mm");
             string inputDate = "";
             try
             {
