@@ -132,7 +132,7 @@ namespace Cinema
             }
 
             //Set room type
-            Console.WriteLine("What type of room is it? \n1 = normal, 2 = 3D, 3 = IMAX");
+            Console.WriteLine("What type of room is it? \n[1] = normal, [2] = 3D, [3] = IMAX");
             string roomType = "";
             try
             {
@@ -222,6 +222,7 @@ namespace Cinema
         {
             Console.Clear();
             //print current schedule
+            Console.WriteLine("Main menu > Add to Schedule");
             Console.WriteLine("Current Schedule: ");
             printSchedule();
 
@@ -239,13 +240,14 @@ namespace Cinema
             Console.Clear();
 
             //input movie
+            Console.WriteLine("Main menu > Add to Schedule > Choose movie");
             Console.WriteLine("Time: " + time);
             Console.WriteLine("\n\nWhat movie do you want to add? select a number\n");
             int i = 0;
             foreach (Films f in myFilms)
             {
                 string x = f.printFilms();
-                Console.WriteLine(i + " " + x + "\n");
+                Console.WriteLine("["+i+"]" + " " + x + "\n");
                 i++;
             }
 
@@ -261,6 +263,7 @@ namespace Cinema
             Console.Clear();
 
             //input room
+            Console.WriteLine("Main menu > Add to Schedule > Choose movie > Assign Room");
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name);
             Console.WriteLine("\n\nWhat room do you want to assign? Select a number\n");
             int j = 0;
@@ -276,6 +279,7 @@ namespace Cinema
             Console.Clear();
 
             //input date
+            Console.WriteLine("Main menu > Add to Schedule > Choose movie > Assign Room > Assign Date");
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
             Console.WriteLine("\n\nWhat date do you want to assign? Example: dd:mm");
             string inputDate = "";
