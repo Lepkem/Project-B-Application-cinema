@@ -289,8 +289,6 @@ namespace Cinema
 
 
 
-            //while (looping)
-            //{
 
 
         /// <summary>
@@ -632,6 +630,31 @@ namespace Cinema
         }
 
         /// <summary>
+        /// ResultsCount displays the amount of search results
+        /// </summary>
+        /// <param name="input"></param>
+        public static void ResultsCount(int input)
+        {
+            if (input > 1 || input == 0)
+            {
+                Console.WriteLine($"There were {input} results.");
+            }
+            else
+            {
+                Console.WriteLine($"There was {input} result.");
+            }
+        }
+
+        /// <summary>
+        /// Prints the message that something went wrong
+        /// </summary>
+        /// <returns></returns>
+        public static void SomethingWentWrong()
+        {
+            Console.WriteLine($"Oops! Something went wrong.");
+        }
+
+        /// <summary>
         /// Prints the welcome message
         /// </summary>
         public static void WelcomeMessage()
@@ -690,21 +713,7 @@ namespace Cinema
             Console.Clear();
         }
 
-        /// <summary>
-        /// ResultsCount displays the amount of search results
-        /// </summary>
-        /// <param name="input"></param>
-        public static void ResultsCount(int input)
-        {
-            if (input > 1 || input == 0)
-            {
-                Console.WriteLine($"There were {input} results.");
-            }
-            else
-            {
-                Console.WriteLine($"There was {input} result.");
-            }
-        }
+       
 
 
         /// <summary>
