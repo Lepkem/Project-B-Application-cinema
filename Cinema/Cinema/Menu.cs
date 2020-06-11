@@ -173,7 +173,7 @@ namespace Cinema
 
 
             Console.WriteLine("Main menu");
-            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[7]FAQ \n[8]Print the submitted questions\n[9]Contact \n[10]Edit room \n[11]Create room \n[13] \n[14]Create movie \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions"); }
+            if (login) { Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Print the submitted questions\n10]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions"); }
 
 
 
@@ -188,7 +188,7 @@ namespace Cinema
                     //checks if number is the same as a user fucntion
                     if (!login)
                     {
-                        if (0 < parsable && parsable < 10) { return parsable; } //number equal to possible functions +1
+                        if (0 < parsable && parsable < 11) { return parsable; } //number equal to possible functions +1
                         else { Console.WriteLine("Please only select from the options given."); }
                     }
                     //checks if number is the same as a user OR admin fucntion
@@ -210,7 +210,7 @@ namespace Cinema
                 string username, password = string.Empty;
 
                 
-                username = StandardMessages.GetInputForParam("username");
+                username = StandardMessages.GetInputForParam("username: (admin)");
 
                 //Exit login screen
                 if (username == "b")
@@ -220,14 +220,14 @@ namespace Cinema
                 }
 
                 //ask user input password
-                Console.Write("Enter a password: (admin) ");
-                password = Console.ReadLine();
+                password = StandardMessages.GetInputForParam("password: (admin)");
+                
 
                 //checks if user input correct.
                 if (username == "admin" && password == "admin")
                 {
                     Console.Clear();
-                    Console.WriteLine("\n \nWelcome admin");
+                    Console.WriteLine("Welcome admin");
                     return true;
                 }
                 else { Console.WriteLine("Wrong input, please try again \n" + "if you want to return to the menu write b as username"); }
