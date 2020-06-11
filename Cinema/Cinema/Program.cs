@@ -66,10 +66,9 @@ namespace Cinema
                     //this line takes the file location for the JSON files, reads the entire file, and passes it to the initializer
                     rooms.Add(new Room(File.ReadAllText(files[i])));
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
-                throw;
+
             }
         }
 
@@ -198,7 +197,7 @@ namespace Cinema
 
 
             //Set new file name in x location
-            string fileName = $"{inputdate}--{time}-{rooms.IndexOf(template)}";
+            string fileName = $"{inputdate}--{time}-{template.roomNumber}";
             string filePath = @$".\rooms\ScheduledRooms\{fileName}.json";
 
             //Create the new file
@@ -206,7 +205,6 @@ namespace Cinema
 
             //Reads new file and makes it a room object
             return new Room(File.ReadAllText(filePath));
-
         }
 
         public static void printSchedule()

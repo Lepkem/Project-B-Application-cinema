@@ -9,7 +9,6 @@ namespace Cinema
 
     class Order
     {
-
         
         public static void orderMenu()
         {
@@ -77,6 +76,7 @@ namespace Cinema
         static void OrderMovie(int input)
         {
             //prints all available movies
+            double price = 0.0;
             Console.Clear();
             bool quit = false;
             int x = 0;
@@ -154,7 +154,7 @@ namespace Cinema
 
             ScheduleElement ticket = possibleMovies[x];
             //takes the index number of the room in the room list, adds one to that number, and that **should** always be the number in the room's name
-            string filename = $"{ticket.date}--{ticket.time}{Program.rooms.IndexOf(ticket.room)}";
+            string filename = $"{ticket.date}--{ticket.time}-{ticket.room.roomNumber}";
             string file = @$".\rooms\ScheduledRooms\{filename}.json";
             List<Tuple<Seat, Tuple<int, int>>> selectedSeats = new List<Tuple<Seat, Tuple<int, int>>>();
             bool running = true;
@@ -265,10 +265,10 @@ namespace Cinema
             foreach (var c in selectedSeats)
             {
                 ticket.room.updateVacancy(c.Item2.Item1, c.Item2.Item2, file);
+                price += (1+1/(c.Item1.priceMod-1))*(double)ticket.room.roomType;
             }
-            
 
-            IDBank.storeOrder(ticket, selectedSeats);
+            IDBank.storeOrder(ticket, selectedSeats, price);
             ticket.room.Initialize(File.ReadAllText(file));
         }
 

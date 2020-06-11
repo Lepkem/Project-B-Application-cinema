@@ -16,16 +16,17 @@ namespace Cinema
         public static string generateUniqueNumber()
         {
             Guid uniqueNumber = Guid.NewGuid();
-            Console.Clear();
-            Console.WriteLine("You succesfully finished ordering your ticket(s).");
-            Console.WriteLine("Your order id: " + uniqueNumber + ". Please make sure to save it.\n");
-            StandardMessages.PressKeyToContinue();
             return uniqueNumber.ToString();
         }
 
-        public static void storeOrder(ScheduleElement se, List<Tuple<Seat, Tuple<int, int>>> ls)
+        public static void storeOrder(ScheduleElement se, List<Tuple<Seat, Tuple<int, int>>> ls, double price)
         {
             string ID = generateUniqueNumber();
+            Console.Clear();
+            Console.WriteLine("You succesfully finished ordering your ticket(s).");
+            Console.WriteLine($"Your order id: {ID}. Please make sure to save it.\n");
+            Console.WriteLine($"Your total price is {price} euro.");
+            StandardMessages.PressKeyToContinue();
             EmailAddressOrder = StandardMessages.GetInputForParam("valid email address, where we will send the order ID to");
             StandardMessages.PressAnyKey();
             StandardMessages.PressKeyToContinue();
