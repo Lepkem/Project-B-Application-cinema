@@ -222,7 +222,9 @@ namespace Cinema
         {
             Console.Clear();
             //print current schedule
-            Console.WriteLine("Main menu > Add to Schedule");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Select Movie > Add To Schedule");
+            Console.ResetColor();
             Console.WriteLine("Current Schedule: ");
             printSchedule();
 
@@ -240,7 +242,9 @@ namespace Cinema
             Console.Clear();
 
             //input movie
-            Console.WriteLine("Main menu > Add to Schedule > Choose movie");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Select Movie > Add To Schedule > Add Movie");
+            Console.ResetColor();
             Console.WriteLine("Time: " + time);
             Console.WriteLine("\n\nWhat movie do you want to add? select a number\n");
             int i = 0;
@@ -263,7 +267,9 @@ namespace Cinema
             Console.Clear();
 
             //input room
-            Console.WriteLine("Main menu > Add to Schedule > Choose movie > Assign Room");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Select Movie > Add To Schedule > Add Movie > Assign Room");
+            Console.ResetColor();
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name);
             Console.WriteLine("\n\nWhat room do you want to assign? Select a number\n");
             int j = 0;
@@ -279,7 +285,9 @@ namespace Cinema
             Console.Clear();
 
             //input date
-            Console.WriteLine("Main menu > Add to Schedule > Choose movie > Assign Room > Assign Date");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Select Movie > Add To Schedule > Add Movie > Assign Room > Assign Date");
+            Console.ResetColor();
             Console.WriteLine("Time: " + time + "\nMovie: " + myFilms[inputFilm].Name + "\nRoom: " + inputRoom);
             Console.WriteLine("\n\nWhat date do you want to assign? Example: dd-mm");
             string inputDate = "";

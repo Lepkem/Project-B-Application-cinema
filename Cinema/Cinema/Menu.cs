@@ -259,11 +259,15 @@ namespace Cinema
         /// </summary>
         static void printFAQ()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Main menu > FAQ");
+            Console.ResetColor();
             string FileContentString = "";
             FileContentString = System.IO.File.ReadAllText("faq.txt");
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Main menu > FAQ");
+            Console.ResetColor();
             Console.WriteLine($"{FileContentString}\n");
             StandardMessages.PressAnyKey();
             StandardMessages.PressKeyToContinue();
