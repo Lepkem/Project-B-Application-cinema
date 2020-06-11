@@ -161,7 +161,7 @@ namespace Cinema
                         caseSwitch = 0;
                         break;
                     default:
-                        Console.WriteLine("That's not an option, please choose again");
+                        StandardMessages.GivenOptions();
                         caseSwitch = 0;
                         break;
                 }
@@ -186,8 +186,6 @@ namespace Cinema
             }
             //text being displayed in menu Admin version
 
-
-
             if (login)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -195,9 +193,6 @@ namespace Cinema
                 Console.ResetColor();
                 Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Print the submitted questions\n[10]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions");
             }
-
-
-
 
             while (true)
             {
@@ -497,7 +492,9 @@ namespace Cinema
                             "If you would like to ask questions about partnership etc. call our business number" +
                             "Buisiness number: 010-123456");
 
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                        StandardMessages.PressAnyKey();
+                        StandardMessages.PressKeyToContinue();
+                        break;
                     case 2:
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Contact > E-mail");
@@ -505,7 +502,9 @@ namespace Cinema
                         Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mails depending on your question\n" +
                             "E-mail: deltascope@gmail.com" +
                             "Business E-mail: b.deltascope@gmail.com");
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                        StandardMessages.PressAnyKey();
+                        StandardMessages.PressKeyToContinue();
+                        break;
                     case 3:
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Contact > Location");
@@ -516,10 +515,12 @@ namespace Cinema
                             "City: Rotterdam\n" +
                             "Country: Netherlands\n" +
                             "Province: Zuid-Holland\n");
-                        Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
+                        StandardMessages.PressAnyKey();
+                        StandardMessages.PressKeyToContinue();
+                        break;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Going back"); looping = false; break;
+                        looping = false; break;
                     default:
                         Console.WriteLine("Enter an existing value"); break;
                 }
@@ -552,11 +553,11 @@ namespace Cinema
                     {
                         break;
                     }
-                    else {Console.WriteLine($"Please enter valid number only"); }
+                    else {StandardMessages.GivenOptions(); }
                 }
                 catch
                 {
-                    Console.WriteLine($"Please enter a number only");
+                    StandardMessages.EnterNumber();
                 }
             }
 
