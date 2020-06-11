@@ -495,7 +495,7 @@ namespace Cinema
                             "Cinema number: 010-234567\n" +
                             "\n" +
                             "If you would like to ask questions about partnership etc. Call our business number:\n" +
-                            "Buisiness number: 010-123456");
+                            "Business number: 010-123456");
 
                         StandardMessages.PressAnyKey();
                         StandardMessages.PressKeyToContinue();
@@ -514,7 +514,7 @@ namespace Cinema
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Contact > Location");
                         Console.ResetColor();
-                        Console.WriteLine("If you would like to visit our headquarters you can make an appointment and visit the following adress\n\n" +
+                        Console.WriteLine("If you would like to visit our headquarters you can make an appointment and visit the following address\n\n" +
                             "Street address: Monopolystraat 124\n" +
                             "Postal code: 2777 ID\n" +
                             "City: Rotterdam\n" +
@@ -539,14 +539,14 @@ namespace Cinema
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Main menu > Show room");
             Console.ResetColor();
-            Console.WriteLine("Wich room do you want to look at?");
+            Console.WriteLine("Which room do you want to look at?");
             int i = 0;
             int inputRoom= 0;
 
             foreach (ScheduleElement r in Program.schedule)
             {
                 string  y = r.printInfo();
-                Console.WriteLine("[" + i + "] "+ y + " In maasvlakte: " +r.room.roomNumber +"\n");
+                Console.WriteLine("[" + i + "] "+ y + " In Maasvlakte: " +r.room.roomNumber +"\n");
                 i++;
             }
             while (true)
