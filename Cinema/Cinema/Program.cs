@@ -108,7 +108,7 @@ namespace Cinema
                     if (newLine == "Exit")
                     {
                         Console.Clear();
-                        Console.WriteLine("Exitted successfully.\n");
+                        Console.WriteLine("Exited successfully.\n");
                         return;
                     }
                     roomRows[i] = newLine;

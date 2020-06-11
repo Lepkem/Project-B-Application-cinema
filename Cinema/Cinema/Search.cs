@@ -20,8 +20,9 @@ namespace Cinema
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Main menu > Search");
                 Console.ResetColor();
-                
-                filmChoice = Convert.ToInt32(StandardMessages.GetInputForParam("\n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n"));
+                Console.WriteLine($"Please select one of the following:");
+                Console.WriteLine($"\n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n");
+                filmChoice = Convert.ToInt32(StandardMessages.GetInputForParam("number"));
 
                 if (filmChoice == 1)
                 {
