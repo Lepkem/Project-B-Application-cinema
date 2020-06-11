@@ -9,20 +9,34 @@ namespace Cinema
     {
         public Search()
         {
-            int filmChoice;
+            int filmChoice = 0;
             string filmSearch;
             bool userWrong = true;
+            //bool correctInput = false;
 
             
 
             while (userWrong)
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("Main menu > Search");
-                Console.ResetColor();
-                Console.WriteLine($"Please select one of the following:");
-                Console.WriteLine($"\n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n");
-                filmChoice = Convert.ToInt32(StandardMessages.GetInputForParam("number"));
+                while (filmChoice == 0)
+                {
+                    try {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Main menu > Search");
+                        Console.ResetColor();
+                        Console.WriteLine($"Please select one of the following:");
+                        Console.WriteLine($"\n [1]Film \n [2]Genre \n [3]Datum \n [4]Exit \n");
+                        filmChoice = Convert.ToInt32(StandardMessages.GetInputForParam("number"));
+                    }
+                    catch
+                    {
+                        StandardMessages.SomethingWentWrong();
+                        StandardMessages.TryAgain();
+                    }
+                    
+                }
+
 
                 if (filmChoice == 1)
                 {
@@ -47,6 +61,7 @@ namespace Cinema
                     StandardMessages.ResultsCount(query.Count());
                     StandardMessages.PressAnyKey();
                     StandardMessages.PressKeyToContinue();
+                    filmChoice = 0;
                 }
 
                 else if (filmChoice == 2)
@@ -73,6 +88,7 @@ namespace Cinema
                     StandardMessages.ResultsCount(query.Count());
                     StandardMessages.PressAnyKey();
                     StandardMessages.PressKeyToContinue();
+                    filmChoice = 0;
                 }
 
                 else if (filmChoice == 3)
@@ -101,13 +117,14 @@ namespace Cinema
                     StandardMessages.ResultsCount(query.Count());
                     StandardMessages.PressAnyKey();
                     StandardMessages.PressKeyToContinue();
+                    filmChoice = 0;
                 }
 
                 else if (filmChoice == 4)
                 {
                     userWrong = false;
-                    StandardMessages.PressAnyKey();
-                    StandardMessages.PressKeyToContinue();
+                    Console.Clear();
+                    filmChoice = 0;
                 }
 
                 else
@@ -116,6 +133,7 @@ namespace Cinema
                     StandardMessages.TryAgain();
                     StandardMessages.PressAnyKey();
                     StandardMessages.PressKeyToContinue();
+                    filmChoice = 0;
                 }
             }
         }
