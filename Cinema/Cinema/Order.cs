@@ -14,7 +14,9 @@ namespace Cinema
         public static void orderMenu()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Main menu > Order Tickets");
+            Console.ResetColor();
             bool quit = false;
             int inputFilm = 0;
             int userAge = 0;
@@ -23,21 +25,20 @@ namespace Cinema
 
             while (quit == false)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Main menu > Order Tickets > Select Movie");
+                Console.ResetColor();
                 Console.WriteLine("Which movie do you want to watch? Enter number\n");
 
                 int i = 0;
                 foreach (Films f in Program.myFilms)
                 {
                     string x = f.printOrderFilms();
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("[" + i + "]");
-                    Console.ResetColor();
-                    Console.WriteLine(x + "\n");
+                    Console.WriteLine("[" + i + "] " + x);
                     i++;
                 }
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Notice! If you want to quit out of ordering a ticket anywhere, just type exit.\n");
+                Console.Write("\nNotice! If you want to quit out of ordering a ticket anywhere, just type exit.\n");
                 Console.ResetColor();
 
                 try
@@ -82,7 +83,9 @@ namespace Cinema
             List<ScheduleElement> possibleMovies = new List<ScheduleElement>();
             while (quit == false)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Main menu > Order Tickets > Select Movie");
+                Console.ResetColor();
                 Console.WriteLine("Choose your preference: select number \n");
                 //finds all schedule elements that contain that movie
                 IEnumerable<ScheduleElement> query = Program.schedule.Where(schedule => schedule.movie == Program.myFilms[input]);
@@ -90,9 +93,7 @@ namespace Cinema
                 foreach (ScheduleElement schedule in query)
                 {
                     possibleMovies.Add(schedule);
-                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("[" + i + "]");
-                    Console.ResetColor();
                     schedule.printScheduleElement();
                     i++;
                 }
@@ -129,7 +130,9 @@ namespace Cinema
                 try
                 {
 
-                    Console.WriteLine("Main menu > Order Tickets > Select Movie > Select Tickets");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Main menu > Select Movie > Select Tickets");
+                    Console.ResetColor();
                     Console.WriteLine("How many tickets do you want? Please enter a number below 11.");
 
                     string exit = Console.ReadLine();
@@ -159,7 +162,9 @@ namespace Cinema
             while (running)
             {
                 bool print = false;
-                Console.WriteLine("Main menu > Order Tickets > Select Movie > Select Tickets > Select Seats");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Main menu > Order Tickets > Select Tickets > Select Seats");
+                Console.ResetColor();
                 Console.WriteLine("\nPlease pick a row of seats. The row has to be " + seats + " seats long.\nThe upper left corner is 1,1.");
                 ticket.room.printRoom();
 
@@ -228,7 +233,9 @@ namespace Cinema
                 //Print confirmation of order
                 if (print)
                 {
-                    Console.WriteLine("\nYou about to purchase the folowing chairs: ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("\nYou are about to purchase the folowing chairs: ");
+                    Console.ResetColor();             
                     foreach (var b in selectedSeats)
                     {
                         Console.WriteLine("Row: {0} Chair: {1}", b.Item2.Item2.ToString(), b.Item2.Item1.ToString());
@@ -277,8 +284,11 @@ namespace Cinema
 
                 try
                 {
-                    Console.Write("Age: ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("Age: ");
+                    Console.ResetColor();
                     age = int.Parse(Console.ReadLine());
+
                     if (age < 1) { Console.Clear(); Console.WriteLine("Please fill in a positve intiger\n"); }
                     else
                     {

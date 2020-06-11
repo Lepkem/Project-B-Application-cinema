@@ -16,6 +16,7 @@ namespace Cinema
         static void Main(string[] args)
         {
             //console program
+            WelcomeMessage();
             readRooms();
             readMovies();
             schedule.Add(new ScheduleElement("12-00", myFilms[0], createScheduleRoom(0, "12-00", "20-04"), "20-04"));
@@ -25,6 +26,33 @@ namespace Cinema
             schedule.Add(new ScheduleElement("12-00", myFilms[8], createScheduleRoom(0, "12-00", "30-05"), "30-05"));
             Menu menu = new Menu();
             menu.switchCase();
+        }
+
+        public static void WelcomeMessage()
+        {
+            Console.WriteLine("WW#-=WWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("@-.....-=WWWWWWWWWWWWWWWWW");
+            Console.WriteLine("+..........-=WWWWWWWWWWWWW");
+            Console.WriteLine("W-..=+.........-*WWWWWWWWW");
+            Console.WriteLine("W@..*WWW@*.........-*WWWWW");
+            Console.WriteLine("W@..*WWW@*.........-*WWWWW");
+            Console.WriteLine("WW=.-WWWWWWW@*.........-*@");
+            Console.WriteLine("WWW*.@WWWWWWWWWW@*-.......");
+            Console.WriteLine("WWWW:=WWWWWWWWWWWWWW@-....");
+            Console.WriteLine("WWWWW+WWWWWWWWWWWW=.......");
+            Console.WriteLine("WWWWW#WWWWWWWWW#-.....+@WW");
+            Console.WriteLine("WWWWWWWWWWWW@:....+#WWWWWW");
+            Console.WriteLine("WWWWWWWWWW+...:#WWWWWWWWWW");
+            Console.WriteLine("WWWWWWW=..:#WWWWWWWWWWWWWW");
+            Console.WriteLine("WWWW#-:#WWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("W@*#WWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("Press enter to continue");
+            Console.ResetColor();
+            StandardMessages.PressKeyToContinue();
+            Console.Clear();
         }
 
         public static void readMovies()

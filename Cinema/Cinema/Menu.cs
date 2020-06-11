@@ -17,7 +17,7 @@ namespace Cinema
 
         public void switchCase()
         {
-            
+
             while (running)
             {
                 switch (caseSwitch)
@@ -31,22 +31,24 @@ namespace Cinema
                         Console.Clear();
                         //Login OR logout
                         if (!login) { login = Login(); }
-                        else { Console.WriteLine("\n\n"); login = false; }
+                        else { Console.WriteLine(""); login = false; }
                         caseSwitch = 0;
                         break;
 
                     case 2:
                         Console.Clear();
                         //Print a Shedule
-                        Console.WriteLine("Main menu > Print Schedule\n");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Main menu > Print Schedule");
+                        Console.ResetColor();
                         Program.printSchedule();
-                       
+
                         caseSwitch = 0;
                         break;
 
                     case 3:
                         Console.Clear();
-                        //Search      
+                        //Search
                         Search search = new Search();
                         caseSwitch = 0;
                         break;
@@ -61,7 +63,7 @@ namespace Cinema
                     case 5:
                         //Order
                         Console.Clear();
-                        
+
 
                         Order.orderMenu();
                         caseSwitch = 0;
@@ -89,6 +91,7 @@ namespace Cinema
 
                     case 10:
                         //Contact
+                        Console.Clear();
                         contact();
                         caseSwitch = 0;
                         break;
@@ -96,7 +99,10 @@ namespace Cinema
                     //Admin functions
                     case 11:
                         //Test update room
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Edit room");
+                        Console.ResetColor();
                         Console.WriteLine("Which room do you want to change?");
                         Program.rooms[2].updateRoom(string.Format(@".\rooms\room{0}.json", int.Parse(Console.ReadLine())));
                         caseSwitch = 0;
@@ -104,13 +110,17 @@ namespace Cinema
 
                     case 12:
                         //Test create room
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Edit room");
+                        Console.ResetColor();
                         Program.createRoom();
                         caseSwitch = 0;
                         break;
 
                     case 13:
                         //Add movie Jitske
+                        Console.Clear();
                         // This will get the current WORKING directory (i.e. \bin\Debug)
                         string workingDirectory = Environment.CurrentDirectory;
                         // or: Directory.GetCurrentDirectory() gives the same result
@@ -126,18 +136,21 @@ namespace Cinema
 
                     case 14:
                         //Add a scheduleElement
+                        Console.Clear();
                         Program.createShedule();
                         caseSwitch = 0;
                         break;
 
                     case 15:
                         //Search Order by ID
+                        Console.Clear();
                         IDBank.searchOrderByID();
                         caseSwitch = 0;
                         break;
 
                     case 16:
                         //Search Order by emailAddress
+                        Console.Clear();
                         IDBank.SearchOrderByEmail();
                         caseSwitch = 0;
                         break;
@@ -162,21 +175,25 @@ namespace Cinema
             string menu = "[1]Login \n[2]Print schedule\n[3]Search  \n[4]Show room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Submit a question \n[10]Contact\n";
 
             //text being displayed in menu
-            
-            if (!login) { 
-                
+
+            if (!login) {
+
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Main menu");
+                Console.ResetColor();
+
                 Console.WriteLine(menu);
-               
             }
             //text being displayed in menu Admin version
 
 
-            
-            if (login) 
+
+            if (login)
             {
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Main menu");
-                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Print the submitted questions\n[10]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions"); 
+                Console.ResetColor();
+                Console.WriteLine("[1]Logout \n[2]Print schedule\n[3]Search  \n[4]Show Room \n[5]Order Tickets \n[6]Show coming movies \n[8]FAQ \n[9]Print the submitted questions\n[10]Contact \n[11]Edit room \n[12]Create room \n[13]Create movie \n[14]Add to schedule \n[15]Search order by ID \n[16]Search order by email\n[17]Print submitted questions");
             }
 
 
@@ -209,24 +226,26 @@ namespace Cinema
 
         static Boolean Login()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Main menu > Login");
+            Console.ResetColor();
             while (true)
             {
                 string username, password = string.Empty;
 
-                
+
                 username = StandardMessages.GetInputForParam("username: (admin)");
 
                 //Exit login screen
                 if (username == "b")
                 {
-                    Console.WriteLine("\n\n");
+                    Console.WriteLine("");
                     return false;
                 }
 
                 //ask user input password
                 password = StandardMessages.GetInputForParam("password: (admin)");
-                
+
 
                 //checks if user input correct.
                 if (username == "admin" && password == "admin")
@@ -239,17 +258,17 @@ namespace Cinema
 
             }
         }
-        
+
         /// <summary>
         /// prints the questions in the file faq.txt
         /// </summary>
-        static void printFAQ() 
+        static void printFAQ()
         {
             Console.WriteLine("Main menu > FAQ");
-            string FileContentString = ""; 
-            FileContentString = System.IO.File.ReadAllText("faq.txt"); 
+            string FileContentString = "";
+            FileContentString = System.IO.File.ReadAllText("faq.txt");
             Console.Clear();
-            Console.WriteLine($"{FileContentString}\n"); 
+            Console.WriteLine($"{FileContentString}\n");
             StandardMessages.PressAnyKey();
             StandardMessages.PressKeyToContinue();
         }
@@ -259,7 +278,7 @@ namespace Cinema
         /// </summary>
         static void printSubmittedQuestions()
         {
-            
+
             string FileContentString = System.IO.File.ReadAllText("submitQuestion.txt");
             Console.WriteLine($"{FileContentString}\n");
             StandardMessages.PressAnyKey();
@@ -267,12 +286,12 @@ namespace Cinema
             Console.Clear();
         }
 
-    
 
-            
+
+
             //while (looping)
             //{
-                
+
 
         /// <summary>
         /// lets a user add a question after solving a riddle
@@ -294,8 +313,8 @@ namespace Cinema
                 StandardMessages.TryAgain();
             }
         }
-        
-        
+
+
 
         static bool riddle()
         {
@@ -433,7 +452,7 @@ namespace Cinema
             }
 
         }
-        
+
 
         static void contact()
         {
@@ -442,11 +461,13 @@ namespace Cinema
 
             //While looping is true
             Console.Clear();
-           
+
             while (looping)
             {
                 //Intro text
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Main menu > Contact");
+                Console.ResetColor();
                 Console.WriteLine("Welcome to the Deltascope contact page! \n" +
                     "Deltascope is located in a modern building, located at the marina in the center of Rotterdam. \n" +
                     "VFrom a hospitable approach, it offers citizens, business and associations accommodation for many diverse activities. \n" +
@@ -466,7 +487,9 @@ namespace Cinema
                 switch (question)
                 {
                     case 1:
-                        Console.WriteLine("Main menu > Contact > Phone Number");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Main menu > Contact > Phone number");
+                        Console.ResetColor();
                         Console.WriteLine("Welcome to our phone number dialog. Call our phone number and follow the menu as told!\n" +
                             "Mobile number: 06-12345678\n" +
                             "Cinema number: 010-234567\n" +
@@ -476,13 +499,17 @@ namespace Cinema
 
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 2:
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Contact > E-mail");
+                        Console.ResetColor();
                         Console.WriteLine("Welcome to our e-mail service. Send us an e-mail to one of the following e-mails depending on your question\n" +
                             "E-mail: deltascope@gmail.com" +
                             "Business E-mail: b.deltascope@gmail.com");
                         Console.WriteLine("Press enter to continue"); Console.ReadLine(); break;
                     case 3:
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("Main menu > Contact > Location");
+                        Console.ResetColor();
                         Console.WriteLine("If you would like to visit our headquarters you can by making an appointment and coming to the following adress\n" +
                             "Street address: Monopolystraat 124\n" +
                             "Postal code: 2777 ID\n" +
@@ -503,7 +530,9 @@ namespace Cinema
         public static void ShowRoom()
         {
             Console.Clear();
-            Console.WriteLine("Main menu > Show Room");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Show room");
+            Console.ResetColor();
             Console.WriteLine("Wich room do you want to look at?");
             int i = 0;
             int inputRoom= 0;
@@ -536,9 +565,11 @@ namespace Cinema
         public static void ExpectedMovies()
         {
             Console.Clear();
-            Console.WriteLine("Main menu > Coming Movies");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Main menu > Coming movies");
+            Console.ResetColor();
             Console.WriteLine($"See the expected movies for the coming X months.\n If you do not make a (valid) choice, the value will be 2 months.");
-            
+
             int inputRoom;
             bool works = int.TryParse(StandardMessages.GetInputForParam("number for the amount of months."), out inputRoom);
             StandardMessages.PressAnyKey();
@@ -552,7 +583,7 @@ namespace Cinema
                 {
                     Console.WriteLine(e.Message);
                 }
-                
+
             }
             else
             {
@@ -565,7 +596,7 @@ namespace Cinema
     public static class StandardMessages
     {
         /// <summary>
-        /// TryAgain displays a try again message 
+        /// TryAgain displays a try again message
         /// </summary>
         public static void TryAgain()
         {
@@ -586,7 +617,9 @@ namespace Cinema
         /// <returns></returns>
         public static bool AreYouSure()
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("Are you sure?\nPlease enter yes or no.");
+            Console.ResetColor();
             string yesorno = Console.ReadLine();
             if (yesorno.ToLower().Equals("yes"))
             {
@@ -622,7 +655,9 @@ namespace Cinema
         /// <returns></returns>
         public static string GetInputForParam(string forParameter)
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Please enter a {forParameter}.");
+            Console.ResetColor();
             return Console.ReadLine();
         }
 
@@ -631,14 +666,18 @@ namespace Cinema
         /// </summary>
         public static void WriteInputBelow()
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Please write your input below.\n \n");
+            Console.ResetColor();
         }
         /// <summary>
         /// EnterNumber prints a request of input of number
         /// </summary>
         public static void EnterNumber()
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Please only enter a number!");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -646,7 +685,9 @@ namespace Cinema
         /// </summary>
         public static void GivenOptions()
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Only choose from the given options.");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -655,7 +696,9 @@ namespace Cinema
         /// <param name="filePath"></param>
         public static void FilePathError(string filePath = "")
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Oops! Something went wrong. {filePath} was not found.");
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -663,7 +706,9 @@ namespace Cinema
         /// </summary>
         public static void PressAnyKey()
         {
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Press any key to continue.");
+            Console.ResetColor();
         }
 
         /// <summary>
