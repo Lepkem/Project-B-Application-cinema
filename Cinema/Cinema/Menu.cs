@@ -636,14 +636,58 @@ namespace Cinema
         /// </summary>
         public static void WelcomeMessage()
         {
-            Console.WriteLine($"██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗     ████████╗██╗  ██╗███████╗    ██████╗ ███████╗██╗  ████████╗ █████╗ ███████╗ ██████╗ ██████╗ ██████╗ ███████╗");
-            Console.WriteLine($"██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ╚══██╔══╝██║  ██║██╔════╝    ██╔══██╗██╔════╝██║  ╚══██╔══╝██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝");
-            Console.WriteLine($"██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║       ██║   ███████║█████╗      ██║  ██║█████╗  ██║     ██║   ███████║███████╗██║     ██║   ██║██████╔╝█████╗  ");
-            Console.WriteLine($"██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║       ██║   ██╔══██║██╔══╝      ██║  ██║██╔══╝  ██║     ██║   ██╔══██║╚════██║██║     ██║   ██║██╔═══╝ ██╔══╝  ");
-            Console.WriteLine($"╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝       ██║   ██║  ██║███████╗    ██████╔╝███████╗███████╗██║   ██║  ██║███████║╚██████╗╚██████╔╝██║     ███████╗");
-            Console.WriteLine($" ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝        ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═════╝ ╚══════╝╚══════╝╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚══════╝");
-            StandardMessages.PressAnyKey();
+            //http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Welcome%20to%20the%20deltascope
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"         ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗");
+            Console.WriteLine($"         ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗");
+            Console.WriteLine($"         ██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║");
+            Console.WriteLine($"         ██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║");
+            Console.WriteLine($"         ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝");
+            Console.WriteLine($"          ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝");
+            Console.WriteLine($"████████╗██╗  ██╗███████╗    ██████╗ ███████╗██╗  ████████╗ █████╗ ███████╗ ██████╗ ██████╗ ██████╗ ███████╗");
+            Console.WriteLine($"╚══██╔══╝██║  ██║██╔════╝    ██╔══██╗██╔════╝██║  ╚══██╔══╝██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝");
+            Console.WriteLine($"   ██║   ███████║█████╗      ██║  ██║█████╗  ██║     ██║   ███████║███████╗██║     ██║   ██║██████╔╝█████╗  ");
+            Console.WriteLine($"   ██║   ██╔══██║██╔══╝      ██║  ██║██╔══╝  ██║     ██║   ██╔══██║╚════██║██║     ██║   ██║██╔═══╝ ██╔══╝  ");
+            Console.WriteLine($"   ██║   ██║  ██║███████╗    ██████╔╝███████╗███████╗██║   ██║  ██║███████║╚██████╗╚██████╔╝██║     ███████╗");
+            Console.WriteLine($"   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═════╝ ╚══════╝╚══════╝╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚══════╝");
+            Console.ResetColor();
+            Console.WriteLine("                        WWWWWW:*@WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWW+......+@WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WW*............+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        =..................:#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        *......................:#WWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        W+.........................-=WWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WW-.....*=:....................-=WWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WW@.....-WWWW#:....................-*@WWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWW=.....@WWWWWWW#+.....................*@WWWWWWWWWWW");
+            Console.WriteLine("                        WWWW*....*WWWWWWWWWWW@+.....................+@WWWWWWW");
+            Console.WriteLine("                        WWWWW:...:WWWWWWWWWWWWWWW@*.....................+#WWW");
+            Console.WriteLine("                        WWWWWW-...@WWWWWWWWWWWWWWWWWW@*-....................:");
+            Console.WriteLine("                        WWWWWW@...=WWWWWWWWWWWWWWWWWWWWWWW=-.................");
+            Console.WriteLine("                        WWWWWWW=..+WWWWWWWWWWWWWWWWWWWWWWWWWWW=-.............");
+            Console.WriteLine("                        WWWWWWWW+..WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#:.........");
+            Console.WriteLine("                        WWWWWWWWW:.#WWWWWWWWWWWWWWWWWWWWWWWWWWWWW=...........");
+            Console.WriteLine("                        WWWWWWWWWW.+WWWWWWWWWWWWWWWWWWWWWWWWWW=-.............");
+            Console.WriteLine("                        WWWWWWWWWW#-WWWWWWWWWWWWWWWWWWWWWWW#-..............+@");
+            Console.WriteLine("                        WWWWWWWWWWW=#WWWWWWWWWWWWWWWWWWW@:.............*@WWWW");
+            Console.WriteLine("                        WWWWWWWWWWWW@WWWWWWWWWWWWWWWW@+............*@WWWWWWWW");
+            Console.WriteLine("                        WWWWWWWWWWWWWWWWWWWWWWWWWWW*..........-*@WWWWWWWWWWWW");
+            Console.WriteLine("                        WWWWWWWWWWWWWWWWWWWWWWWW=.........-*WWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWWWWWWWWWWWWWWWWWWW#-.......-*WWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWWWWWWWWWWWWWWWW@-......-=WWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWWWWWWWWWWWWW@:.....-=WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWWWWWWWWWWW+....-=WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWWWWWWWW*...-=WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWWWWW=-.:=WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        WWWW#-:#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("                        W@*#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("Press enter to continue");
+            Console.ResetColor();
             StandardMessages.PressKeyToContinue();
+            Console.Clear();
         }
 
         /// <summary>
